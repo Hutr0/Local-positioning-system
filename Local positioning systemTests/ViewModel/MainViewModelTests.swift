@@ -1,14 +1,13 @@
 //
-//  Local_positioning_systemTests.swift
+//  MainViewModelTests.swift
 //  Local positioning systemTests
 //
-//  Created by Леонид Лукашевич on 25.04.2022.
+//  Created by Леонид Лукашевич on 26.04.2022.
 //
 
 import XCTest
-@testable import Local_positioning_system
 
-class Local_positioning_systemTests: XCTestCase {
+class MainViewModelTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
