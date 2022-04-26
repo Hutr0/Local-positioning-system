@@ -18,7 +18,7 @@ class PositioningManagerTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        
+        sut = nil
     }
     
     func testMotionManagerIsSet() {

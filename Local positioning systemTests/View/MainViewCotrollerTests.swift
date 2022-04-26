@@ -21,10 +21,26 @@ class MainViewCotrollerTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
     }
 
     func testViewModelIsSet() {
         XCTAssertNotNil(sut.viewModel)
+    }
+    
+    func testUserIsExists() {
+        XCTAssertNotNil(sut.user)
+    }
+    
+    func testScrollViewIsExists() {
+        XCTAssertNotNil(sut.scrollView)
+    }
+    
+    func testScrollViewHasDelegate() {
+        XCTAssertNotNil(sut.scrollView.delegate)
+    }
+    
+    func testScrollViewDelegateIsMVC() {
+        XCTAssertTrue(sut.scrollView.delegate is MainViewController)
     }
 }

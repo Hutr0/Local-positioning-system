@@ -9,11 +9,22 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var user: UIImageView!
+    @IBOutlet weak var map: UIImageView!
+    
     let viewModel = MainViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        scrollView.delegate = self
+        configureScrollView()
+    }
+    
+    func configureScrollView() {
+        scrollView.minimumZoomScale = 1.0
+        scrollView.maximumZoomScale = 5.0
     }
     
 
@@ -27,4 +38,10 @@ class MainViewController: UIViewController {
     }
     */
 
+}
+
+extension MainViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return map
+    }
 }
