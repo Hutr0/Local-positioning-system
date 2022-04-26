@@ -142,8 +142,17 @@ class PositioningMotionManagerTests: XCTestCase {
     }
     
     func testStopDeviceMotionUpdateIsStoppingUpdate() {
+        let expectation = expectation(description: "Test after zero point one")
+        
         sut.startDeviceMotionUpdate { _, _, _, _ in }
-        XCTAssertTrue(sut.motionManager.isDeviceMotionActive)
+        
+        let result = XCTWaiter.wait(for: [expectation], timeout: 0.1)
+        if result == XCTWaiter.Result.timedOut {
+            XCTAssertTrue(sut.motionManager.isDeviceMotionActive)
+        } else {
+            XCTFail("Delay interrupted")
+        }
+        
         sut.stopDeviceMotionUpdate()
         XCTAssertTrue(!sut.motionManager.isDeviceMotionActive)
     }
@@ -154,6 +163,22 @@ class PositioningMotionManagerTests: XCTestCase {
         sut.changeDeviceMotionUpdateInterval(to: 0.2)
         
         XCTAssertEqual(sut.motionManager.deviceMotionUpdateInterval, 0.2)
+    }
+    
+    func testIfDeviceMotionNotAvailableThenMethodIsStoped() {
+        let expectation = expectation(description: "Test after zero point one seconds")
+        sut.startDeviceMotionUpdate { _, _, _, _ in }
+        
+        let result = XCTWaiter.wait(for: [expectation], timeout: 0.1)
+        if result == XCTWaiter.Result.timedOut {
+            if sut.motionManager.isDeviceMotionAvailable == false {
+                XCTAssertFalse(sut.motionManager.isDeviceMotionActive)
+            } else {
+                XCTAssertTrue(sut.motionManager.isDeviceMotionActive)
+            }
+        } else {
+            XCTFail("Delay interrupted")
+        }
     }
     
 //    func testDeviceMotionUpdateIntervalIsEqualZeroPointFive() {

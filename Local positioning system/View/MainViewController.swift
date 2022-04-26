@@ -20,6 +20,9 @@ class MainViewController: UIViewController {
         
         scrollView.delegate = self
         configureScrollView()
+        viewModel.startPositioningUser {
+            
+        }
     }
     
     func configureScrollView() {

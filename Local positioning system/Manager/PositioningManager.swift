@@ -10,16 +10,35 @@ import Foundation
 class PositioningManager {
     
     let positioningMotionManager = PositioningMotionManager()
+    let reducingInaccurancyManager = ReducingInaccuracyManager()
     
-    var motionData: [MotionData] = []
+    var motionsData: [MotionData] = []
     
     func startRecordingMotions() {
+        
+        var mdForReducingInaccurancy: [MotionData] = []
+        
         positioningMotionManager.startDeviceMotionUpdate { rotationRate, attitude, userAcceleration, gravity in
             
-            self.motionData.append(MotionData(rotationRate: rotationRate,
-                                              attitude: attitude,
-                                              userAcceleration: userAcceleration,
-                                              gravity: gravity))
+            mdForReducingInaccurancy.append(MotionData(rotationRate: rotationRate,
+                                                       attitude: attitude,
+                                                       userAcceleration: userAcceleration,
+                                                       gravity: gravity))
+            
+            if mdForReducingInaccurancy.count >= 10 {
+                self.reducingInaccurancy(data: mdForReducingInaccurancy)
+                mdForReducingInaccurancy.removeAll()
+            }
+        }
+    }
+    
+    func reducingInaccurancy(data: [MotionData]) {
+        let result = reducingInaccurancyManager.reduceInaccurancy(data: data)
+        
+        motionsData.append(result)
+        
+        if self.motionsData.count > 100 {
+            self.motionsData.removeFirst()
         }
     }
 }
