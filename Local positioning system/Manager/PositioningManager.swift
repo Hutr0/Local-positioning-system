@@ -11,6 +11,7 @@ class PositioningManager {
     
     let positioningMotionManager = PositioningMotionManager()
     let reducingInaccurancyManager = ReducingInaccuracyManager()
+    let movementAnalysisManager = MovementAnalysisManager()
     
     var motionsData: [MotionData] = []
     

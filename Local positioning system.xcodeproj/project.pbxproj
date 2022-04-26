@@ -35,6 +35,8 @@
 		E0E31D9628182E9F00AD79C4 /* MotionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31D9528182E9F00AD79C4 /* MotionProtocol.swift */; };
 		E0E31D9828182FB300AD79C4 /* UserAccelerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31D9728182FB300AD79C4 /* UserAccelerationTests.swift */; };
 		E0E31D9A2818312100AD79C4 /* GravityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31D992818312100AD79C4 /* GravityTests.swift */; };
+		E0E31D9D28184DDC00AD79C4 /* MovementAnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31D9C28184DDC00AD79C4 /* MovementAnalysisManager.swift */; };
+		E0E31D9F28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31D9E28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		E0E31D9528182E9F00AD79C4 /* MotionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionProtocol.swift; sourceTree = "<group>"; };
 		E0E31D9728182FB300AD79C4 /* UserAccelerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccelerationTests.swift; sourceTree = "<group>"; };
 		E0E31D992818312100AD79C4 /* GravityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityTests.swift; sourceTree = "<group>"; };
+		E0E31D9C28184DDC00AD79C4 /* MovementAnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementAnalysisManager.swift; sourceTree = "<group>"; };
+		E0E31D9E28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementAnalysisManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +219,7 @@
 				E08EAE7228174866005F6A69 /* PositioningManager.swift */,
 				E0E31D7F2817782C00AD79C4 /* PositioningMotionManager.swift */,
 				E0E31D8D2818054200AD79C4 /* ReducingInaccuracyManager.swift */,
+				E0E31D9C28184DDC00AD79C4 /* MovementAnalysisManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -225,6 +230,7 @@
 				E0E31D812817785E00AD79C4 /* PositioningManagerTests.swift */,
 				E08EAE74281748F3005F6A69 /* PositioningMotionManagerTests.swift */,
 				E0E31D8F2818056500AD79C4 /* ReducingInaccuracyManagerTests.swift */,
+				E0E31D9E28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -402,6 +408,7 @@
 				E0E31D8828177E6300AD79C4 /* RotationRate.swift in Sources */,
 				E0E31D802817782C00AD79C4 /* PositioningMotionManager.swift in Sources */,
 				E03A4F052817370D0087BD9F /* SceneDelegate.swift in Sources */,
+				E0E31D9D28184DDC00AD79C4 /* MovementAnalysisManager.swift in Sources */,
 				E0E31D8C281784AA00AD79C4 /* MotionData.swift in Sources */,
 				E0E31D8628177E3200AD79C4 /* Attitude.swift in Sources */,
 				E0E31D9628182E9F00AD79C4 /* MotionProtocol.swift in Sources */,
@@ -420,6 +427,7 @@
 				E0E31D9428182DE200AD79C4 /* AttitudeTests.swift in Sources */,
 				E0E31D822817785E00AD79C4 /* PositioningManagerTests.swift in Sources */,
 				E08EAE71281747D6005F6A69 /* MainViewCotrollerTests.swift in Sources */,
+				E0E31D9F28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift in Sources */,
 				E08EAE75281748F3005F6A69 /* PositioningMotionManagerTests.swift in Sources */,
 				E0E31D9A2818312100AD79C4 /* GravityTests.swift in Sources */,
 				E0E31D9828182FB300AD79C4 /* UserAccelerationTests.swift in Sources */,

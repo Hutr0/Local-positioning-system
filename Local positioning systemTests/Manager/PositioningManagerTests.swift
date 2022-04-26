@@ -28,6 +28,10 @@ class PositioningManagerTests: XCTestCase {
         XCTAssertNotNil(sut.reducingInaccurancyManager)
     }
     
+    func testMovementAnalysisIsSet() {
+        XCTAssertNotNil(sut.movementAnalysisManager)
+    }
+    
     func testReducingInaccurancyStarting() {
         let expectation = expectation(description: "Test after zero point eleven seconds")
         sut = MockPositioningManager()
