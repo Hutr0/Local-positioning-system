@@ -148,6 +148,14 @@ class PositioningMotionManagerTests: XCTestCase {
         XCTAssertTrue(!sut.motionManager.isDeviceMotionActive)
     }
     
+    func testChangeDeviceMotionUpdateIntervalIsUpdatingInterval() {
+        XCTAssertEqual(sut.motionManager.deviceMotionUpdateInterval, 0.5)
+        
+        sut.changeDeviceMotionUpdateInterval(to: 0.2)
+        
+        XCTAssertEqual(sut.motionManager.deviceMotionUpdateInterval, 0.2)
+    }
+    
 //    func testDeviceMotionUpdateIntervalIsEqualZeroPointFive() {
 //        sut.startDeviceMotionUpdateWith(completionHandler: {_ in })
 //
