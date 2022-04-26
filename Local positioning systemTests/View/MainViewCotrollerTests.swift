@@ -52,4 +52,23 @@ class MainViewCotrollerTests: XCTestCase {
         XCTAssertEqual(sut.scrollView.minimumZoomScale, 1)
         XCTAssertEqual(sut.scrollView.maximumZoomScale, 5)
     }
+    
+    func testMapViewOnStartIsHidden() {
+        XCTAssertTrue(sut.mapView.isHidden)
+    }
+    
+    func testMapButtonPressedToogleValues() {
+        sut.mapButtonPressed(sut.mapButton)
+        XCTAssertFalse(sut.mapView.isHidden)
+        XCTAssertTrue(sut.map.isHidden)
+        XCTAssertTrue(sut.user.isHidden)
+    }
+    
+    func testMapManagerNotNil() {
+        XCTAssertNotNil(sut.mapManager)
+    }
+    
+    func testMapViewDelegateIsMapManager() {
+        XCTAssertTrue(sut.mapView.delegate is MapManager)
+    }
 }

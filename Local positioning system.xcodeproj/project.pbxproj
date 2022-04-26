@@ -37,6 +37,8 @@
 		E0E31D9A2818312100AD79C4 /* GravityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31D992818312100AD79C4 /* GravityTests.swift */; };
 		E0E31D9D28184DDC00AD79C4 /* MovementAnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31D9C28184DDC00AD79C4 /* MovementAnalysisManager.swift */; };
 		E0E31D9F28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31D9E28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift */; };
+		E0E31DA32818A67700AD79C4 /* MapManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DA22818A67700AD79C4 /* MapManagerTests.swift */; };
+		E0E31DA52818AE0200AD79C4 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DA42818AE0200AD79C4 /* MapManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,8 @@
 		E0E31D992818312100AD79C4 /* GravityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityTests.swift; sourceTree = "<group>"; };
 		E0E31D9C28184DDC00AD79C4 /* MovementAnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementAnalysisManager.swift; sourceTree = "<group>"; };
 		E0E31D9E28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementAnalysisManagerTests.swift; sourceTree = "<group>"; };
+		E0E31DA22818A67700AD79C4 /* MapManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManagerTests.swift; sourceTree = "<group>"; };
+		E0E31DA42818AE0200AD79C4 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				E08EAE7B281749F3005F6A69 /* MainViewModel.swift */,
+				E0E31DA42818AE0200AD79C4 /* MapManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				E08EAE7D28174A0C005F6A69 /* MainViewModelTests.swift */,
+				E0E31DA22818A67700AD79C4 /* MapManagerTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -411,6 +417,7 @@
 				E0E31D9D28184DDC00AD79C4 /* MovementAnalysisManager.swift in Sources */,
 				E0E31D8C281784AA00AD79C4 /* MotionData.swift in Sources */,
 				E0E31D8628177E3200AD79C4 /* Attitude.swift in Sources */,
+				E0E31DA52818AE0200AD79C4 /* MapManager.swift in Sources */,
 				E0E31D9628182E9F00AD79C4 /* MotionProtocol.swift in Sources */,
 				E08EAE6F281747A5005F6A69 /* MainViewController.swift in Sources */,
 				E0E31D8E2818054200AD79C4 /* ReducingInaccuracyManager.swift in Sources */,
@@ -432,6 +439,7 @@
 				E0E31D9A2818312100AD79C4 /* GravityTests.swift in Sources */,
 				E0E31D9828182FB300AD79C4 /* UserAccelerationTests.swift in Sources */,
 				E0E31D902818056500AD79C4 /* ReducingInaccuracyManagerTests.swift in Sources */,
+				E0E31DA32818A67700AD79C4 /* MapManagerTests.swift in Sources */,
 				E0E31D9228182B8200AD79C4 /* RotationRateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

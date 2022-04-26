@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,18 +13,14 @@
             <objects>
                 <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="MainViewController" customModule="Local_positioning_system" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePy-V7-wIf">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="21v-ly-KWj">
                                         <rect key="frame" x="0.0" y="0.0" width="1000" height="700"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="QIT-cM-sUR">
-                                        <rect key="frame" x="227" y="323" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -36,30 +32,65 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="L56-gV-JAX"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="rOo-67-7P4"/>
                             </scrollView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="QIT-cM-sUR">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="0wx-PH-B3O"/>
+                                    <constraint firstAttribute="height" constant="20" id="IsL-Lm-uZO"/>
+                                </constraints>
+                            </imageView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" pitchEnabled="NO" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzr-dz-0j6">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fpS-rY-qa0">
+                                <rect key="frame" x="348" y="826" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="cVK-vb-5X3"/>
+                                    <constraint firstAttribute="height" constant="40" id="kJ7-nP-PFO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="40"/>
+                                <state key="normal" image="worldwide">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
+                                </state>
+                                <connections>
+                                    <action selector="mapButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uBL-uY-Aas"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ePy-V7-wIf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="36F-Gx-NOu"/>
+                            <constraint firstAttribute="bottom" secondItem="rzr-dz-0j6" secondAttribute="bottom" id="4xE-zr-izx"/>
+                            <constraint firstItem="rzr-dz-0j6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6DI-c9-mhA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rzr-dz-0j6" secondAttribute="trailing" id="BE8-w3-Bac"/>
+                            <constraint firstItem="rzr-dz-0j6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EyQ-Vl-DHG"/>
                             <constraint firstItem="ePy-V7-wIf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="XDP-XG-4SV"/>
                             <constraint firstAttribute="bottom" secondItem="ePy-V7-wIf" secondAttribute="bottom" id="YJj-1M-bfb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fpS-rY-qa0" secondAttribute="trailing" constant="40" id="e1G-Mc-5L8"/>
+                            <constraint firstAttribute="bottom" secondItem="fpS-rY-qa0" secondAttribute="bottom" constant="60" id="jfG-dl-uvL"/>
+                            <constraint firstItem="QIT-cM-sUR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="197" id="qkF-VL-jm5"/>
                             <constraint firstItem="ePy-V7-wIf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ySy-XM-SSv"/>
+                            <constraint firstItem="QIT-cM-sUR" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="438" id="zoA-fU-CjH"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="map" destination="21v-ly-KWj" id="Vpj-Oe-AjD"/>
+                        <outlet property="mapButton" destination="fpS-rY-qa0" id="VZ7-PR-QHy"/>
+                        <outlet property="mapView" destination="rzr-dz-0j6" id="U48-u2-4ON"/>
                         <outlet property="scrollView" destination="ePy-V7-wIf" id="hyv-TA-ab2"/>
                         <outlet property="user" destination="QIT-cM-sUR" id="CVz-F7-0wq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="34.782608695652179" y="83.705357142857139"/>
+            <point key="canvasLocation" x="33.644859813084111" y="83.585313174946009"/>
         </scene>
     </scenes>
     <resources>
         <image name="map" width="1000" height="700"/>
         <image name="user" width="256" height="256"/>
+        <image name="worldwide" width="256" height="256"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
