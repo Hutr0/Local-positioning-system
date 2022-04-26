@@ -6,24 +6,20 @@
 //
 
 import Foundation
-import CoreMotion
 
 class PositioningManager {
     
-    let motionManager = CMMotionManager()
+    let positioningMotionManager = PositioningMotionManager()
     
-    func startDeviceMotionUpdateWith(completionHandler: @escaping (CMDeviceMotion) -> ()) {
-        motionManager.deviceMotionUpdateInterval = 0.5
-        
-        motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { motion, error in
+    var motionData: [MotionData] = []
+    
+    func startRecordingMotions() {
+        positioningMotionManager.startDeviceMotionUpdate { rotationRate, attitude, userAcceleration, gravity in
             
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            
-            guard let motion = motion else { return }
-            completionHandler(motion)
+            self.motionData.append(MotionData(rotationRate: rotationRate,
+                                              attitude: attitude,
+                                              userAcceleration: userAcceleration,
+                                              gravity: gravity))
         }
     }
 }

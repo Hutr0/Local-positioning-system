@@ -7,7 +7,6 @@
 
 import XCTest
 @testable import Local_positioning_system
-import CoreMotion
 
 class PositioningManagerTests: XCTestCase {
 
@@ -21,29 +20,18 @@ class PositioningManagerTests: XCTestCase {
         sut = nil
     }
     
-    func testMotionManagerIsSet() {
-        XCTAssertNotNil(sut.motionManager)
+    func testPositioningMotionManagerIsSet() {
+        XCTAssertNotNil(sut.positioningMotionManager)
     }
     
-    func testDeviceMotionUpdateIntervalIsEqualZeroPointFive() {
-        sut.startDeviceMotionUpdateWith(completionHandler: {_ in })
+    func testStartRecordingMotionsIsRecoedAtLeastOneValue() {
+        let expectation = expectation(description: "Test after one seconds")
         
-        let interval = sut.motionManager.deviceMotionUpdateInterval
-        
-        XCTAssertEqual(interval, 0.5)
-    }
-    
-    func testDeviceMotionDataIsReturned() {
-        let expectation = expectation(description: "Test after five seconds")
-        var data: CMDeviceMotion?
-        
-        sut.startDeviceMotionUpdateWith() { motion in
-            data = motion
-        }
+        sut.startRecordingMotions()
         
         let result = XCTWaiter.wait(for: [expectation], timeout: 1)
         if result == XCTWaiter.Result.timedOut {
-            XCTAssertNotNil(data)
+            XCTAssertGreaterThan(sut.motionData.count, 0)
         } else {
             XCTFail("Delay interrupted")
         }

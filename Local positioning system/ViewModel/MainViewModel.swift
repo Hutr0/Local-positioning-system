@@ -8,5 +8,9 @@
 import Foundation
 
 class MainViewModel {
+    let positioningManager = PositioningManager()
     
+    func startPositioningUser(completionHandler: @escaping () -> ()) {
+        
+    }
 }
