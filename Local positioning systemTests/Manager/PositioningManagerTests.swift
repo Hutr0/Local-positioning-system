@@ -46,7 +46,7 @@ class PositioningManagerTests: XCTestCase {
     func testReducingInaccurancyHaveMaximumHundredValues() {
         var array: [MotionData] = []
         
-        for _ in 0...102 {
+        for _ in 0...99 {
             let motionData = MotionData(rotationRate: RotationRate(x: 1, y: 1, z: 1),
                                         attitude: Attitude(roll: 1, pitch: 1, yaw: 1),
                                         userAcceleration: UserAcceleration(x: 1, y: 1, z: 1),
@@ -57,7 +57,6 @@ class PositioningManagerTests: XCTestCase {
         for _ in 0..<4 {
             sut.reducingInaccurancy(data: array)
         }
-        
         XCTAssertEqual(sut.motionsData.count, 100)
     }
     
