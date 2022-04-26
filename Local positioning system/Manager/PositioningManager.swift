@@ -33,7 +33,7 @@ class PositioningManager {
     }
     
     func reducingInaccurancy(data: [MotionData]) {
-        let result = reducingInaccurancyManager.reduceInaccurancy(data: data)
+        let result = reducingInaccurancyManager.reduceInaccurancy(motionsData: data)
         
         motionsData.append(result)
         

@@ -20,26 +20,6 @@ class ReducingInaccuracyManagerTests: XCTestCase {
         sut = nil
     }
     
-    func testReduceInaccurancyOnlyWorksAnEvenCountOfElementsOfInputArray() {
-        let data = MotionData(rotationRate: RotationRate(x: 1, y: 1, z: 1),
-                              attitude: Attitude(roll: 1, pitch: 1, yaw: 1),
-                              userAcceleration: UserAcceleration(x: 1, y: 1, z: 1),
-                              gravity: Gravity(x: 1, y: 1, z: 1))
-        
-        let _ = sut.reduceInaccurancy(data: [data, data, data])
-        XCTAssertTrue(sut.motionsData.count % 2 == 0)
-    }
-    
-    func testReduceInaccurancyGiveSpecificCountOfElementsToMotionsDataArray() {
-        let data = MotionData(rotationRate: RotationRate(x: 1, y: 1, z: 1),
-                              attitude: Attitude(roll: 1, pitch: 1, yaw: 1),
-                              userAcceleration: UserAcceleration(x: 1, y: 1, z: 1),
-                              gravity: Gravity(x: 1, y: 1, z: 1))
-        
-       let _ =  sut.reduceInaccurancy(data: [data, data, data])
-        XCTAssertEqual(sut.motionsData.count, 2)
-    }
-    
     func testReduceInaccurancyOfElementsCorrectlyWorkedWithGenericRotationRate() {
         let rrFirst = RotationRate(x: 1, y: 1, z: 1)
         let rrSecond = RotationRate(x: 2, y: 2, z: 2)
@@ -106,7 +86,7 @@ class ReducingInaccuracyManagerTests: XCTestCase {
             motionArray.append(MotionData(rotationRate: rr, attitude: a, userAcceleration: ua, gravity: g))
         }
         
-        let result = sut.reduceInaccurancy(data: motionArray)
+        let result = sut.reduceInaccurancy(motionsData: motionArray)
         
         XCTAssertEqual(result.rotationRate.x, 2.5)
         XCTAssertEqual(result.rotationRate.y, 2.5)

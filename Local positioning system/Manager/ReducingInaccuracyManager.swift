@@ -9,15 +9,7 @@ import Foundation
 
 class ReducingInaccuracyManager {
     
-    var motionsData: [MotionData] = []
-    
-    func reduceInaccurancy(data: [MotionData]) -> MotionData {
-        self.motionsData = data
-
-        if motionsData.count % 2 != 0 {
-            self.motionsData.removeFirst()
-        }
-        
+    func reduceInaccurancy(motionsData: [MotionData]) -> MotionData {
         var rotationRateElementsForReducingInaccurancy: [RotationRate] = []
         for element in motionsData {
             rotationRateElementsForReducingInaccurancy.append(element.rotationRate)

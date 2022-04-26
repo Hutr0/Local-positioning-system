@@ -212,8 +212,8 @@
 		E08EAE7A281749A1005F6A69 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				E0E31D7F2817782C00AD79C4 /* PositioningMotionManager.swift */,
 				E08EAE7228174866005F6A69 /* PositioningManager.swift */,
+				E0E31D7F2817782C00AD79C4 /* PositioningMotionManager.swift */,
 				E0E31D8D2818054200AD79C4 /* ReducingInaccuracyManager.swift */,
 			);
 			path = Manager;
@@ -222,8 +222,8 @@
 		E08EAE7F28174C8E005F6A69 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				E08EAE74281748F3005F6A69 /* PositioningMotionManagerTests.swift */,
 				E0E31D812817785E00AD79C4 /* PositioningManagerTests.swift */,
+				E08EAE74281748F3005F6A69 /* PositioningMotionManagerTests.swift */,
 				E0E31D8F2818056500AD79C4 /* ReducingInaccuracyManagerTests.swift */,
 			);
 			path = Manager;
