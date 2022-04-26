@@ -25,20 +25,24 @@ class MapManagerTests: XCTestCase {
         XCTAssertNotNil(sut.locationManager)
     }
     
-    func testCheckLocationServicesStartsCheckLocationAutorization() {
+    func testCheckLocationServicesStartsCheckLocationAutorizationIfLocationServicesEnabled() {
         sut = MockMapManager()
         
         sut.checkLocationServices(mapView: MKMapView()) {}
         
-        XCTAssertTrue((sut as! MockMapManager).isInside)
+        if CLLocationManager.locationServicesEnabled() {
+            XCTAssertTrue((sut as! MockMapManager).isInside)
+        }
     }
     
-    func testCheckLocationAutorizationStartsShowUserLocation() {
+    func testCheckLocationAutorizationStartsShowUserLocationIfAuthorizationStatusIsAuthorizedWhenInUse() {
         sut = MockMapManager()
         
         sut.checkLocationAutorization(mapView: MKMapView())
         
-        XCTAssertTrue((sut as! MockMapManager).isInside)
+        if sut.locationManager.authorizationStatus == .authorizedWhenInUse {
+            XCTAssertTrue((sut as! MockMapManager).isInside)
+        }
     }
 }
 
