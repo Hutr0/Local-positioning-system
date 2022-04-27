@@ -11,13 +11,17 @@ import XCTest
 class MainViewModelTests: XCTestCase {
     
     var sut: MainViewModel!
+    
+    var scrollView: UIScrollView!
 
     override func setUpWithError() throws {
-        sut = MainViewModel()
+        sut = MainViewModel(map: UIImageView())
+        scrollView = UIScrollView()
     }
 
     override func tearDownWithError() throws {
         sut = nil
+        scrollView = nil
     }
 
     func testPositioningManagerIsSet() {
@@ -25,7 +29,6 @@ class MainViewModelTests: XCTestCase {
     }
     
     func testCalculateEnterPointCalculatesCorrectlyPoint() {
-        let scrollView = UIScrollView()
         let secondScrollView = UIScrollView()
         
         scrollView.contentSize.width = 102
@@ -45,6 +48,29 @@ class MainViewModelTests: XCTestCase {
         let secondResult = CGPoint(x: centerOffsetX, y: centerOffsetY)
         
         XCTAssertEqual(result, secondResult)
+    }
+    
+    func testScrollViewDelegateNotNil() {
+        XCTAssertNotNil(sut.scrollViewDelegate)
+    }
+    
+    func testConfigureSetsDelegateScrollViewDelegateForScrollView() {
+        sut.configure(scrollView: scrollView)
+        
+        XCTAssertTrue(scrollView.delegate is ScrollViewDelegate)
+    }
+    
+    func testConfigureSetsZoomScaleForScrollView() {
+        sut.configure(scrollView: scrollView)
+        
+        XCTAssertEqual(scrollView.minimumZoomScale, 0.2)
+        XCTAssertEqual(scrollView.maximumZoomScale, 5.0)
+    }
+    
+    func testConfigureSetsContentOffset() {
+        sut.configure(scrollView: scrollView)
+        
+        XCTAssertNotEqual(scrollView.contentOffset, CGPoint(x: 0.0, y: 0.0))
     }
     
 //    func testStartPositioningUserCompletionReturnsNotNill() {
