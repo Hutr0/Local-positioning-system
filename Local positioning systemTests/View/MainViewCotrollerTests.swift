@@ -44,12 +44,16 @@ class MainViewCotrollerTests: XCTestCase {
         XCTAssertNotNil(sut.scrollView.delegate)
     }
     
-    func testScrollViewDelegateIsMVC() {
-        XCTAssertTrue(sut.scrollView.delegate is MainViewController)
+    func testScrollViewIsConfigured() {
+        XCTAssertEqual(sut.scrollView.minimumZoomScale, 0.2)
+        XCTAssertEqual(sut.scrollView.maximumZoomScale, 5)
     }
     
-    func testScrollViewIsConfigured() {
-        XCTAssertEqual(sut.scrollView.minimumZoomScale, 1)
-        XCTAssertEqual(sut.scrollView.maximumZoomScale, 5)
+    func testScrollViewHasScrollViewDelegateDelegate() {
+        XCTAssertTrue(sut.scrollView.delegate is ScrollViewDelegate)
+    }
+    
+    func testScrollViewContentOffsetSetsOnEnterPoint() {
+        XCTAssertNotEqual(sut.scrollView.contentOffset, CGPoint(x: 0.0, y: 0.0))
     }
 }
