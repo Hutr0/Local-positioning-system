@@ -221,10 +221,8 @@
 		E08EAE7A281749A1005F6A69 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				E08EAE7228174866005F6A69 /* PositioningManager.swift */,
-				E0E31D7F2817782C00AD79C4 /* PositioningMotionManager.swift */,
-				E0E31D8D2818054200AD79C4 /* ReducingInaccuracyManager.swift */,
-				E0E31D9C28184DDC00AD79C4 /* MovementAnalysisManager.swift */,
+				E0E31DAA2819999D00AD79C4 /* Positioning */,
+				E0E31DAB281999AA00AD79C4 /* Analysis */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -274,6 +272,24 @@
 				E0E31D9528182E9F00AD79C4 /* MotionProtocol.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		E0E31DAA2819999D00AD79C4 /* Positioning */ = {
+			isa = PBXGroup;
+			children = (
+				E08EAE7228174866005F6A69 /* PositioningManager.swift */,
+				E0E31D7F2817782C00AD79C4 /* PositioningMotionManager.swift */,
+				E0E31D8D2818054200AD79C4 /* ReducingInaccuracyManager.swift */,
+			);
+			path = Positioning;
+			sourceTree = "<group>";
+		};
+		E0E31DAB281999AA00AD79C4 /* Analysis */ = {
+			isa = PBXGroup;
+			children = (
+				E0E31D9C28184DDC00AD79C4 /* MovementAnalysisManager.swift */,
+			);
+			path = Analysis;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -20,10 +20,6 @@ class MainViewController: UIViewController {
         
         viewModel = MainViewModel(map: map)
         
-        configureScrollView()
-    }
-    
-    func configureScrollView() {
         viewModel.configure(scrollView: scrollView)
     }
 }
