@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Building coordinate</key>
+	<dict>
+		<key>Left bottom</key>
+		<dict>
+			<key>latitude</key>
+			<string>55.67252498442427</string>
+			<key>longitude</key>
+			<string>37.47844079363455</string>
+		</dict>
+		<key>Left top</key>
+		<dict>
+			<key>latitude</key>
+			<string>55.672788164529</string>
+			<key>longitude</key>
+			<string>37.478994655052944</string>
+		</dict>
+		<key>Right bottom</key>
+		<dict>
+			<key>latitude</key>
+			<string>55.672003413955736</string>
+			<key>longitude</key>
+			<string>37.47914128789388</string>
+		</dict>
+		<key>Right top</key>
+		<dict>
+			<key>latitude</key>
+			<string>55.67224525582763</string>
+			<key>longitude</key>
+			<string>37.47972036203386</string>
+		</dict>
+		<key>Enter</key>
+		<dict>
+			<key>latitude</key>
+			<string>55.67219200458108</string>
+			<key>longitude</key>
+			<string>37.4788591774319</string>
+		</dict>
+	</dict>
+	<key>Area coordinate</key>
+	<dict>
+		<key>Left bottom</key>
+		<dict>
+			<key>latitude</key>
+			<string>55.67251976271117</string>
+			<key>longitude</key>
+			<string>37.47807658227939</string>
+		</dict>
+		<key>Left top</key>
+		<dict>
+			<key>latitude</key>
+			<string>55.67296292923412</string>
+			<key>longitude</key>
+			<string>37.4790514089806</string>
+		</dict>
+		<key>Right bottom</key>
+		<dict>
+			<key>latitude</key>
+			<string>55.67180389258219</string>
+			<key>longitude</key>
+			<string>37.47907448597416</string>
+		</dict>
+		<key>Right top</key>
+		<dict>
+			<key>latitude</key>
+			<string>55.672212965043585</string>
+			<key>longitude</key>
+			<string>37.48000555803723</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
