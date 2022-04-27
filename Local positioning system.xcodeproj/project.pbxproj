@@ -49,6 +49,10 @@
 		E0E31DBD2819D90900AD79C4 /* BuildingAreaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DBC2819D90900AD79C4 /* BuildingAreaTests.swift */; };
 		E0E31DBF2819DAB700AD79C4 /* BuildingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DBE2819DAB700AD79C4 /* BuildingManager.swift */; };
 		E0E31DC12819DAD300AD79C4 /* BuildingManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DC02819DAD300AD79C4 /* BuildingManagerTests.swift */; };
+		E0E31DC32819E14500AD79C4 /* LocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DC22819E14500AD79C4 /* LocationManagerDelegate.swift */; };
+		E0E31DC52819E18A00AD79C4 /* LocationManagerDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DC42819E18A00AD79C4 /* LocationManagerDelegateTests.swift */; };
+		E0E31DC72819E35600AD79C4 /* LocationServicesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DC62819E35600AD79C4 /* LocationServicesManager.swift */; };
+		E0E31DC92819E36F00AD79C4 /* LocationServicesManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DC82819E36F00AD79C4 /* LocationServicesManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +119,10 @@
 		E0E31DBC2819D90900AD79C4 /* BuildingAreaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingAreaTests.swift; sourceTree = "<group>"; };
 		E0E31DBE2819DAB700AD79C4 /* BuildingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingManager.swift; sourceTree = "<group>"; };
 		E0E31DC02819DAD300AD79C4 /* BuildingManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingManagerTests.swift; sourceTree = "<group>"; };
+		E0E31DC22819E14500AD79C4 /* LocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerDelegate.swift; sourceTree = "<group>"; };
+		E0E31DC42819E18A00AD79C4 /* LocationManagerDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerDelegateTests.swift; sourceTree = "<group>"; };
+		E0E31DC62819E35600AD79C4 /* LocationServicesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesManager.swift; sourceTree = "<group>"; };
+		E0E31DC82819E36F00AD79C4 /* LocationServicesManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +245,7 @@
 			children = (
 				E08EAE7B281749F3005F6A69 /* MainViewModel.swift */,
 				E0E31DA6281982B900AD79C4 /* ScrollViewDelegate.swift */,
+				E0E31DC22819E14500AD79C4 /* LocationManagerDelegate.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -246,6 +255,7 @@
 			children = (
 				E0E31DAC2819AD6B00AD79C4 /* MapManager.swift */,
 				E0E31DBE2819DAB700AD79C4 /* BuildingManager.swift */,
+				E0E31DC62819E35600AD79C4 /* LocationServicesManager.swift */,
 				E0E31DAA2819999D00AD79C4 /* Positioning */,
 				E0E31DAB281999AA00AD79C4 /* Analysis */,
 			);
@@ -257,6 +267,7 @@
 			children = (
 				E0E31DB02819AD9400AD79C4 /* MapManagerTests.swift */,
 				E0E31DC02819DAD300AD79C4 /* BuildingManagerTests.swift */,
+				E0E31DC82819E36F00AD79C4 /* LocationServicesManagerTests.swift */,
 				E0E31DAE2819AD7500AD79C4 /* Positioning */,
 				E0E31DAF2819AD8000AD79C4 /* Analysis */,
 			);
@@ -268,6 +279,7 @@
 			children = (
 				E08EAE7D28174A0C005F6A69 /* MainViewModelTests.swift */,
 				E0E31DA8281982FE00AD79C4 /* ScrollViewDelegateTests.swift */,
+				E0E31DC42819E18A00AD79C4 /* LocationManagerDelegateTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -470,6 +482,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0E31DC72819E35600AD79C4 /* LocationServicesManager.swift in Sources */,
 				E03A4F032817370D0087BD9F /* AppDelegate.swift in Sources */,
 				E0E31DAD2819AD6B00AD79C4 /* MapManager.swift in Sources */,
 				E03A4F0D2817370D0087BD9F /* Local_positioning_system.xcdatamodeld in Sources */,
@@ -489,6 +502,7 @@
 				E08EAE6F281747A5005F6A69 /* MainViewController.swift in Sources */,
 				E0E31D8E2818054200AD79C4 /* ReducingInaccuracyManager.swift in Sources */,
 				E08EAE7328174866005F6A69 /* PositioningManager.swift in Sources */,
+				E0E31DC32819E14500AD79C4 /* LocationManagerDelegate.swift in Sources */,
 				E08EAE7C281749F3005F6A69 /* MainViewModel.swift in Sources */,
 				E0E31DBB2819D47D00AD79C4 /* BuildingArea.swift in Sources */,
 			);
@@ -502,6 +516,7 @@
 				E08EAE7E28174A0C005F6A69 /* MainViewModelTests.swift in Sources */,
 				E0E31D9428182DE200AD79C4 /* AttitudeTests.swift in Sources */,
 				E0E31D822817785E00AD79C4 /* PositioningManagerTests.swift in Sources */,
+				E0E31DC92819E36F00AD79C4 /* LocationServicesManagerTests.swift in Sources */,
 				E08EAE71281747D6005F6A69 /* MainViewCotrollerTests.swift in Sources */,
 				E0E31D9F28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift in Sources */,
 				E0E31DC12819DAD300AD79C4 /* BuildingManagerTests.swift in Sources */,
@@ -509,6 +524,7 @@
 				E0E31D9A2818312100AD79C4 /* GravityTests.swift in Sources */,
 				E0E31D9828182FB300AD79C4 /* UserAccelerationTests.swift in Sources */,
 				E0E31DA9281982FE00AD79C4 /* ScrollViewDelegateTests.swift in Sources */,
+				E0E31DC52819E18A00AD79C4 /* LocationManagerDelegateTests.swift in Sources */,
 				E0E31D902818056500AD79C4 /* ReducingInaccuracyManagerTests.swift in Sources */,
 				E0E31DBD2819D90900AD79C4 /* BuildingAreaTests.swift in Sources */,
 				E0E31DB72819B18100AD79C4 /* BuildingCoordinateTests.swift in Sources */,

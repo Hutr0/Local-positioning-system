@@ -8,7 +8,14 @@
 import Foundation
 import CoreLocation
 
+
 class MapManager {
     var buildingCoordinate = BuildingCoordinate()
     var buildingArea = BuildingArea()
+    
+    let locationServicesManager = LocationServicesManager()
+    
+    func setupLocationServices() {
+        locationServicesManager.checkLocationServices()
+    }
 }

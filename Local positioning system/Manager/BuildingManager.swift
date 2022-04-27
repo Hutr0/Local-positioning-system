@@ -27,8 +27,6 @@ class BuildingManager {
             type = "Area coordinate"
         }
         
-        print(dictionary.allKeys)
-        
         guard let arrayOfBuildingCoordinate = dictionary.object(forKey: type) as? [String: NSDictionary] else { return [:] }
         
         var coordinates: [String: CLLocationCoordinate2D] = [:]
