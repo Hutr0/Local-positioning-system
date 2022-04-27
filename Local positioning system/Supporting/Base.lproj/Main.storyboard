@@ -39,36 +39,13 @@
                                     <constraint firstAttribute="height" constant="20" id="IsL-Lm-uZO"/>
                                 </constraints>
                             </imageView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" pitchEnabled="NO" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzr-dz-0j6">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fpS-rY-qa0">
-                                <rect key="frame" x="348" y="826" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="cVK-vb-5X3"/>
-                                    <constraint firstAttribute="height" constant="40" id="kJ7-nP-PFO"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="40"/>
-                                <state key="normal" image="worldwide">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
-                                </state>
-                                <connections>
-                                    <action selector="mapButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uBL-uY-Aas"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ePy-V7-wIf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="36F-Gx-NOu"/>
-                            <constraint firstAttribute="bottom" secondItem="rzr-dz-0j6" secondAttribute="bottom" id="4xE-zr-izx"/>
-                            <constraint firstItem="rzr-dz-0j6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6DI-c9-mhA"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rzr-dz-0j6" secondAttribute="trailing" id="BE8-w3-Bac"/>
-                            <constraint firstItem="rzr-dz-0j6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EyQ-Vl-DHG"/>
                             <constraint firstItem="ePy-V7-wIf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="XDP-XG-4SV"/>
                             <constraint firstAttribute="bottom" secondItem="ePy-V7-wIf" secondAttribute="bottom" id="YJj-1M-bfb"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fpS-rY-qa0" secondAttribute="trailing" constant="40" id="e1G-Mc-5L8"/>
-                            <constraint firstAttribute="bottom" secondItem="fpS-rY-qa0" secondAttribute="bottom" constant="60" id="jfG-dl-uvL"/>
                             <constraint firstItem="QIT-cM-sUR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="197" id="qkF-VL-jm5"/>
                             <constraint firstItem="ePy-V7-wIf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ySy-XM-SSv"/>
                             <constraint firstItem="QIT-cM-sUR" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="438" id="zoA-fU-CjH"/>
@@ -76,8 +53,6 @@
                     </view>
                     <connections>
                         <outlet property="map" destination="21v-ly-KWj" id="Vpj-Oe-AjD"/>
-                        <outlet property="mapButton" destination="fpS-rY-qa0" id="VZ7-PR-QHy"/>
-                        <outlet property="mapView" destination="rzr-dz-0j6" id="U48-u2-4ON"/>
                         <outlet property="scrollView" destination="ePy-V7-wIf" id="hyv-TA-ab2"/>
                         <outlet property="user" destination="QIT-cM-sUR" id="CVz-F7-0wq"/>
                     </connections>
@@ -90,7 +65,6 @@
     <resources>
         <image name="map" width="1000" height="700"/>
         <image name="user" width="256" height="256"/>
-        <image name="worldwide" width="256" height="256"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
