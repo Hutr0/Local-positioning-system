@@ -39,7 +39,7 @@ class PositioningManagerTests: XCTestCase {
         sut.positioningMotionManager.changeDeviceMotionUpdateInterval(to: 0.01)
         sut.startRecordingMotions()
         
-        let result = XCTWaiter.wait(for: [expectation], timeout: 0.11)
+        let result = XCTWaiter.wait(for: [expectation], timeout: 1)
         if result == XCTWaiter.Result.timedOut {
             XCTAssertTrue((sut as! MockPositioningManager).isInside)
         } else {

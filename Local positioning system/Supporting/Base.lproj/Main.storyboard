@@ -23,7 +23,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="1460" height="900"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="900" id="32e-Ji-fbr"/>
-                                            <constraint firstAttribute="width" constant="1460" id="Ulk-iZ-fEn"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="1460" id="Ulk-iZ-fEn"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>

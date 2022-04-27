@@ -37,6 +37,8 @@
 		E0E31D9A2818312100AD79C4 /* GravityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31D992818312100AD79C4 /* GravityTests.swift */; };
 		E0E31D9D28184DDC00AD79C4 /* MovementAnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31D9C28184DDC00AD79C4 /* MovementAnalysisManager.swift */; };
 		E0E31D9F28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31D9E28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift */; };
+		E0E31DA7281982B900AD79C4 /* ScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DA6281982B900AD79C4 /* ScrollViewDelegate.swift */; };
+		E0E31DA9281982FE00AD79C4 /* ScrollViewDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DA8281982FE00AD79C4 /* ScrollViewDelegateTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,8 @@
 		E0E31D992818312100AD79C4 /* GravityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityTests.swift; sourceTree = "<group>"; };
 		E0E31D9C28184DDC00AD79C4 /* MovementAnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementAnalysisManager.swift; sourceTree = "<group>"; };
 		E0E31D9E28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementAnalysisManagerTests.swift; sourceTree = "<group>"; };
+		E0E31DA6281982B900AD79C4 /* ScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewDelegate.swift; sourceTree = "<group>"; };
+		E0E31DA8281982FE00AD79C4 /* ScrollViewDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewDelegateTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				E08EAE7B281749F3005F6A69 /* MainViewModel.swift */,
+				E0E31DA6281982B900AD79C4 /* ScrollViewDelegate.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				E08EAE7D28174A0C005F6A69 /* MainViewModelTests.swift */,
+				E0E31DA8281982FE00AD79C4 /* ScrollViewDelegateTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -409,6 +415,7 @@
 				E0E31D802817782C00AD79C4 /* PositioningMotionManager.swift in Sources */,
 				E03A4F052817370D0087BD9F /* SceneDelegate.swift in Sources */,
 				E0E31D9D28184DDC00AD79C4 /* MovementAnalysisManager.swift in Sources */,
+				E0E31DA7281982B900AD79C4 /* ScrollViewDelegate.swift in Sources */,
 				E0E31D8C281784AA00AD79C4 /* MotionData.swift in Sources */,
 				E0E31D8628177E3200AD79C4 /* Attitude.swift in Sources */,
 				E0E31D9628182E9F00AD79C4 /* MotionProtocol.swift in Sources */,
@@ -431,6 +438,7 @@
 				E08EAE75281748F3005F6A69 /* PositioningMotionManagerTests.swift in Sources */,
 				E0E31D9A2818312100AD79C4 /* GravityTests.swift in Sources */,
 				E0E31D9828182FB300AD79C4 /* UserAccelerationTests.swift in Sources */,
+				E0E31DA9281982FE00AD79C4 /* ScrollViewDelegateTests.swift in Sources */,
 				E0E31D902818056500AD79C4 /* ReducingInaccuracyManagerTests.swift in Sources */,
 				E0E31D9228182B8200AD79C4 /* RotationRateTests.swift in Sources */,
 			);
