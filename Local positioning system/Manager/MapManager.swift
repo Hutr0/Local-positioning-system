@@ -9,5 +9,6 @@ import Foundation
 import CoreLocation
 
 class MapManager {
-    let buildingCoordinate = BuildingCoordinate()
+    var buildingCoordinate = BuildingCoordinate()
+    var buildingArea = BuildingArea()
 }

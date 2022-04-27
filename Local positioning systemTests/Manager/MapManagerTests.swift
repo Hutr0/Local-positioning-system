@@ -23,4 +23,8 @@ class MapManagerTests: XCTestCase {
     func testBuildingCoordinateNotNil() {
         XCTAssertNotNil(sut.buildingCoordinate)
     }
+    
+    func testBuildingAreaNotNil() {
+        XCTAssertNotNil(sut.buildingArea)
+    }
 }

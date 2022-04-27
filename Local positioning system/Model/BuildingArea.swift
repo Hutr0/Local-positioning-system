@@ -1,5 +1,5 @@
 //
-//  BuildingCoordinate.swift
+//  Coordinate.swift
 //  Local positioning system
 //
 //  Created by Леонид Лукашевич on 27.04.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct BuildingCoordinate: BuildingProtocol {
+struct BuildingArea: BuildingProtocol {
     let buildingManager = BuildingManager()
     
     var leftBottom: CLLocationCoordinate2D
@@ -16,16 +16,13 @@ struct BuildingCoordinate: BuildingProtocol {
     var rightBottom: CLLocationCoordinate2D
     var rightTop: CLLocationCoordinate2D
     
-    var enter: CLLocationCoordinate2D
-    
     init() {
         leftBottom = CLLocationCoordinate2D()
         leftTop = CLLocationCoordinate2D()
         rightBottom = CLLocationCoordinate2D()
         rightTop = CLLocationCoordinate2D()
-        enter = CLLocationCoordinate2D()
         
-        let coordinates = buildingManager.getCoordinatesFromPlist(of: .coordinate)
+        let coordinates = buildingManager.getCoordinatesFromPlist(of: .area)
         
         if !coordinates.isEmpty {
             for coordinate in coordinates {
@@ -38,8 +35,6 @@ struct BuildingCoordinate: BuildingProtocol {
                     self.rightBottom = coordinate.value
                 case "Right top":
                     self.rightTop = coordinate.value
-                case "Enter":
-                    self.enter = coordinate.value
                 default:
                     print("Unexpected value on initialization BuildingCoordinate")
                 }
