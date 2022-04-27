@@ -10,16 +10,17 @@ import UIKit
 class MainViewModel {
     
     var scrollViewDelegate: ScrollViewDelegate!
-    var positioningManager = PositioningManager()
-    var mapManager = MapManager()
+    lazy var positioningManager = PositioningManager()
+    lazy var mapManager = MapManager()
     
     init(map: UIImageView) {
         scrollViewDelegate = ScrollViewDelegate(map: map)
     }
     
     func startPositioningUser(completionHandler: @escaping () -> ()) {
-        mapManager.setupLocationServices()
-//        positioningManager.startRecordingMotions()
+        mapManager.startGettingLocation(closureIfWeAreInside: {
+            self.positioningManager.startRecordingMotions()
+        })
     }
     
     func configure(scrollView: UIScrollView) {

@@ -38,14 +38,14 @@ class MapManagerTests: XCTestCase {
     }
     
     func testStartDetectionGettingInsideAreaStartsTimer() {
-        sut.startDetectionGettingInsideArea()
+        sut.startDetectionGettingInsideArea() {}
         
         XCTAssertNotNil(sut.timerManager.timer)
         XCTAssertTrue(sut.timerManager.timer.isValid)
     }
     
     func testStopDetectionGettingInsideAreaStopTimer() {
-        sut.startDetectionGettingInsideArea()
+        sut.startDetectionGettingInsideArea() {}
         sut.stopDetectionGettingInsideArea()
         
         XCTAssertFalse(sut.timerManager.timer.isValid)

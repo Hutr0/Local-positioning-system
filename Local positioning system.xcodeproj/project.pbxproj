@@ -225,13 +225,8 @@
 		E08EAE7628174950005F6A69 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E0E31D8B281784AA00AD79C4 /* MotionData.swift */,
-				E0E31D8728177E6300AD79C4 /* RotationRate.swift */,
-				E0E31D8528177E3200AD79C4 /* Attitude.swift */,
-				E0E31D8328177DED00AD79C4 /* UserAcceleration.swift */,
-				E0E31D8928177E8600AD79C4 /* Gravity.swift */,
-				E0E31DB22819AEB300AD79C4 /* BuildingCoordinate.swift */,
-				E0E31DBA2819D47D00AD79C4 /* BuildingArea.swift */,
+				E0E31DD1281A0A1500AD79C4 /* Motion Data */,
+				E0E31DD0281A0A0600AD79C4 /* Building */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -248,8 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				E08EAE7B281749F3005F6A69 /* MainViewModel.swift */,
-				E0E31DA6281982B900AD79C4 /* ScrollViewDelegate.swift */,
-				E0E31DC22819E14500AD79C4 /* LocationManagerDelegate.swift */,
+				E0E31DCE281A09E100AD79C4 /* Delegate */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -260,9 +254,9 @@
 				E0E31DAC2819AD6B00AD79C4 /* MapManager.swift */,
 				E0E31DBE2819DAB700AD79C4 /* BuildingManager.swift */,
 				E0E31DC62819E35600AD79C4 /* LocationServicesManager.swift */,
+				E0E31DCA2819F4B300AD79C4 /* TimerManager.swift */,
 				E0E31DAA2819999D00AD79C4 /* Positioning */,
 				E0E31DAB281999AA00AD79C4 /* Analysis */,
-				E0E31DCA2819F4B300AD79C4 /* TimerManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -273,9 +267,9 @@
 				E0E31DB02819AD9400AD79C4 /* MapManagerTests.swift */,
 				E0E31DC02819DAD300AD79C4 /* BuildingManagerTests.swift */,
 				E0E31DC82819E36F00AD79C4 /* LocationServicesManagerTests.swift */,
+				E0E31DCC2819F4C300AD79C4 /* TimerManagerTests.swift */,
 				E0E31DAE2819AD7500AD79C4 /* Positioning */,
 				E0E31DAF2819AD8000AD79C4 /* Analysis */,
-				E0E31DCC2819F4C300AD79C4 /* TimerManagerTests.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -284,8 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				E08EAE7D28174A0C005F6A69 /* MainViewModelTests.swift */,
-				E0E31DA8281982FE00AD79C4 /* ScrollViewDelegateTests.swift */,
-				E0E31DC42819E18A00AD79C4 /* LocationManagerDelegateTests.swift */,
+				E0E31DCF281A09F600AD79C4 /* Delegate */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -301,12 +294,8 @@
 		E08EAE8228174CA4005F6A69 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E0E31D9128182B8200AD79C4 /* RotationRateTests.swift */,
-				E0E31D9328182DE200AD79C4 /* AttitudeTests.swift */,
-				E0E31D9728182FB300AD79C4 /* UserAccelerationTests.swift */,
-				E0E31D992818312100AD79C4 /* GravityTests.swift */,
-				E0E31DB62819B18100AD79C4 /* BuildingCoordinateTests.swift */,
-				E0E31DBC2819D90900AD79C4 /* BuildingAreaTests.swift */,
+				E0E31DD3281A0A3100AD79C4 /* MotionData */,
+				E0E31DD2281A0A2800AD79C4 /* Building */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -354,6 +343,65 @@
 				E0E31D9E28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift */,
 			);
 			path = Analysis;
+			sourceTree = "<group>";
+		};
+		E0E31DCE281A09E100AD79C4 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				E0E31DA6281982B900AD79C4 /* ScrollViewDelegate.swift */,
+				E0E31DC22819E14500AD79C4 /* LocationManagerDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		E0E31DCF281A09F600AD79C4 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				E0E31DA8281982FE00AD79C4 /* ScrollViewDelegateTests.swift */,
+				E0E31DC42819E18A00AD79C4 /* LocationManagerDelegateTests.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		E0E31DD0281A0A0600AD79C4 /* Building */ = {
+			isa = PBXGroup;
+			children = (
+				E0E31DB22819AEB300AD79C4 /* BuildingCoordinate.swift */,
+				E0E31DBA2819D47D00AD79C4 /* BuildingArea.swift */,
+			);
+			path = Building;
+			sourceTree = "<group>";
+		};
+		E0E31DD1281A0A1500AD79C4 /* Motion Data */ = {
+			isa = PBXGroup;
+			children = (
+				E0E31D8B281784AA00AD79C4 /* MotionData.swift */,
+				E0E31D8728177E6300AD79C4 /* RotationRate.swift */,
+				E0E31D8528177E3200AD79C4 /* Attitude.swift */,
+				E0E31D8328177DED00AD79C4 /* UserAcceleration.swift */,
+				E0E31D8928177E8600AD79C4 /* Gravity.swift */,
+			);
+			path = "Motion Data";
+			sourceTree = "<group>";
+		};
+		E0E31DD2281A0A2800AD79C4 /* Building */ = {
+			isa = PBXGroup;
+			children = (
+				E0E31DB62819B18100AD79C4 /* BuildingCoordinateTests.swift */,
+				E0E31DBC2819D90900AD79C4 /* BuildingAreaTests.swift */,
+			);
+			path = Building;
+			sourceTree = "<group>";
+		};
+		E0E31DD3281A0A3100AD79C4 /* MotionData */ = {
+			isa = PBXGroup;
+			children = (
+				E0E31D9128182B8200AD79C4 /* RotationRateTests.swift */,
+				E0E31D9328182DE200AD79C4 /* AttitudeTests.swift */,
+				E0E31D9728182FB300AD79C4 /* UserAccelerationTests.swift */,
+				E0E31D992818312100AD79C4 /* GravityTests.swift */,
+			);
+			path = MotionData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
