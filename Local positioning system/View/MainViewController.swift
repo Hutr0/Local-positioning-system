@@ -28,7 +28,7 @@ class MainViewController: UIViewController {
     func configureScrollView() {
         scrollView.delegate = self
         
-        scrollView.minimumZoomScale = 1.0
+        scrollView.minimumZoomScale = 0.25
         scrollView.maximumZoomScale = 5.0
     }
 }
