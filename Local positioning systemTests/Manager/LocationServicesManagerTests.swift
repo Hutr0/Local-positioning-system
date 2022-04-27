@@ -22,7 +22,7 @@ class LocationServicesManagerTests: XCTestCase {
     }
     
     func testCheckLocationServicesSetsDesiredAccuracyOnkCLLocationAccuracyBestIfLocationServicesEnabled() {
-        sut.checkLocationServices {}
+        sut.checkLocationServices()
         
         if CLLocationManager.locationServicesEnabled() {
             XCTAssertTrue(sut.locationManager.desiredAccuracy == kCLLocationAccuracyBest)
@@ -31,7 +31,7 @@ class LocationServicesManagerTests: XCTestCase {
     
     func testCheckLocationServicesStartCheckLocationAutorizationIfLocationServicesEnabled() {
         sut = MockLocationServicesManager()
-        sut.checkLocationServices {}
+        sut.checkLocationServices()
         
         if CLLocationManager.locationServicesEnabled() {
             XCTAssertTrue((sut as! MockLocationServicesManager).isInside)
