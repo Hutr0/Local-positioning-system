@@ -38,14 +38,14 @@ class MapManagerTests: XCTestCase {
     }
     
     func testStartDetectionGettingInsideAreaStartsTimer() {
-        sut.startDetectionGettingInsideArea() {}
+        sut.startDetectionGettingInsideArea()
         
         XCTAssertNotNil(sut.timerManager.timer)
         XCTAssertTrue(sut.timerManager.timer.isValid)
     }
     
     func testStopDetectionGettingInsideAreaStopTimer() {
-        sut.startDetectionGettingInsideArea() {}
+        sut.startDetectionGettingInsideArea()
         sut.stopDetectionGettingInsideArea()
         
         XCTAssertFalse(sut.timerManager.timer.isValid)
@@ -129,5 +129,26 @@ class MapManagerTests: XCTestCase {
         let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
         
         XCTAssertFalse(result)
+    }
+    
+    func testGetCurrentUserLocationReturnsNotDefaultResult() {
+        let expectation = expectation(description: "Test after zero point one second")
+        
+        let defaultLocation = CLLocationCoordinate2D()
+        var location = CLLocationCoordinate2D()
+        let delegate = LocationManagerDelegate(locationServicesManager: sut.locationServicesManager)
+        sut.locationServicesManager.locationManager.delegate = delegate
+        
+        sut.getCurrentUserLocation() { loc in
+            location = loc
+        }
+        
+        let result = XCTWaiter.wait(for: [expectation], timeout: 0.2)
+        if result == XCTWaiter.Result.timedOut {
+            XCTAssertNotEqual(location.latitude, defaultLocation.latitude)
+            XCTAssertNotEqual(location.longitude, defaultLocation.longitude)
+        } else {
+            XCTFail("Delay interruped")
+        }
     }
 }

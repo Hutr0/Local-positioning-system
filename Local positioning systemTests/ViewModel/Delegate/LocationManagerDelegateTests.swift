@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import Local_positioning_system
+import CoreLocation
 
 class LocationManagerDelegateTests: XCTestCase {
 
@@ -22,5 +23,33 @@ class LocationManagerDelegateTests: XCTestCase {
     
     func testMapManagerNotNilAfterInit() {
         XCTAssertNotNil(sut.locationServicesManager)
+    }
+    
+    func testCompletionHandlerNotNilAfterSet() {
+        sut.completionHandler = { _ in }
+        XCTAssertNotNil(sut.completionHandler)
+    }
+    
+    func testUpdateLocationCallsCompletionHandler() {
+        var isCalled = false
+        sut.completionHandler = { _ in
+            isCalled = true
+        }
+        
+        sut.locationManager(CLLocationManager(), didUpdateLocations: [CLLocation()])
+        
+        XCTAssertTrue(isCalled)
+    }
+    
+    func testUpdateLocationReturnsLocationInCompeltion() {
+        let startLocation = CLLocation(latitude: 1, longitude: 1)
+        var location: CLLocation = CLLocation()
+        sut.completionHandler = { loc in
+            location = loc
+        }
+        
+        sut.locationManager(CLLocationManager(), didUpdateLocations: [startLocation])
+        
+        XCTAssertEqual(location, startLocation)
     }
 }

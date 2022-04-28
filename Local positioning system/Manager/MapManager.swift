@@ -15,35 +15,73 @@ class MapManager {
     let locationServicesManager = LocationServicesManager()
     let timerManager = TimerManager()
     
+    var closure: ((CLLocationCoordinate2D) -> ())!
+    
     func startGettingLocation(closureIfWeAreInside: @escaping () -> ()) {
         locationServicesManager.checkLocationServices()
-        startDetectionGettingInsideArea(closureIfWeAreInside: closureIfWeAreInside)
+        
+        if locationServicesManager.locationManager.authorizationStatus == .authorizedWhenInUse {
+            startDetectionGettingInsideArea()
+        }
     }
     
-    func startDetectionGettingInsideArea(closureIfWeAreInside: @escaping () -> ()) {
+    func setCompletionToLocationManagerDelegate(completion: @escaping (CLLocation) -> ()) {
+        let delegate = locationServicesManager.locationManager.delegate
+        (delegate as! LocationManagerDelegate).completionHandler = completion
+    }
+    
+    func getCurrentUserLocation(closure: @escaping (CLLocationCoordinate2D) -> ()) {
+        let completion: ((CLLocation) -> ()) = { location in
+            closure(location.coordinate)
+        }
+        
+        setCompletionToLocationManagerDelegate(completion: completion)
+        
+        locationServicesManager.locationManager.requestLocation()
+    }
+    
+    func startDetectionGettingInsideArea() {
         timerManager.startTimer(timeInterval: 10) { [weak self] in
             guard let self = self else { return }
             
-            guard let userLocation = self.locationServicesManager.locationManager.location?.coordinate else { return }
-            let isInside = self.checkGettingInside(in: self.buildingArea, userLocation: userLocation)
+            self.getCurrentUserLocation() { location in
+                let isInside = self.checkGettingInside(in: self.buildingArea, userLocation: location)
 
-            if isInside {
-                self.timerManager.stopTimer()
-                self.startDetectionGettingInsideBuilding(closureIfWeAreInside: closureIfWeAreInside)
+                if isInside {
+                    self.timerManager.stopTimer()
+                    self.startDetectionGettingInsideBuilding()
+                }
             }
         }
     }
     
-    func startDetectionGettingInsideBuilding(closureIfWeAreInside: @escaping () -> ()) {
+    func startDetectionGettingInsideBuilding() {
         timerManager.startTimer(timeInterval: 1) { [weak self] in
             guard let self = self else { return }
             
-            guard let userLocation = self.locationServicesManager.locationManager.location?.coordinate else { return }
-            let isInside = self.checkGettingInside(in: self.buildingCoordinate, userLocation: userLocation)
-
-            if isInside {
-                self.timerManager.stopTimer()
-                closureIfWeAreInside()
+            self.getCurrentUserLocation() { location in
+                let isInArea = self.checkGettingInside(in: self.buildingArea, userLocation: location)
+                if !isInArea {
+                    self.timerManager.stopTimer()
+                    self.startDetectionGettingInsideArea()
+                }
+                
+                let isInside = self.checkGettingInside(in: self.buildingCoordinate, userLocation: location)
+                if isInside {
+                    self.timerManager.stopTimer()
+                    
+                    let completionHandler: ((CLLocation) -> ()) = { loc in
+                        self.closure(loc.coordinate)
+                        
+                        if self.checkGettingInside(in: self.buildingCoordinate, userLocation: loc.coordinate) {
+                            self.locationServicesManager.locationManager.stopUpdatingLocation()
+                            self.startDetectionGettingInsideBuilding()
+                        }
+                    }
+                    
+                    self.setCompletionToLocationManagerDelegate(completion: completionHandler)
+                    self.locationServicesManager.locationManager.startUpdatingLocation()
+                }
             }
         }
     }
