@@ -21,22 +21,38 @@ class MapManager {
     }
     
     func startDetectionGettingInsideArea(closureIfWeAreInside: @escaping () -> ()) {
-        timerManager.startTimer(timeInterval: 10) {
+        timerManager.startTimer(timeInterval: 10) { [weak self] in
+            guard let self = self else { return }
+            
             guard let userLocation = self.locationServicesManager.locationManager.location?.coordinate else { return }
-            let inside = self.checkGettingInsideArea(userLocation: userLocation)
+            let isInside = self.checkGettingInside(in: self.buildingArea, userLocation: userLocation)
 
-            if inside {
+            if isInside {
+                self.timerManager.stopTimer()
+                self.startDetectionGettingInsideBuilding(closureIfWeAreInside: closureIfWeAreInside)
+            }
+        }
+    }
+    
+    func startDetectionGettingInsideBuilding(closureIfWeAreInside: @escaping () -> ()) {
+        timerManager.startTimer(timeInterval: 1) { [weak self] in
+            guard let self = self else { return }
+            
+            guard let userLocation = self.locationServicesManager.locationManager.location?.coordinate else { return }
+            let isInside = self.checkGettingInside(in: self.buildingCoordinate, userLocation: userLocation)
+
+            if isInside {
                 self.timerManager.stopTimer()
                 closureIfWeAreInside()
             }
         }
     }
     
-    func checkGettingInsideArea(userLocation: CLLocationCoordinate2D) -> Bool {
-        let lb = buildingArea.leftBottom
-        let lt = buildingArea.leftTop
-        let rb = buildingArea.rightBottom
-        let rt = buildingArea.rightTop
+    func checkGettingInside(in coordinates: BuildingProtocol, userLocation: CLLocationCoordinate2D) -> Bool {
+        let lb = coordinates.leftBottom
+        let lt = coordinates.leftTop
+        let rb = coordinates.rightBottom
+        let rt = coordinates.rightTop
         
         var isInside = false
         if userLocation.longitude >= lb.longitude &&

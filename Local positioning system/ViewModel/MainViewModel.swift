@@ -19,7 +19,7 @@ class MainViewModel {
     
     func startPositioningUser(completionHandler: @escaping () -> ()) {
         mapManager.startGettingLocation(closureIfWeAreInside: {
-            self.positioningManager.startRecordingMotions()
+            
         })
     }
     

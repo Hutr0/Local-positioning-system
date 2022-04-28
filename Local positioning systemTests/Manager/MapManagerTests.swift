@@ -54,7 +54,7 @@ class MapManagerTests: XCTestCase {
     func testCheckGettingInsideAreaWorksCorrectlyFirstTest() {
         let location = CLLocationCoordinate2D(latitude: 55.67239263212078, longitude: 37.47897356390552)
         
-        let result = sut.checkGettingInsideArea(userLocation: location)
+        let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
         
         XCTAssertTrue(result)
     }
@@ -62,7 +62,7 @@ class MapManagerTests: XCTestCase {
     func testCheckGettingInsideAreaWorksCorrectlySecondTest() {
         let location = CLLocationCoordinate2D(latitude: 55.671592512248566, longitude: 37.47835052742039)
         
-        let result = sut.checkGettingInsideArea(userLocation: location)
+        let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
         
         XCTAssertFalse(result)
     }
@@ -70,8 +70,32 @@ class MapManagerTests: XCTestCase {
     func testCheckGettingInsideAreaWorksCorrectlyThirdTest() {
         let location = CLLocationCoordinate2D(latitude: 55.67239761556922, longitude: 37.478390897967074)
         
-        let result = sut.checkGettingInsideArea(userLocation: location)
+        let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
         
         XCTAssertTrue(result)
+    }
+    
+    func testCheckGettingInsideBuildingWorksCorrectlyFirstTest() {
+        let location = CLLocationCoordinate2D(latitude: 55.67239263212078, longitude: 37.47897356390552)
+        
+        let result = sut.checkGettingInside(in: sut.buildingCoordinate, userLocation: location)
+        
+        XCTAssertTrue(result)
+    }
+    
+    func testCheckGettingInsideBuildingWorksCorrectlySecondTest() {
+        let location = CLLocationCoordinate2D(latitude: 55.671592512248566, longitude: 37.47835052742039)
+        
+        let result = sut.checkGettingInside(in: sut.buildingCoordinate, userLocation: location)
+        
+        XCTAssertFalse(result)
+    }
+    
+    func testCheckGettingInsideBuildingWorksCorrectlyThirdTest() {
+        let location = CLLocationCoordinate2D(latitude: 55.67239761556922, longitude: 37.478390897967074)
+        
+        let result = sut.checkGettingInside(in: sut.buildingCoordinate, userLocation: location)
+        
+        XCTAssertFalse(result)
     }
 }
