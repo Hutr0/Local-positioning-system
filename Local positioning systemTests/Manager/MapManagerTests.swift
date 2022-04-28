@@ -98,4 +98,36 @@ class MapManagerTests: XCTestCase {
         
         XCTAssertFalse(result)
     }
+    
+    func testGettingInsideAreaFourth() {
+        let location = CLLocationCoordinate2D(latitude: 55.67194178348394, longitude: 37.47846747199399)
+        
+        let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
+        
+        XCTAssertFalse(result)
+    }
+    
+    func testGettingInsideAreaFifth() {
+        let location = CLLocationCoordinate2D(latitude: 55.67180389258219, longitude: 37.47807658227939)
+        
+        let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
+        
+        XCTAssertFalse(result)
+    }
+    
+    func testGettingInsideArea6() {
+        let location = CLLocationCoordinate2D(latitude: 55.672612841598145, longitude: 37.47935890790105)
+        
+        let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
+        
+        XCTAssertTrue(result)
+    }
+    
+    func testGettingInsideArea7() {
+        let location = CLLocationCoordinate2D(latitude: 55.672896696472215, longitude: 37.479700442533364)
+        
+        let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
+        
+        XCTAssertFalse(result)
+    }
 }

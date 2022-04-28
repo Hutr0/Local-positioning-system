@@ -54,15 +54,31 @@ class MapManager {
         let rb = coordinates.rightBottom
         let rt = coordinates.rightTop
         
+        let p1 = hitCalculate(pointX: userLocation.longitude, pointY: userLocation.latitude,
+                              firstX: lb.longitude, firstY: lb.latitude,
+                              secondX: lt.longitude, secondY: lt.latitude)
+        let p2 = hitCalculate(pointX: userLocation.longitude, pointY: userLocation.latitude,
+                              firstX: lt.longitude, firstY: lt.latitude,
+                              secondX: rt.longitude, secondY: rt.latitude)
+        let p3 = hitCalculate(pointX: userLocation.longitude, pointY: userLocation.latitude,
+                              firstX: rt.longitude, firstY: rt.latitude,
+                              secondX: rb.longitude, secondY: rb.latitude)
+        let p4 = hitCalculate(pointX: userLocation.longitude, pointY: userLocation.latitude,
+                              firstX: rb.longitude, firstY: rb.latitude,
+                              secondX: lb.longitude, secondY: lb.latitude)
+        
         var isInside = false
-        if userLocation.longitude >= lb.longitude &&
-            userLocation.longitude <= rt.longitude &&
-            userLocation.latitude <= lt.latitude &&
-            userLocation.latitude >= rb.latitude {
+        if p1 < 0 && p2 < 0 && p3 < 0 && p4 < 0 {
             isInside = true
         }
         
         return isInside
+    }
+    
+    private func hitCalculate(pointX: Double, pointY: Double,
+                              firstX: Double, firstY: Double,
+                              secondX: Double, secondY: Double) -> Double {
+        return (secondX - firstX) * (pointY - firstY) - (secondY - firstY) * (pointX - firstX)
     }
     
     func stopDetectionGettingInsideArea() {
