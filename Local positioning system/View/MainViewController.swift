@@ -22,8 +22,6 @@ class MainViewController: UIViewController {
         
         viewModel.configure(scrollView: scrollView)
         
-        viewModel.startPositioningUser {
-            
-        }
+        viewModel.startPositioningUserOnMap(widht: map.frame.width, height: map.frame.height)
     }
 }

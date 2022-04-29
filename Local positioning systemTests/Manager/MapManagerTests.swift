@@ -76,7 +76,7 @@ class MapManagerTests: XCTestCase {
     }
     
     func testCheckGettingInsideBuildingWorksCorrectlyFirstTest() {
-        let location = CLLocationCoordinate2D(latitude: 55.67239263212078, longitude: 37.47897356390552)
+        let location = CLLocationCoordinate2D(latitude: 55.67239263212078, longitude: 37.478994655052944)
         
         let result = sut.checkGettingInside(in: sut.buildingCoordinate, userLocation: location)
         
@@ -147,6 +147,41 @@ class MapManagerTests: XCTestCase {
         if result == XCTWaiter.Result.timedOut {
             XCTAssertNotEqual(location.latitude, defaultLocation.latitude)
             XCTAssertNotEqual(location.longitude, defaultLocation.longitude)
+        } else {
+            XCTFail("Delay interruped")
+        }
+    }
+    
+    func testSetCompletionToLocationManagerDelegateSetsCompletionToDelegate() {
+        let delegate = LocationManagerDelegate(locationServicesManager: sut.locationServicesManager)
+        sut.locationServicesManager.locationManager.delegate = delegate
+        
+        var isCompleted = false
+        let completion: (CLLocation) -> () = { loc in
+            isCompleted = true
+        }
+        
+        sut.setCompletionToLocationManagerDelegate(completion: completion)
+        delegate.locationManager(CLLocationManager(), didUpdateLocations: [CLLocation()])
+        
+        XCTAssertTrue(isCompleted)
+    }
+    
+    func testGetCurrentUserLocationWorksCorrectly() {
+        let expectation = expectation(description: "Test after zero point one second")
+        
+        var isCompleted = false
+        let completion: (CLLocationCoordinate2D) -> () = { _ in
+            isCompleted = true
+        }
+        let delegate = LocationManagerDelegate(locationServicesManager: sut.locationServicesManager)
+        sut.locationServicesManager.locationManager.delegate = delegate
+        
+        sut.getCurrentUserLocation(completion: completion)
+        
+        let result = XCTWaiter.wait(for: [expectation], timeout: 0.2)
+        if result == XCTWaiter.Result.timedOut {
+            XCTAssertTrue(isCompleted)
         } else {
             XCTFail("Delay interruped")
         }

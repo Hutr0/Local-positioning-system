@@ -17,27 +17,13 @@ class MapManager {
     
     var closure: ((CLLocationCoordinate2D) -> ())!
     
-    func startGettingLocation(closureIfWeAreInside: @escaping () -> ()) {
+    func startGettingLocation(closureIfWeAreInside: @escaping (CLLocationCoordinate2D) -> ()) {
         locationServicesManager.checkLocationServices()
         
         if locationServicesManager.locationManager.authorizationStatus == .authorizedWhenInUse {
+            closure = closureIfWeAreInside
             startDetectionGettingInsideArea()
         }
-    }
-    
-    func setCompletionToLocationManagerDelegate(completion: @escaping (CLLocation) -> ()) {
-        let delegate = locationServicesManager.locationManager.delegate
-        (delegate as! LocationManagerDelegate).completionHandler = completion
-    }
-    
-    func getCurrentUserLocation(closure: @escaping (CLLocationCoordinate2D) -> ()) {
-        let completion: ((CLLocation) -> ()) = { location in
-            closure(location.coordinate)
-        }
-        
-        setCompletionToLocationManagerDelegate(completion: completion)
-        
-        locationServicesManager.locationManager.requestLocation()
     }
     
     func startDetectionGettingInsideArea() {
@@ -121,5 +107,22 @@ class MapManager {
     
     func stopDetectionGettingInsideArea() {
         timerManager.stopTimer()
+    }
+    
+    func setCompletionToLocationManagerDelegate(completion: @escaping (CLLocation) -> ()) {
+        let delegate = locationServicesManager.locationManager.delegate
+        guard delegate != nil else { return }
+        
+        (delegate as! LocationManagerDelegate).completionHandler = completion
+    }
+    
+    func getCurrentUserLocation(completion: @escaping (CLLocationCoordinate2D) -> ()) {
+        let completion: ((CLLocation) -> ()) = { location in
+            completion(location.coordinate)
+        }
+        
+        setCompletionToLocationManagerDelegate(completion: completion)
+        
+        locationServicesManager.locationManager.requestLocation()
     }
 }

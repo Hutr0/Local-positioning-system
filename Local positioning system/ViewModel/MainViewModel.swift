@@ -6,20 +6,24 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MainViewModel {
     
     var scrollViewDelegate: ScrollViewDelegate!
     lazy var positioningManager = PositioningManager()
     lazy var mapManager = MapManager()
+    lazy var userManager = UserManager()
     
     init(map: UIImageView) {
         scrollViewDelegate = ScrollViewDelegate(map: map)
     }
     
-    func startPositioningUser(completionHandler: @escaping () -> ()) {
-        mapManager.startGettingLocation(closureIfWeAreInside: {
+    func startPositioningUserOnMap(widht: CGFloat, height: CGFloat) {
+        mapManager.startGettingLocation(closureIfWeAreInside: { [weak self] loc in
+            guard let self = self else { return }
             
+            let coordinates = self.userManager.getUserCoordinatesForMap(mapWidth: widht, mapHeight: height, coordinates: loc)
         })
     }
     

@@ -10,13 +10,14 @@ import MapKit
 
 class LocationServicesManager {
     let locationManager = CLLocationManager()
+    var locationManagerDelegate: LocationManagerDelegate!
     
     func checkLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             checkLocationAutorization()
             
-            let locationManagerDelegate = LocationManagerDelegate(locationServicesManager: self)
+            locationManagerDelegate = LocationManagerDelegate(locationServicesManager: self)
             locationManager.delegate = locationManagerDelegate
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
