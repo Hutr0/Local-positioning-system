@@ -31,15 +31,6 @@ class MathManager {
         return arcsin
     }
     
-    static func calculateSidesLength(firstPoint: CGPoint, secondPoint: CGPoint) -> TriangleSides {
-        
-        let hypotenuse = calculateHypotenuse(firstPoint: firstPoint, secondPoint: secondPoint)
-        let x = max(firstPoint.x, secondPoint.x) - min(firstPoint.x, secondPoint.x)
-        let y = max(firstPoint.y, secondPoint.y) - min(firstPoint.y, secondPoint.y)
-        
-        return TriangleSides(x: x, y: y, hypotenuse: hypotenuse)
-    }
-    
     static func calculatePercent(of number: Double, to hundredPercent: Double) -> Double {
         return (number * 100) / hundredPercent
     }

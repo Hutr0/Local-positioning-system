@@ -13,58 +13,74 @@ class UserManager {
     
     func getUserCoordinatesForMap(mapWidth: CGFloat, mapHeight: CGFloat, coordinates: CLLocationCoordinate2D) -> CGPoint {
         
-//        let lb = CGPoint(x: buildingCoordinate.leftBottom.longitude,
+//        let a = CGPoint(x: buildingCoordinate.leftBottom.longitude,
 //                         y: buildingCoordinate.leftBottom.latitude)
-//        let lt = CGPoint(x: buildingCoordinate.leftTop.longitude,
+//        let b = CGPoint(x: buildingCoordinate.leftTop.longitude,
 //                         y: buildingCoordinate.leftTop.latitude)
-//        let rt = CGPoint(x: buildingCoordinate.rightTop.longitude,
+//        let c = CGPoint(x: buildingCoordinate.rightTop.longitude,
 //                         y: buildingCoordinate.rightTop.latitude)
-//        let rb = CGPoint(x: buildingCoordinate.rightBottom.longitude,
+//        let d = CGPoint(x: buildingCoordinate.rightBottom.longitude,
 //                         y: buildingCoordinate.rightBottom.latitude)
-//
-//        let lbltSides = MathManager.calculateSidesLength(firstPoint: lb, secondPoint: lt)
-//        let ltrtSides = MathManager.calculateSidesLength(firstPoint: lt, secondPoint: rt)
-//        let rtrbSides = MathManager.calculateSidesLength(firstPoint: rt, secondPoint: rb)
-//        let rblbSides = MathManager.calculateSidesLength(firstPoint: rb, secondPoint: lb)
+//        let p = CGPoint(x: coordinates.longitude, y: coordinates.latitude)
         
-//        let lbltAngles = MathManager.calculateCosAndSinOfTriangleWithSides(adjacentCathet: lbltSides.y, oppositeCathet: lbltSides.x, hypotenuse: lbltSides.hypotenuse)
-//        let newLb = MathManager.calculateNewCoordinate(of: lb, sin: lbltAngles.sin, cos: lbltAngles.cos)
+//        let a = CGPoint(x: 0, y: 3)
+//        let b = CGPoint(x: 1, y: 4)
+//        let c = CGPoint(x: 5, y: 2)
+//        let d = CGPoint(x: 5, y: 1)
+//        let p = CGPoint(x: 0, y: 3)
+//
+//        let centerTriangleSides = calculateSidesLength(firstPoint: a, secondPoint: d)
+//
+//        let adAngle = MathManager.getAngle(oppositeCathet: centerTriangleSides.y, hypotenuse: centerTriangleSides.hypotenuse)
+//        let newA = MathManager.rotatePoint(pointToRotate: a, centerPoint: d, angleInDegrees: adAngle)
+//
+//        let bCenter = CGPoint(x: b.x + centerTriangleSides.x, y: b.y - centerTriangleSides.y)
+//        let abCenterSides = calculateSidesLength(firstPoint: b, secondPoint: d)
+//        let abAngle = MathManager.getAngle(oppositeCathet: abCenterSides.y, hypotenuse: abCenterSides.hypotenuse)
+//        let newB = MathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: abAngle - adAngle)
+//
+//        let cCenter = CGPoint(x: c.x + centerTriangleSides.x, y: c.y - centerTriangleSides.y)
+//        let bcCenterSides = calculateSidesLength(firstPoint: c, secondPoint: cCenter)
+//        let bcAngle = MathManager.getAngle(oppositeCathet: bcCenterSides.y, hypotenuse: bcCenterSides.hypotenuse)
+//        let newC = MathManager.rotatePoint(pointToRotate: c, centerPoint: d, angleInDegrees: adAngle)
+
+//        let cd = calculateSidesLength(firstPoint: c, secondPoint: d)
+//        let da = calculateSidesLength(firstPoint: d, secondPoint: a)
+//        let dp = calculateSidesLength(firstPoint: d, secondPoint: p)
 //        
-//        let ltrtAngles = MathManager.calculateCosAndSinOfTriangleWithSides(adjacentCathet: lbltSides.x, oppositeCathet: lbltSides.y, hypotenuse: lbltSides.hypotenuse)
-//        let newLt = MathManager.calculateNewCoordinate(of: lt, sin: ltrtAngles.sin, cos: ltrtAngles.cos)
+//        let angle = MathManager.getAngle(oppositeCathet: da.y, hypotenuse: da.hypotenuse)
+//        let angleCD = MathManager.getAngle(oppositeCathet: cd.y, hypotenuse: cd.hypotenuse)
+//        let anglePD = MathManager.getAngle(oppositeCathet: dp.y, hypotenuse: dp.hypotenuse)
+//        
+//        let sides = [calculateSidesLength(firstPoint: p, secondPoint: b), calculateSidesLength(firstPoint: p, secondPoint: d)]
+//        
+//        let newA = MathManager.rotatePoint(pointToRotate: a, centerPoint: d, angleInDegrees: angle)
+//        let newC = MathManager.rotatePoint(pointToRotate: c, centerPoint: d, angleInDegrees: 90 - angleCD)
+//        let newP = MathManager.rotatePoint(pointToRotate: p, centerPoint: d, angleInDegrees: angle-anglePD)
+////        let newB = MathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: 31)
+//        let newB = CGPoint(x: newA.x, y: newC.y)
+//        let newD = d
+//        let newSides = [calculateSidesLength(firstPoint: newP, secondPoint: newB), calculateSidesLength(firstPoint: newP, secondPoint: newD)]
+        
+//        let maxX = buildingCoordinate.rightTop.longitude
+//        let minX = buildingCoordinate.leftBottom.longitude
+//        let maxY = buildingCoordinate.leftTop.latitude
+//        let minY = buildingCoordinate.rightBottom.latitude
 //
-//        print(newLb)
-//        print(newLt)
+////        let pointToRight = maxX - coordinates.longitude
+//        let pointToLeft = coordinates.longitude - minX
+////        let pointToTop = maxY - coordinates.latitude
+//        let pointToBootom = coordinates.latitude - minY
+//
+//        let sizeOfRectangle = getSizeOfBuilding()
+//
+//        let percentX = MathManager.calculatePercent(of: pointToLeft, to: sizeOfRectangle.width)
+//        let percentY = MathManager.calculatePercent(of: pointToBootom, to: sizeOfRectangle.height)
+//
+//        let pointX = MathManager.calculateSmallerNumber(of: percentX, to: mapWidth)
+//        let pointY = MathManager.calculateSmallerNumber(of: percentY, to: mapHeight)
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        let maxX = buildingCoordinate.rightTop.longitude
-        let minX = buildingCoordinate.leftBottom.longitude
-        let maxY = buildingCoordinate.leftTop.latitude
-        let minY = buildingCoordinate.rightBottom.latitude
-        
-//        let pointToRight = maxX - coordinates.longitude
-        let pointToLeft = coordinates.longitude - minX
-//        let pointToTop = maxY - coordinates.latitude
-        let pointToBootom = coordinates.latitude - minY
-        
-        let sizeOfRectangle = getSizeOfBuilding()
-        
-        let percentX = MathManager.calculatePercent(of: pointToLeft, to: sizeOfRectangle.width)
-        let percentY = MathManager.calculatePercent(of: pointToBootom, to: sizeOfRectangle.height)
-        
-        let pointX = MathManager.calculateSmallerNumber(of: percentX, to: mapWidth)
-        let pointY = MathManager.calculateSmallerNumber(of: percentY, to: mapHeight)
-        
-        return CGPoint(x: pointX, y: pointY)
+        return CGPoint(x: 0, y: 0)
     }
     
     func getSizeOfBuilding() -> CGSize {
@@ -77,5 +93,14 @@ class UserManager {
                                                      secondPoint: CGPoint(x: buildingCoordinate.leftTop.longitude,
                                                                           y: buildingCoordinate.leftTop.latitude))
         return CGSize(width: width, height: height)
+    }
+    
+    func calculateSidesLength(firstPoint: CGPoint, secondPoint: CGPoint) -> TriangleSides {
+        
+        let hypotenuse = MathManager.calculateHypotenuse(firstPoint: firstPoint, secondPoint: secondPoint)
+        let x = max(firstPoint.x, secondPoint.x) - min(firstPoint.x, secondPoint.x)
+        let y = max(firstPoint.y, secondPoint.y) - min(firstPoint.y, secondPoint.y)
+        
+        return TriangleSides(x: x, y: y, hypotenuse: hypotenuse)
     }
 }

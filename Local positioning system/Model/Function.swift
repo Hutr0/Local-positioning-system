@@ -8,6 +8,8 @@
 import Foundation
 
 struct Function {
-    let sin: Double
-    let cos: Double
+    let angle: Double
+    let x: Double
+    let y: Double
+    let hypotenuse: Double
 }

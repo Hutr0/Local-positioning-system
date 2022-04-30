@@ -29,7 +29,7 @@ class UserManagerTests: XCTestCase {
         XCTAssertNotNil(sut.getUserCoordinatesForMap(mapWidth: 0, mapHeight: 0, coordinates: CLLocationCoordinate2D()))
     }
     
-    func testGetParametersOfRectangleRetursCorrectlyValue() {
+    func testGetSizeOfBuildingRetursCorrectlyValue() {
         let width = MathManager.calculateHypotenuse(firstPoint: CGPoint(x: sut.buildingCoordinate.leftBottom.longitude,
                                                                         y: sut.buildingCoordinate.leftBottom.latitude),
                                                     secondPoint: CGPoint(x: sut.buildingCoordinate.rightBottom.longitude,
@@ -44,8 +44,6 @@ class UserManagerTests: XCTestCase {
         
         XCTAssertEqual(size, result)
     }
-    
-    
     
     func testGetUserCoordinatesForMapWorksCorrectly1() {
         let mapWidth: CGFloat = 1400
@@ -67,5 +65,20 @@ class UserManagerTests: XCTestCase {
         
         XCTAssertEqual(result.x, 1400)
         XCTAssertEqual(result.y, 900)
+    }
+    
+    func testCalculateSidesLengthWorksCorrecly() {
+        let fp = CGPoint(x: 0, y: 0)
+        let sp = CGPoint(x: 5, y: 10)
+        
+        let h = MathManager.calculateHypotenuse(firstPoint: fp, secondPoint: sp)
+        let x = sp.x - fp.x
+        let y = sp.y - fp.y
+        
+        let result = sut.calculateSidesLength(firstPoint: fp, secondPoint: sp)
+        
+        XCTAssertEqual(h, result.hypotenuse)
+        XCTAssertEqual(x, result.x)
+        XCTAssertEqual(y, result.y)
     }
 }

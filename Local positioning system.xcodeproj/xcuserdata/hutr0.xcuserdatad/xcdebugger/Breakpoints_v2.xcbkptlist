@@ -3,4 +3,54 @@
    uuid = "9D992DF3-EF11-4B4A-A46D-691C71B1EE60"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A01073C7-811A-4EEB-A263-36EFF13D59E9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Local positioning systemTests/Manager/MathManagerTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "testRotatePointWorksCorrectly2()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A01073C7-811A-4EEB-A263-36EFF13D59E9 - a8f9006d4b91a6b1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Local_positioning_systemTests.MathManagerTests.testRotatePointWorksCorrectly2() -&gt; ()"
+                  moduleName = "Local positioning systemTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hutr0/Library/Mobile%20Documents/com~apple~CloudDocs/Xcode%20Projects/%D0%9C%D0%BE%D0%B8%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B/Local%20positioning%20system/Local%20positioning%20systemTests/Manager/MathManagerTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "94"
+                  endingLineNumber = "94"
+                  offsetFromSymbolStart = "1574">
+               </Location>
+               <Location
+                  uuid = "A01073C7-811A-4EEB-A263-36EFF13D59E9 - a8f9006d4b91a64f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Local_positioning_systemTests.MathManagerTests.testRotatePointWorksCorrectly2() -&gt; ()"
+                  moduleName = "Local positioning systemTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hutr0/Library/Mobile%20Documents/com~apple~CloudDocs/Xcode%20Projects/%D0%9C%D0%BE%D0%B8%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B/Local%20positioning%20system/Local%20positioning%20systemTests/Manager/MathManagerTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "1782">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
