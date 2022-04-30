@@ -59,6 +59,8 @@
 		E0E31DD9281AF56D00AD79C4 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DD8281AF56D00AD79C4 /* UserManagerTests.swift */; };
 		E0E31DDB281B586A00AD79C4 /* MathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DDA281B586A00AD79C4 /* MathManager.swift */; };
 		E0E31DDD281B593800AD79C4 /* MathManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DDC281B593800AD79C4 /* MathManagerTests.swift */; };
+		E0E31DDF281C235200AD79C4 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DDE281C235100AD79C4 /* Function.swift */; };
+		E0E31DE1281C280C00AD79C4 /* TriangleSides.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DE0281C280C00AD79C4 /* TriangleSides.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +137,8 @@
 		E0E31DD8281AF56D00AD79C4 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		E0E31DDA281B586A00AD79C4 /* MathManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathManager.swift; sourceTree = "<group>"; };
 		E0E31DDC281B593800AD79C4 /* MathManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathManagerTests.swift; sourceTree = "<group>"; };
+		E0E31DDE281C235100AD79C4 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
+		E0E31DE0281C280C00AD79C4 /* TriangleSides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleSides.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +237,8 @@
 		E08EAE7628174950005F6A69 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E0E31DDE281C235100AD79C4 /* Function.swift */,
+				E0E31DE0281C280C00AD79C4 /* TriangleSides.swift */,
 				E0E31DD1281A0A1500AD79C4 /* Motion Data */,
 				E0E31DD0281A0A0600AD79C4 /* Building */,
 			);
@@ -566,6 +572,8 @@
 				E0E31DB32819AEB300AD79C4 /* BuildingCoordinate.swift in Sources */,
 				E0E31DBF2819DAB700AD79C4 /* BuildingManager.swift in Sources */,
 				E0E31D8628177E3200AD79C4 /* Attitude.swift in Sources */,
+				E0E31DDF281C235200AD79C4 /* Function.swift in Sources */,
+				E0E31DE1281C280C00AD79C4 /* TriangleSides.swift in Sources */,
 				E0E31D9628182E9F00AD79C4 /* MotionProtocol.swift in Sources */,
 				E0E31DD7281AF55400AD79C4 /* UserManager.swift in Sources */,
 				E08EAE6F281747A5005F6A69 /* MainViewController.swift in Sources */,

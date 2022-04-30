@@ -10,100 +10,85 @@ import Accelerate
 
 class MathManager {
     
-    static func calculateSmallerNumber(of percent: Double, to number: Double) -> Double {
-        return (number * percent) / 100
+    static func rotatePoint(pointToRotate: CGPoint, centerPoint: CGPoint, angleInDegrees: Double) -> CGPoint {
+        
+        let angleInRadians = angleInDegrees * (Double.pi / 180)
+        let sinTheta = sin(angleInRadians)
+        let cosTheta = cos(angleInRadians)
+        
+        let x = cosTheta * (pointToRotate.x - centerPoint.x) - sinTheta * (pointToRotate.y - centerPoint.y) + centerPoint.x
+        let y = sinTheta * (pointToRotate.x - centerPoint.x) + cosTheta * (pointToRotate.y - centerPoint.y) + centerPoint.y
+        
+        return CGPoint(x: x, y: y)
+    }
+    
+    static func getAngle(oppositeCathet: Double, hypotenuse: Double) -> Double {
+        
+        let sinusTypeRelation = oppositeCathet / hypotenuse
+        
+        let arcsin = asin(sinusTypeRelation) * 180 / Double.pi
+        
+        return arcsin
+    }
+    
+    static func calculateSidesLength(firstPoint: CGPoint, secondPoint: CGPoint) -> TriangleSides {
+        
+        let hypotenuse = calculateHypotenuse(firstPoint: firstPoint, secondPoint: secondPoint)
+        let x = max(firstPoint.x, secondPoint.x) - min(firstPoint.x, secondPoint.x)
+        let y = max(firstPoint.y, secondPoint.y) - min(firstPoint.y, secondPoint.y)
+        
+        return TriangleSides(x: x, y: y, hypotenuse: hypotenuse)
     }
     
     static func calculatePercent(of number: Double, to hundredPercent: Double) -> Double {
         return (number * 100) / hundredPercent
     }
     
-    static func calculateDistanceBetweenTwoPoints(first: CGPoint, second: CGPoint, fs: Double, fp: Double, sp: Double) {
-        
-        let x1 = first.x
-        let y1 = first.y
-        let x2 = second.x
-        let y2 = second.y
-        
-        if fs != sqrt(pow((x2-x1), 2)+pow((y2-y1), 2)) { return }
-        
-        
+    static func calculateSmallerNumber(of percent: Double, to number: Double) -> Double {
+        return (number * percent) / 100
     }
     
     static func calculateHypotenuse(firstPoint: CGPoint, secondPoint: CGPoint) -> Double {
         
         var result: Double
         
-        let maxX = max(firstPoint.x, secondPoint.x)
-        let maxY = max(firstPoint.y, secondPoint.y)
-        let minX = min(firstPoint.x, secondPoint.x)
-        let minY = min(firstPoint.y, secondPoint.y)
+        let x = secondPoint.x - firstPoint.x
+        let y = secondPoint.y - firstPoint.y
         
-        let first = maxX - minX
-        let second = maxY - minY
-        
-        let rightSide = pow(first, 2) + pow(second, 2)
+        let rightSide = pow(x, 2) + pow(y, 2)
         
         result = sqrt(rightSide)
         
         return result
     }
     
-    static func solveLinearSystem(a: inout [Double],
-                                  a_rowCount: Int, a_columnCount: Int,
-                                  b: inout [Double],
-                                  b_count: Int) throws {
+    static func calculateIntersectionPoint(p0_x: Float, p0_y: Float, p1_x: Float, p1_y: Float, p2_x: Float, p2_y: Float, p3_x: Float, p3_y: Float) -> CGPoint? {
+        let i_x: Float
+        let i_y: Float
         
-        var info = Int32(0)
+        var s1_x: Float
+        var s1_y: Float
+        var s2_x: Float
+        var s2_y: Float
         
-        // 1: Specify transpose.
-        var trans = Int8("T".utf8.first!)
-        
-        // 2: Define constants.
-        var m = __CLPK_integer(a_rowCount)
-        var n = __CLPK_integer(a_columnCount)
-        var lda = __CLPK_integer(a_rowCount)
-        var nrhs = __CLPK_integer(1) // assumes `b` is a column matrix
-        var ldb = __CLPK_integer(b_count)
-        
-        // 3: Workspace query.
-        var workDimension = Double(0)
-        var minusOne = Int32(-1)
-        
-        dgels_(&trans, &m, &n,
-               &nrhs,
-               &a, &lda,
-               &b, &ldb,
-               &workDimension, &minusOne,
-               &info)
-        
-        if info != 0 {
-            throw LAPACKError.internalError
-        }
-        
-        // 4: Create workspace.
-        var lwork = Int32(workDimension)
-        var workspace = [Double](repeating: 0,
-                                 count: Int(workDimension))
-        
-        // 5: Solve linear system.
-        dgels_(&trans, &m, &n,
-               &nrhs,
-               &a, &lda,
-               &b, &ldb,
-               &workspace, &lwork,
-               &info)
-        
-        if info < 0 {
-            throw LAPACKError.parameterHasIllegalValue(parameterIndex: abs(Int(info)))
-        } else if info > 0 {
-            throw LAPACKError.diagonalElementOfTriangularFactorIsZero(index: Int(info))
-        }
-    }
+        s1_x = p1_x - p0_x
+        s1_y = p1_y - p0_y
+        s2_x = p3_x - p2_x
+        s2_y = p3_y - p2_y
 
-    private enum LAPACKError: Swift.Error {
-        case internalError
-        case parameterHasIllegalValue(parameterIndex: Int)
-        case diagonalElementOfTriangularFactorIsZero(index: Int)
+        var s: Float
+        var t: Float
+        
+        s = (-s1_y * (p0_x - p2_x) + s1_x * (p0_y - p2_y)) / (-s2_x * s1_y + s1_x * s2_y)
+        t = ( s2_x * (p0_y - p2_y) - s2_y * (p0_x - p2_x)) / (-s2_x * s1_y + s1_x * s2_y)
+
+        if (s >= 0 && s <= 1 && t >= 0 && t <= 1)
+        {
+            i_x = p0_x + (t * s1_x)
+            i_y = p0_y + (t * s1_y)
+            return CGPoint(x: CGFloat(i_x), y: CGFloat(i_y))
+        }
+
+            return nil
     }
 }
