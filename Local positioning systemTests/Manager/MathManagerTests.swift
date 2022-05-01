@@ -56,8 +56,6 @@ class MathManagerTests: XCTestCase {
     }
     
     func testRotatePointWorksCorrectly2() {
-        // При нуле алгоритмика ломается
-        
         let a = CGPoint(x: 0, y: 3)
         let b = CGPoint(x: 1, y: 4)
         let c = CGPoint(x: 4, y: 2)
@@ -65,31 +63,22 @@ class MathManagerTests: XCTestCase {
 
         let adY = a.y - d.y
         let adH = MathManager.calculateHypotenuse(firstPoint: a, secondPoint: d)
-        let adAngle = MathManager.getAngle(oppositeCathet: adY, hypotenuse: adH)
+        let angle = MathManager.getAngle(oppositeCathet: adY, hypotenuse: adH)
         
-        let abY = b.y - a.y
-        let abH = MathManager.calculateHypotenuse(firstPoint: b, secondPoint: a)
-        let abAngle = MathManager.getAngle(oppositeCathet: abY, hypotenuse: abH)
+        let newA = MathManager.rotatePoint(pointToRotate: a, centerPoint: d, angleInDegrees: angle)
         
-        let bcY = b.y - c.y
-        let bcX = c.x - b.x
-        let bcH = MathManager.calculateHypotenuse(firstPoint: b, secondPoint: c)
-        let bcAngle = MathManager.getAngle(oppositeCathet: bcX, hypotenuse: bcH)
-
-        let dcY = c.y - d.y
-        let dcH = MathManager.calculateHypotenuse(firstPoint: c, secondPoint: d)
-        let dcAngle = MathManager.getAngle(oppositeCathet: dcY, hypotenuse: dcH)
+        let newB = MathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: angle)
         
-        let abR = MathManager.rotatePoint(pointToRotate: a, centerPoint: d, angleInDegrees: adAngle)
+        let newC = MathManager.rotatePoint(pointToRotate: c, centerPoint: d, angleInDegrees: angle)
         
-        let bcR = MathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: bcAngle)
+        XCTAssertEqual(newA.x, -0.6055512754639891)
+        XCTAssertEqual(newA.y, 0.9999999999999998)
         
-        let cdR = MathManager.rotatePoint(pointToRotate: c, centerPoint: d, angleInDegrees: 90 - dcAngle)
-
-        let ddR = d
+        XCTAssertEqual(newB.x, -0.32820117735137444)
+        XCTAssertEqual(newB.y, 2.3867504905630725)
         
-        XCTAssertEqual(bcR.x, -0.38292140016222476)
-        XCTAssertEqual(bcR.y, 2)
+        XCTAssertEqual(newC.x, 3.2773500981126142)
+        XCTAssertEqual(newC.y, 2.386750490563073)
     }
 
     func testCalculateAngleWorksCorrectly() {

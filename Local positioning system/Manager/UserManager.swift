@@ -23,11 +23,26 @@ class UserManager {
 //                         y: buildingCoordinate.rightBottom.latitude)
 //        let p = CGPoint(x: coordinates.longitude, y: coordinates.latitude)
         
-//        let a = CGPoint(x: 0, y: 3)
-//        let b = CGPoint(x: 1, y: 4)
-//        let c = CGPoint(x: 5, y: 2)
-//        let d = CGPoint(x: 5, y: 1)
-//        let p = CGPoint(x: 0, y: 3)
+        let a = CGPoint(x: 0, y: 0)
+        let b = CGPoint(x: 0, y: 3)
+        let c = CGPoint(x: 5, y: 3)
+        let d = CGPoint(x: 5, y: 0)
+        let p = CGPoint(x: 3, y: 3)
+        
+        let width = d.x - a.x
+        let height = b.y - a.y
+        
+        let angle = -45.0
+        
+        let newA = MathManager.rotatePoint(pointToRotate: a, centerPoint: d, angleInDegrees: angle)
+        let newB = MathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: angle)
+        let newC = MathManager.rotatePoint(pointToRotate: c, centerPoint: d, angleInDegrees: angle)
+        let newD = d
+        
+        let h = MathManager.calculateHypotenuse(firstPoint: newB, secondPoint: newC)
+        let aaa = MathManager.getAngle(oppositeCathet: newB.y - newC.y, hypotenuse: h)
+        
+        let ui = "ui"
 //
 //        let centerTriangleSides = calculateSidesLength(firstPoint: a, secondPoint: d)
 //
@@ -47,18 +62,18 @@ class UserManager {
 //        let cd = calculateSidesLength(firstPoint: c, secondPoint: d)
 //        let da = calculateSidesLength(firstPoint: d, secondPoint: a)
 //        let dp = calculateSidesLength(firstPoint: d, secondPoint: p)
-//        
+//
 //        let angle = MathManager.getAngle(oppositeCathet: da.y, hypotenuse: da.hypotenuse)
 //        let angleCD = MathManager.getAngle(oppositeCathet: cd.y, hypotenuse: cd.hypotenuse)
 //        let anglePD = MathManager.getAngle(oppositeCathet: dp.y, hypotenuse: dp.hypotenuse)
-//        
+//
 //        let sides = [calculateSidesLength(firstPoint: p, secondPoint: b), calculateSidesLength(firstPoint: p, secondPoint: d)]
-//        
+//
 //        let newA = MathManager.rotatePoint(pointToRotate: a, centerPoint: d, angleInDegrees: angle)
-//        let newC = MathManager.rotatePoint(pointToRotate: c, centerPoint: d, angleInDegrees: 90 - angleCD)
-//        let newP = MathManager.rotatePoint(pointToRotate: p, centerPoint: d, angleInDegrees: angle-anglePD)
-////        let newB = MathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: 31)
-//        let newB = CGPoint(x: newA.x, y: newC.y)
+//        let newC = MathManager.rotatePoint(pointToRotate: c, centerPoint: d, angleInDegrees: angle)
+//        let newP = MathManager.rotatePoint(pointToRotate: p, centerPoint: d, angleInDegrees: angle)
+//        let newB = MathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: angle)
+////        let newB = CGPoint(x: newA.x, y: newC.y)
 //        let newD = d
 //        let newSides = [calculateSidesLength(firstPoint: newP, secondPoint: newB), calculateSidesLength(firstPoint: newP, secondPoint: newD)]
         
