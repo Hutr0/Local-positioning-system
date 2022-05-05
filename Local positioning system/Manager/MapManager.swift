@@ -59,7 +59,7 @@ class MapManager {
                     let completionHandler: ((CLLocation) -> ()) = { loc in
                         self.closure(loc.coordinate)
                         
-                        if self.checkGettingInside(in: self.buildingCoordinate, userLocation: loc.coordinate) {
+                        if !self.checkGettingInside(in: self.buildingCoordinate, userLocation: loc.coordinate) {
                             self.locationServicesManager.locationManager.stopUpdatingLocation()
                             self.startDetectionGettingInsideBuilding()
                         }
@@ -117,15 +117,15 @@ class MapManager {
     }
     
     func getCurrentUserLocation(completion: @escaping (CLLocationCoordinate2D) -> ()) {
-//        let completion: ((CLLocation) -> ()) = { location in
-//            completion(location.coordinate)
-//        }
-//
-//        setCompletionToLocationManagerDelegate(completion: completion)
-//
-//        locationServicesManager.locationManager.requestLocation()
+        let completion: ((CLLocation) -> ()) = { location in
+            completion(location.coordinate)
+        }
+
+        setCompletionToLocationManagerDelegate(completion: completion)
+
+        locationServicesManager.locationManager.requestLocation()
         
-        let coord = CLLocationCoordinate2D(latitude: 55.67240880567305, longitude: 37.47905855501432)
-        completion(coord)
+//        let coord = CLLocationCoordinate2D(latitude: 55.67240880567305, longitude: 37.47905855501432)
+//        completion(coord)
     }
 }

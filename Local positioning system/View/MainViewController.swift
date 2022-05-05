@@ -36,6 +36,8 @@ class MainViewController: UIViewController {
         viewModel.startPositioningUserOnMap(widht: map.frame.width, height: map.frame.height) { [weak self] point in
             guard let self = self else { return }
             
+            self.user.isHidden = false
+            
             let x = point.x
             let y = point.y
             let sizeOfUser = self.user.frame.size

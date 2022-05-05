@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import Local_positioning_system
+import CoreLocation
 
 class MainViewCotrollerTests: XCTestCase {
     
@@ -99,5 +100,9 @@ class MainViewCotrollerTests: XCTestCase {
         sut.scrollView.zoomScale = zoom
         
         XCTAssertNotEqual(userY * zoom, sut.userConstraintToTop.constant)
+    }
+    
+    func testUserIsHiddenAfterInit() {
+        XCTAssertTrue(sut.user.isHidden)
     }
 }
