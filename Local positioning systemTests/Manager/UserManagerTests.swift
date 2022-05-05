@@ -29,22 +29,6 @@ class UserManagerTests: XCTestCase {
         XCTAssertNotNil(sut.getUserCoordinatesForMap(mapWidth: 0, mapHeight: 0, coordinates: CLLocationCoordinate2D()))
     }
     
-    func testGetSizeOfBuildingRetursCorrectlyValue() {
-        let width = MathManager.calculateHypotenuse(firstPoint: CGPoint(x: sut.buildingCoordinate.leftBottom.longitude,
-                                                                        y: sut.buildingCoordinate.leftBottom.latitude),
-                                                    secondPoint: CGPoint(x: sut.buildingCoordinate.rightBottom.longitude,
-                                                                         y: sut.buildingCoordinate.rightBottom.latitude))
-        let height = MathManager.calculateHypotenuse(firstPoint: CGPoint(x: sut.buildingCoordinate.leftBottom.longitude,
-                                                                         y: sut.buildingCoordinate.leftBottom.latitude),
-                                                     secondPoint: CGPoint(x: sut.buildingCoordinate.leftTop.longitude,
-                                                                          y: sut.buildingCoordinate.leftTop.latitude))
-        let size = CGSize(width: width, height: height)
-        
-        let result = sut.getSizeOfBuilding()
-        
-        XCTAssertEqual(size, result)
-    }
-    
     func testGetUserCoordinatesForMapWorksCorrectly1() {
         let mapWidth: CGFloat = 1400
         let mapHeight: CGFloat = 900

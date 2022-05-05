@@ -19,15 +19,17 @@ class MainViewModel {
         scrollViewDelegate = ScrollViewDelegate(map: map)
     }
     
-    func startPositioningUserOnMap(widht: CGFloat, height: CGFloat) {
+    func startPositioningUserOnMap(widht: CGFloat, height: CGFloat, completionHandler: @escaping (CGPoint) -> ()) {
         mapManager.startGettingLocation(closureIfWeAreInside: { [weak self] loc in
             guard let self = self else { return }
             
             let coordinates = self.userManager.getUserCoordinatesForMap(mapWidth: widht, mapHeight: height, coordinates: loc)
+            completionHandler(coordinates)
         })
     }
     
-    func configure(scrollView: UIScrollView) {
+    func configure(scrollView: UIScrollView, closureForUserPositioning: @escaping () -> ()) {
+        scrollViewDelegate.closureForUserPositioning = closureForUserPositioning
         scrollView.delegate = scrollViewDelegate
         
         scrollView.minimumZoomScale = 0.2

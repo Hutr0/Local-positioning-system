@@ -15,7 +15,7 @@ class MathManagerTests: XCTestCase {
         let of = 3.5
         let to = 7.0
         
-        let result = MathManager.calculatePercent(of: of, to: to)
+        let result = MathManager.calculatePercent(number: of, hundredPercentNumber: to)
         
         XCTAssertEqual(result, 50)
     }
@@ -24,7 +24,7 @@ class MathManagerTests: XCTestCase {
         let ofPercent = 44.0
         let number = 1400.0
         
-        let result = MathManager.calculateSmallerNumber(of: ofPercent, to: number)
+        let result = MathManager.calculateNumberOnPercent(lowerPercent: ofPercent, highterNumber: number)
         
         XCTAssertEqual(result, 616)
     }

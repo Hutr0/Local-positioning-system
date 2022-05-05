@@ -11,9 +11,11 @@ import XCTest
 class ScrollViewDelegateTests: XCTestCase {
 
     var sut: ScrollViewDelegate!
+    var scrollView: UIScrollView!
     
     override func setUpWithError() throws {
         sut = ScrollViewDelegate(map: UIImageView())
+        scrollView = UIScrollView()
     }
 
     override func tearDownWithError() throws {
@@ -34,7 +36,7 @@ class ScrollViewDelegateTests: XCTestCase {
     }
     
     func testScrollViewDidZoomIsWorkingCorrectly() {
-        let scrollView = UIScrollView()
+        
         scrollView.delegate = sut
         
         let secondScrollView = UIScrollView()
@@ -51,5 +53,16 @@ class ScrollViewDelegateTests: XCTestCase {
         secondScrollView.contentInset = UIEdgeInsets(top: offsetY, left: offsetX, bottom: 0, right: 0)
         
         XCTAssertEqual(scrollView.contentInset, secondScrollView.contentInset)
+    }
+    
+    func testClosureCallsWhenScrollViewDidZoom() {
+        var isInside = false
+        sut.closureForUserPositioning = {
+            isInside = true
+        }
+        
+        sut.scrollViewDidZoom(scrollView)
+        
+        XCTAssertTrue(isInside)
     }
 }

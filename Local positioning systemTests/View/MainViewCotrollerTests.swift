@@ -56,4 +56,48 @@ class MainViewCotrollerTests: XCTestCase {
     func testScrollViewContentOffsetSetsOnEnterPoint() {
         XCTAssertNotEqual(sut.scrollView.contentOffset, CGPoint(x: 0.0, y: 0.0))
     }
+    
+    func testUserXIsSetAfterViewDidLoad() {
+        XCTAssertNotNil(sut.userX)
+    }
+    
+    func testUserYIsSetAfterViewDidLoad() {
+        XCTAssertNotNil(sut.userY)
+    }
+    
+    func testUserValuesEqualsUserFrameAfterViewDidLoad() {
+        XCTAssertEqual(sut.userX, sut.user.frame.origin.x)
+        XCTAssertEqual(sut.userY, sut.user.frame.origin.y)
+    }
+    
+    func testUserConstraintsUpdatesWhenScrollViewZooming() {
+        let userX = sut.userX!
+        let userY = sut.userY!
+        let zoom = 0.5
+        
+        sut.scrollView.zoomScale = zoom
+        
+        XCTAssertEqual(userX * zoom, sut.userConstraintToLeading.constant)
+        XCTAssertEqual(userY * zoom, sut.userConstraintToTop.constant)
+    }
+    
+    func testUserConstraintsDontUpdateIfUserXIsNil() {
+        let zoom = 0.5
+        let userX = sut.userX!
+        sut.userX = nil
+        
+        sut.scrollView.zoomScale = zoom
+        
+        XCTAssertNotEqual(userX * zoom, sut.userConstraintToLeading.constant)
+    }
+    
+    func testUserConstraintsDontUpdateIfUserYIsNil() {
+        let zoom = 0.5
+        let userY = sut.userY!
+        sut.userY = nil
+        
+        sut.scrollView.zoomScale = zoom
+        
+        XCTAssertNotEqual(userY * zoom, sut.userConstraintToTop.constant)
+    }
 }

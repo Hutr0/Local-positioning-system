@@ -117,12 +117,15 @@ class MapManager {
     }
     
     func getCurrentUserLocation(completion: @escaping (CLLocationCoordinate2D) -> ()) {
-        let completion: ((CLLocation) -> ()) = { location in
-            completion(location.coordinate)
-        }
+//        let completion: ((CLLocation) -> ()) = { location in
+//            completion(location.coordinate)
+//        }
+//
+//        setCompletionToLocationManagerDelegate(completion: completion)
+//
+//        locationServicesManager.locationManager.requestLocation()
         
-        setCompletionToLocationManagerDelegate(completion: completion)
-        
-        locationServicesManager.locationManager.requestLocation()
+        let coord = CLLocationCoordinate2D(latitude: 55.67240880567305, longitude: 37.47905855501432)
+        completion(coord)
     }
 }

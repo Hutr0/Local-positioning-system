@@ -31,12 +31,12 @@ class MathManager {
         return arcsin
     }
     
-    static func calculatePercent(of number: Double, to hundredPercent: Double) -> Double {
-        return (number * 100) / hundredPercent
+    static func calculatePercent(number: Double, hundredPercentNumber: Double) -> Double {
+        return (number * 100) / hundredPercentNumber
     }
     
-    static func calculateSmallerNumber(of percent: Double, to number: Double) -> Double {
-        return (number * percent) / 100
+    static func calculateNumberOnPercent(lowerPercent: Double, highterNumber: Double) -> Double {
+        return (highterNumber * lowerPercent) / 100
     }
     
     static func calculateHypotenuse(firstPoint: CGPoint, secondPoint: CGPoint) -> Double {

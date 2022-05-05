@@ -55,41 +55,38 @@ class MainViewModelTests: XCTestCase {
     }
     
     func testConfigureSetsDelegateScrollViewDelegateForScrollView() {
-        sut.configure(scrollView: scrollView)
+        sut.configure(scrollView: scrollView) {}
         
         XCTAssertTrue(scrollView.delegate is ScrollViewDelegate)
     }
     
     func testConfigureSetsZoomScaleForScrollView() {
-        sut.configure(scrollView: scrollView)
+        sut.configure(scrollView: scrollView) {}
         
         XCTAssertEqual(scrollView.minimumZoomScale, 0.2)
         XCTAssertEqual(scrollView.maximumZoomScale, 5.0)
     }
     
     func testConfigureSetsContentOffset() {
-        sut.configure(scrollView: scrollView)
+        sut.configure(scrollView: scrollView) {}
         
         XCTAssertNotEqual(scrollView.contentOffset, CGPoint(x: 0.0, y: 0.0))
     }
     
-//    func testStartPositioningUserCompletionReturnsNotNill() {
-//        var result: [Double]?
-//
-//        sut.startPositioningUser { array in
-//            result = array
-//        }
-//        
-//        XCTAssertNotNil(result)
-//    }
-//
-//    func testStartPositioningUserCompletionReturnsAtLeastTwoValuesInArray() {
-//        var result: [Double]?
-//
-//        sut.startPositioningUser { array in
-//            result = array
-//        }
-//
-//        XCTAssertGreaterThan(result!.count, 1)
-//    }
+    func testConfigureAddsClosureToScrollViewDelegate() {
+        sut.configure(scrollView: scrollView, closureForUserPositioning: {})
+        
+        XCTAssertNotNil(sut.scrollViewDelegate.closureForUserPositioning)
+    }
+    
+    func testClosureInConfigureWorksCorrectly() {
+        var isInside = false
+        
+        sut.configure(scrollView: scrollView, closureForUserPositioning: {
+            isInside = true
+        })
+        sut.scrollViewDelegate.closureForUserPositioning!()
+        
+        XCTAssertTrue(isInside)
+    }
 }

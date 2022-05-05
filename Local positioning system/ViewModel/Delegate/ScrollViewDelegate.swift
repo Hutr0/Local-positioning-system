@@ -10,6 +10,7 @@ import UIKit
 class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
     
     var map: UIImageView!
+    var closureForUserPositioning: (() -> ())?
     
     init(map: UIImageView) {
         self.map = map
@@ -23,5 +24,8 @@ class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
         let offsetX = max((scrollView.bounds.width - scrollView.contentSize.width) * 0.5, 0)
         let offsetY = max((scrollView.bounds.height - scrollView.contentSize.height) * 0.5, 0)
         scrollView.contentInset = UIEdgeInsets(top: offsetY, left: offsetX, bottom: 0, right: 0)
+        
+        guard let closureForUserPositioning = closureForUserPositioning else { return }
+        closureForUserPositioning()
     }
 }
