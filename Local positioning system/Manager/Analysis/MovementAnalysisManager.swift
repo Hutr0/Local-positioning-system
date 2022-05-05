@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 
 class MovementAnalysisManager {
-    func getNewCoordinates(motions: [MotionData]) -> CLLocation {
+    func getNewCoordinates(currentCoordonates: CLLocation, motions: [MotionData]) -> CLLocation {
         
         return CLLocation()
     }

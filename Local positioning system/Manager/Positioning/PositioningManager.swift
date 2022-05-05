@@ -14,15 +14,15 @@ class PositioningManager {
     let reducingInaccurancyManager = ReducingInaccuracyManager()
     let movementAnalysisManager = MovementAnalysisManager()
     
-    var motionsData: [MotionData]!
     var currentCoordinates: CLLocation!
     
     func startRecordingMotions(coordinatesOfStart: CLLocation, closure: @escaping (CLLocation) -> ()) {
         
         var mdForReducingInaccurancy: [MotionData] = []
-        motionsData = []
+        var motionsData: [MotionData] = []
         currentCoordinates = coordinatesOfStart
         
+        positioningMotionManager.changeDeviceMotionUpdateInterval(to: 0.01)
         positioningMotionManager.startDeviceMotionUpdate { [weak self] rotationRate, attitude, userAcceleration, gravity in
             guard let self = self else { return }
             
@@ -32,28 +32,27 @@ class PositioningManager {
                                                        gravity: gravity))
             
             if mdForReducingInaccurancy.count >= 10 {
-                self.reducingInaccurancy(data: mdForReducingInaccurancy)
+                let data = self.reducingInaccurancy(data: mdForReducingInaccurancy)
                 mdForReducingInaccurancy.removeAll()
+                
+                motionsData.append(data)
             }
             
-            self.updateCoordinates(closure: closure)
+            if motionsData.count >= 10 {
+                self.updateCoordinates(motionsData: motionsData, closure: closure)
+                motionsData.removeAll()
+            }
         }
     }
     
-    func updateCoordinates(closure: @escaping (CLLocation) -> ()) {
-        var newCoordinates = movementAnalysisManager.getNewCoordinates(motions: motionsData)
+    func updateCoordinates(motionsData: [MotionData], closure: @escaping (CLLocation) -> ()) {
+        let newCoordinates = movementAnalysisManager.getNewCoordinates(currentCoordonates: currentCoordinates, motions: motionsData)
         
         currentCoordinates = newCoordinates
         closure(newCoordinates)
     }
     
-    func reducingInaccurancy(data: [MotionData]) {
-        let result = reducingInaccurancyManager.reduceInaccurancy(motionsData: data)
-        
-        motionsData.append(result)
-        
-        if self.motionsData.count > 100 {
-            self.motionsData.removeFirst()
-        }
+    func reducingInaccurancy(data: [MotionData]) -> MotionData {
+        return reducingInaccurancyManager.reduceInaccurancy(motionsData: data)
     }
 }
