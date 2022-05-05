@@ -13,37 +13,71 @@ class UserManager {
     
     func getUserCoordinatesForMap(mapWidth: CGFloat, mapHeight: CGFloat, coordinates: CLLocationCoordinate2D) -> CGPoint {
         
-//        let a = CGPoint(x: buildingCoordinate.leftBottom.longitude,
-//                         y: buildingCoordinate.leftBottom.latitude)
-//        let b = CGPoint(x: buildingCoordinate.leftTop.longitude,
-//                         y: buildingCoordinate.leftTop.latitude)
-//        let c = CGPoint(x: buildingCoordinate.rightTop.longitude,
-//                         y: buildingCoordinate.rightTop.latitude)
-//        let d = CGPoint(x: buildingCoordinate.rightBottom.longitude,
-//                         y: buildingCoordinate.rightBottom.latitude)
-//        let p = CGPoint(x: coordinates.longitude, y: coordinates.latitude)
+        let a = CGPoint(x: buildingCoordinate.leftBottom.longitude,
+                         y: buildingCoordinate.leftBottom.latitude)
+        let b = CGPoint(x: buildingCoordinate.leftTop.longitude,
+                         y: buildingCoordinate.leftTop.latitude)
+        let c = CGPoint(x: buildingCoordinate.rightTop.longitude,
+                         y: buildingCoordinate.rightTop.latitude)
+        let d = CGPoint(x: buildingCoordinate.rightBottom.longitude,
+                         y: buildingCoordinate.rightBottom.latitude)
+        let p = CGPoint(x: coordinates.longitude, y: coordinates.latitude)
         
-        let a = CGPoint(x: 0, y: 0)
-        let b = CGPoint(x: 0, y: 3)
-        let c = CGPoint(x: 5, y: 3)
-        let d = CGPoint(x: 5, y: 0)
-        let p = CGPoint(x: 3, y: 3)
+//        let a = CGPoint(x: 0, y: 1)
+//        let b = CGPoint(x: 1, y: 2)
+//        let c = CGPoint(x: 3, y: 1)
+//        let d = CGPoint(x: 2, y: 0)
+//        let p = CGPoint(x: 0.5, y: 1)
         
-        let width = d.x - a.x
-        let height = b.y - a.y
-        
-        let angle = -45.0
+        let sizesLength = calculateSidesLength(firstPoint: a, secondPoint: d)
+        let angle = MathManager.getAngle(oppositeCathet: sizesLength.y, hypotenuse: sizesLength.hypotenuse)
         
         let newA = MathManager.rotatePoint(pointToRotate: a, centerPoint: d, angleInDegrees: angle)
         let newB = MathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: angle)
         let newC = MathManager.rotatePoint(pointToRotate: c, centerPoint: d, angleInDegrees: angle)
         let newD = d
+        let newP = MathManager.rotatePoint(pointToRotate: p, centerPoint: d, angleInDegrees: angle)
         
-        let h = MathManager.calculateHypotenuse(firstPoint: newB, secondPoint: newC)
-        let aaa = MathManager.getAngle(oppositeCathet: newB.y - newC.y, hypotenuse: h)
+        let maxWidth = max(newC.x, newD.x) - min(newA.x, newB.x)
+        let minWidth = min(newC.x, newD.x) - max(newA.x, newB.x)
+        var maxPercentToTrailing = MathManager.calculatePercent(of: max(newD.x, newC.x) - newP.x, to: maxWidth)
+        var minPercentToTrailing = MathManager.calculatePercent(of: min(newD.x, newC.x) - newP.x, to: minWidth)
         
-        let ui = "ui"
-//
+        let maxHeight = max(newB.y, newC.y) - min(newA.y, newD.y)
+        let minHeight = min(newB.y, newC.y) - max(newA.y, newD.y)
+        var maxPercentToTop = MathManager.calculatePercent(of: max(newB.y, newC.y) - newP.y, to: maxHeight)
+        var minPercentToTop = MathManager.calculatePercent(of: min(newB.y, newC.y) - newP.y, to: minHeight)
+        
+        if maxPercentToTrailing > 100 { maxPercentToTrailing = 100 }
+        if minPercentToTrailing < 0 { minPercentToTrailing = 0 }
+        if maxPercentToTop > 100 { maxPercentToTop = 100 }
+        if minPercentToTop < 0 { minPercentToTop = 0 }
+        
+        var percentToTrailing: Double
+        if maxPercentToTrailing != minPercentToTrailing {
+            percentToTrailing = (maxPercentToTrailing + minPercentToTrailing) / 2
+        } else {
+            percentToTrailing = maxPercentToTrailing
+        }
+        
+        var percentToTop: Double
+        if maxPercentToTop != minPercentToTop {
+            percentToTop = (maxPercentToTop + minPercentToTop) / 2
+        } else {
+            percentToTop = maxPercentToTop
+        }
+        
+        if percentToTop > 100 { percentToTop = 100 }
+        else if percentToTop < 0 { percentToTop = 0 }
+        if percentToTrailing > 100 { percentToTrailing = 100 }
+        else if percentToTrailing < 0 { percentToTrailing = 0 }
+        
+        let percentFromBeginning = 100 - percentToTrailing
+        let percentFromBottom = 100 - percentToTop
+        
+        let xCoordinatesOnMap = MathManager.calculateSmallerNumber(of: percentFromBeginning, to: mapWidth)
+        let yCoordinatesOnMap = MathManager.calculateSmallerNumber(of: percentFromBottom, to: mapHeight)
+        
 //        let centerTriangleSides = calculateSidesLength(firstPoint: a, secondPoint: d)
 //
 //        let adAngle = MathManager.getAngle(oppositeCathet: centerTriangleSides.y, hypotenuse: centerTriangleSides.hypotenuse)
@@ -95,7 +129,7 @@ class UserManager {
 //        let pointX = MathManager.calculateSmallerNumber(of: percentX, to: mapWidth)
 //        let pointY = MathManager.calculateSmallerNumber(of: percentY, to: mapHeight)
         
-        return CGPoint(x: 0, y: 0)
+        return CGPoint(x:xCoordinatesOnMap , y: yCoordinatesOnMap)
     }
     
     func getSizeOfBuilding() -> CGSize {

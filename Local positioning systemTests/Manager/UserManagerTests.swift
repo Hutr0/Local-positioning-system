@@ -48,23 +48,37 @@ class UserManagerTests: XCTestCase {
     func testGetUserCoordinatesForMapWorksCorrectly1() {
         let mapWidth: CGFloat = 1400
         let mapHeight: CGFloat = 900
-        let coordinates = CLLocationCoordinate2D(latitude: 55.67252498442427, longitude: 37.47844079363455)
+        let coordinates = BuildingCoordinate().rightTop
         
         let result = sut.getUserCoordinatesForMap(mapWidth: mapWidth, mapHeight: mapHeight, coordinates: coordinates)
         
-        XCTAssertEqual(result.x, 0)
-        XCTAssertEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.x, mapWidth - 5)
+        XCTAssertGreaterThanOrEqual(result.y, mapHeight - 5)
+        XCTAssertLessThanOrEqual(result.x, mapWidth)
+        XCTAssertLessThanOrEqual(result.y, mapHeight)
     }
     
     func testGetUserCoordinatesForMapWorksCorrectly2() {
         let mapWidth: CGFloat = 1400
         let mapHeight: CGFloat = 900
-        let coordinates = CLLocationCoordinate2D(latitude: 55.67224525582763, longitude: 37.47972036203386)
+        let coordinates = BuildingCoordinate().leftBottom
+        let result = sut.getUserCoordinatesForMap(mapWidth: mapWidth, mapHeight: mapHeight, coordinates: coordinates)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertLessThanOrEqual(result.x, 5)
+        XCTAssertLessThanOrEqual(result.y, 5)
+    }
+    
+    func testGetUserCoordinatesForMapWorksCorrectly3() {
+        let mapWidth: CGFloat = 1400
+        let mapHeight: CGFloat = 900
+        let coordinates = CLLocationCoordinate2D(latitude: 55.67239468839017, longitude: 37.47906302533583)
         
         let result = sut.getUserCoordinatesForMap(mapWidth: mapWidth, mapHeight: mapHeight, coordinates: coordinates)
         
-        XCTAssertEqual(result.x, 1400)
-        XCTAssertEqual(result.y, 900)
+        XCTAssertEqual(result.x, 684.4382951208179)
+        XCTAssertEqual(result.y, 444.47277675042284)
     }
     
     func testCalculateSidesLengthWorksCorrecly() {
