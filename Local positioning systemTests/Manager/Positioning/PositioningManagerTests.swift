@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import CoreLocation
 @testable import Local_positioning_system
 
 class PositioningManagerTests: XCTestCase {
@@ -37,7 +38,7 @@ class PositioningManagerTests: XCTestCase {
         sut = MockPositioningManager()
         
         sut.positioningMotionManager.changeDeviceMotionUpdateInterval(to: 0.01)
-        sut.startRecordingMotions()
+        sut.startRecordingMotions(coordinatesOfStart: CLLocation(), closure: {_ in })
         
         let result = XCTWaiter.wait(for: [expectation], timeout: 1)
         if result == XCTWaiter.Result.timedOut {
@@ -69,9 +70,9 @@ class PositioningManagerTests: XCTestCase {
         sut = MockPositioningManager()
         
         sut.positioningMotionManager.changeDeviceMotionUpdateInterval(to: 0.01)
-        sut.startRecordingMotions()
+        sut.startRecordingMotions(coordinatesOfStart: CLLocation(), closure: {_ in})
         
-        let result = XCTWaiter.wait(for: [expectation], timeout: 0.105)
+        let result = XCTWaiter.wait(for: [expectation], timeout: 0.11)
         if result == XCTWaiter.Result.timedOut {
             XCTAssertTrue((sut as! MockPositioningManager).isInside)
         } else {
@@ -133,6 +134,51 @@ class PositioningManagerTests: XCTestCase {
         XCTAssertEqual(result.gravity.y, 2.5)
         XCTAssertEqual(result.gravity.z, 2.5)
     }
+    
+    func testStartRecordingMotionsCallsClosure() {
+        let expectation = expectation(description: "Test after zero point one hudred five seconds")
+        var isInside = false
+        
+        sut.startRecordingMotions(coordinatesOfStart: CLLocation(), closure: { _ in
+            isInside = true
+        })
+        
+        let result = XCTWaiter.wait(for: [expectation], timeout: 1)
+        if result == XCTWaiter.Result.timedOut {
+            XCTAssertTrue(isInside)
+        } else {
+            XCTFail("Delay interrupted")
+        }
+    }
+    
+    func testMotionsDataNotNilAfterStartrecordingMotions() {
+        sut.startRecordingMotions(coordinatesOfStart: CLLocation(), closure: {_ in})
+        
+        XCTAssertNotNil(sut.motionsData)
+    }
+    
+    func testStartRecordingMotionsCallsUpdateCoordinates() {
+        sut = MockPositioningManager()
+        
+        sut.updateCoordinates(closure: {_ in})
+        
+        XCTAssertTrue((sut as! MockPositioningManager).isInside)
+    }
+    
+    func testUpdateCoordinatesSetsNewCoordinate() {
+        let newCoordinates = CLLocation(latitude: 1, longitude: 1)
+        sut.currentCoordinates = newCoordinates
+        
+        sut.updateCoordinates(closure: {_ in})
+        
+        XCTAssertNotEqual(sut.currentCoordinates, newCoordinates)
+    }
+    
+    func testCurrentCoordinatesNotNilAfterStartRecordingMotions() {
+        sut.startRecordingMotions(coordinatesOfStart: CLLocation(), closure: {_ in})
+        
+        XCTAssertNotNil(sut.currentCoordinates)
+    }
 }
 
 extension PositioningManagerTests {
@@ -140,6 +186,10 @@ extension PositioningManagerTests {
         var isInside = false
         
         override func reducingInaccurancy(data: [MotionData]) {
+            isInside = true
+        }
+        
+        override func updateCoordinates(closure: @escaping (CLLocation) -> ()) {
             isInside = true
         }
     }

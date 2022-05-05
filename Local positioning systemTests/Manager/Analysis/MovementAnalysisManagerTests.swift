@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import Local_positioning_system
+import CoreLocation
 
 class MovementAnalysisManagerTests: XCTestCase {
     
@@ -19,4 +20,6 @@ class MovementAnalysisManagerTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
+    
+    
 }

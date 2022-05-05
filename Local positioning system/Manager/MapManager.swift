@@ -14,6 +14,7 @@ class MapManager {
     
     let locationServicesManager = LocationServicesManager()
     let timerManager = TimerManager()
+    let positioningManager = PositioningManager()
     
     var closure: ((CLLocationCoordinate2D) -> ())!
     
@@ -23,6 +24,10 @@ class MapManager {
         if locationServicesManager.locationManager.authorizationStatus == .authorizedWhenInUse {
             closure = closureIfWeAreInside
             startDetectionGettingInsideArea()
+        } else {
+            //
+            //
+            //
         }
     }
     
@@ -56,27 +61,32 @@ class MapManager {
                 if isInside {
                     self.timerManager.stopTimer()
                     
-                    let completionHandler: ((CLLocation) -> ()) = { loc in
+                    let closure: ((CLLocation) -> ()) = { loc in
                         self.closure(loc.coordinate)
                         
-                        if !self.checkGettingInside(in: self.buildingCoordinate, userLocation: loc.coordinate) {
+                        if !self.checkGettingInside(in: self.buildingCoordinate, userLocation: loc) {
                             self.locationServicesManager.locationManager.stopUpdatingLocation()
+                            self.positioningManager.positioningMotionManager.stopDeviceMotionUpdate()
                             self.startDetectionGettingInsideBuilding()
                         }
                     }
                     
-                    self.setCompletionToLocationManagerDelegate(completion: completionHandler)
-                    self.locationServicesManager.locationManager.startUpdatingLocation()
+//                    self.setCompletionToLocationManagerDelegate(completion: completionHandler)
+//                    self.locationServicesManager.locationManager.startUpdatingLocation()
+                    
+                    self.positioningManager.startRecordingMotions(coordinatesOfStart: location, closure: closure)
                 }
             }
         }
     }
     
-    func checkGettingInside(in coordinates: BuildingProtocol, userLocation: CLLocationCoordinate2D) -> Bool {
+    func checkGettingInside(in coordinates: BuildingProtocol, userLocation: CLLocation) -> Bool {
         let lb = coordinates.leftBottom
         let lt = coordinates.leftTop
         let rb = coordinates.rightBottom
         let rt = coordinates.rightTop
+        
+        let userLocation = userLocation.coordinate
         
         let p1 = hitCalculate(pointX: userLocation.longitude, pointY: userLocation.latitude,
                               firstX: lb.longitude, firstY: lb.latitude,
@@ -116,9 +126,9 @@ class MapManager {
         (delegate as! LocationManagerDelegate).completionHandler = completion
     }
     
-    func getCurrentUserLocation(completion: @escaping (CLLocationCoordinate2D) -> ()) {
+    func getCurrentUserLocation(completion: @escaping (CLLocation) -> ()) {
         let completion: ((CLLocation) -> ()) = { location in
-            completion(location.coordinate)
+            completion(location)
         }
 
         setCompletionToLocationManagerDelegate(completion: completion)

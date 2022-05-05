@@ -28,19 +28,15 @@ class LocationServicesManager {
     
     func checkLocationAutorization() {
         switch locationManager.authorizationStatus {
-            case .authorizedWhenInUse:
-                break
-            case .denied:
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.showAlert(title: "Location Services are denied", message: "To enable your location tracking: Setting -> MyPlaces -> Location")
-                }
-                break
             case .notDetermined:
                 locationManager.requestWhenInUseAuthorization()
                 break
-            case .restricted:
+            case .authorizedWhenInUse, .authorizedAlways:
                 break
-            case .authorizedAlways:
+            case .denied, .restricted:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.showAlert(title: "Location Services are denied", message: "To enable your location tracking: Setting -> MyPlaces -> Location")
+                }
                 break
             @unknown default:
                 print("New cases was added")

@@ -5,7 +5,8 @@
 //  Created by Леонид Лукашевич on 26.04.2022.
 //
 
-import Foundation
+import UIKit
+import CoreLocation
 
 class PositioningManager {
     
@@ -13,13 +14,17 @@ class PositioningManager {
     let reducingInaccurancyManager = ReducingInaccuracyManager()
     let movementAnalysisManager = MovementAnalysisManager()
     
-    var motionsData: [MotionData] = []
+    var motionsData: [MotionData]!
+    var currentCoordinates: CLLocation!
     
-    func startRecordingMotions() {
+    func startRecordingMotions(coordinatesOfStart: CLLocation, closure: @escaping (CLLocation) -> ()) {
         
         var mdForReducingInaccurancy: [MotionData] = []
+        motionsData = []
+        currentCoordinates = coordinatesOfStart
         
-        positioningMotionManager.startDeviceMotionUpdate { rotationRate, attitude, userAcceleration, gravity in
+        positioningMotionManager.startDeviceMotionUpdate { [weak self] rotationRate, attitude, userAcceleration, gravity in
+            guard let self = self else { return }
             
             mdForReducingInaccurancy.append(MotionData(rotationRate: rotationRate,
                                                        attitude: attitude,
@@ -30,7 +35,16 @@ class PositioningManager {
                 self.reducingInaccurancy(data: mdForReducingInaccurancy)
                 mdForReducingInaccurancy.removeAll()
             }
+            
+            self.updateCoordinates(closure: closure)
         }
+    }
+    
+    func updateCoordinates(closure: @escaping (CLLocation) -> ()) {
+        var newCoordinates = movementAnalysisManager.getNewCoordinates(motions: motionsData)
+        
+        currentCoordinates = newCoordinates
+        closure(newCoordinates)
     }
     
     func reducingInaccurancy(data: [MotionData]) {

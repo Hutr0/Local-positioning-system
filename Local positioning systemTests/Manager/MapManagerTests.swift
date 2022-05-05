@@ -21,6 +21,10 @@ class MapManagerTests: XCTestCase {
         sut = nil
     }
     
+    func testPositioningManagerNotNil() {
+        XCTAssertNotNil(sut.positioningManager)
+    }
+    
     func testBuildingCoordinateNotNil() {
         XCTAssertNotNil(sut.buildingCoordinate)
     }
@@ -52,7 +56,7 @@ class MapManagerTests: XCTestCase {
     }
     
     func testCheckGettingInsideAreaWorksCorrectlyFirstTest() {
-        let location = CLLocationCoordinate2D(latitude: 55.67239263212078, longitude: 37.47897356390552)
+        let location = CLLocation(latitude: 55.67239263212078, longitude: 37.47897356390552)
         
         let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
         
@@ -60,7 +64,7 @@ class MapManagerTests: XCTestCase {
     }
     
     func testCheckGettingInsideAreaWorksCorrectlySecondTest() {
-        let location = CLLocationCoordinate2D(latitude: 55.671592512248566, longitude: 37.47835052742039)
+        let location = CLLocation(latitude: 55.671592512248566, longitude: 37.47835052742039)
         
         let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
         
@@ -68,7 +72,7 @@ class MapManagerTests: XCTestCase {
     }
     
     func testCheckGettingInsideAreaWorksCorrectlyThirdTest() {
-        let location = CLLocationCoordinate2D(latitude: 55.67239761556922, longitude: 37.478390897967074)
+        let location = CLLocation(latitude: 55.67239761556922, longitude: 37.478390897967074)
         
         let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
         
@@ -76,7 +80,7 @@ class MapManagerTests: XCTestCase {
     }
     
     func testCheckGettingInsideBuildingWorksCorrectlyFirstTest() {
-        let location = CLLocationCoordinate2D(latitude: 55.67239263212078, longitude: 37.478994655052944)
+        let location = CLLocation(latitude: 55.67239263212078, longitude: 37.478994655052944)
         
         let result = sut.checkGettingInside(in: sut.buildingCoordinate, userLocation: location)
         
@@ -84,7 +88,7 @@ class MapManagerTests: XCTestCase {
     }
     
     func testCheckGettingInsideBuildingWorksCorrectlySecondTest() {
-        let location = CLLocationCoordinate2D(latitude: 55.671592512248566, longitude: 37.47835052742039)
+        let location = CLLocation(latitude: 55.671592512248566, longitude: 37.47835052742039)
         
         let result = sut.checkGettingInside(in: sut.buildingCoordinate, userLocation: location)
         
@@ -92,7 +96,7 @@ class MapManagerTests: XCTestCase {
     }
     
     func testCheckGettingInsideBuildingWorksCorrectlyThirdTest() {
-        let location = CLLocationCoordinate2D(latitude: 55.67239761556922, longitude: 37.478390897967074)
+        let location = CLLocation(latitude: 55.67239761556922, longitude: 37.478390897967074)
         
         let result = sut.checkGettingInside(in: sut.buildingCoordinate, userLocation: location)
         
@@ -100,7 +104,7 @@ class MapManagerTests: XCTestCase {
     }
     
     func testGettingInsideAreaFourth() {
-        let location = CLLocationCoordinate2D(latitude: 55.67194178348394, longitude: 37.47846747199399)
+        let location = CLLocation(latitude: 55.67194178348394, longitude: 37.47846747199399)
         
         let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
         
@@ -108,7 +112,7 @@ class MapManagerTests: XCTestCase {
     }
     
     func testGettingInsideAreaFifth() {
-        let location = CLLocationCoordinate2D(latitude: 55.67180389258219, longitude: 37.47807658227939)
+        let location = CLLocation(latitude: 55.67180389258219, longitude: 37.47807658227939)
         
         let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
         
@@ -116,7 +120,7 @@ class MapManagerTests: XCTestCase {
     }
     
     func testGettingInsideArea6() {
-        let location = CLLocationCoordinate2D(latitude: 55.672612841598145, longitude: 37.47935890790105)
+        let location = CLLocation(latitude: 55.672612841598145, longitude: 37.47935890790105)
         
         let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
         
@@ -124,7 +128,7 @@ class MapManagerTests: XCTestCase {
     }
     
     func testGettingInsideArea7() {
-        let location = CLLocationCoordinate2D(latitude: 55.672896696472215, longitude: 37.479700442533364)
+        let location = CLLocation(latitude: 55.672896696472215, longitude: 37.479700442533364)
         
         let result = sut.checkGettingInside(in: sut.buildingArea, userLocation: location)
         
@@ -135,7 +139,7 @@ class MapManagerTests: XCTestCase {
         let expectation = expectation(description: "Test after zero point one second")
         
         let defaultLocation = CLLocationCoordinate2D()
-        var location = CLLocationCoordinate2D()
+        var location = CLLocation()
         let delegate = LocationManagerDelegate(locationServicesManager: sut.locationServicesManager)
         sut.locationServicesManager.locationManager.delegate = delegate
         
@@ -145,8 +149,8 @@ class MapManagerTests: XCTestCase {
         
         let result = XCTWaiter.wait(for: [expectation], timeout: 0.2)
         if result == XCTWaiter.Result.timedOut {
-            XCTAssertNotEqual(location.latitude, defaultLocation.latitude)
-            XCTAssertNotEqual(location.longitude, defaultLocation.longitude)
+            XCTAssertNotEqual(location.coordinate.latitude, defaultLocation.latitude)
+            XCTAssertNotEqual(location.coordinate.longitude, defaultLocation.longitude)
         } else {
             XCTFail("Delay interruped")
         }
@@ -171,7 +175,7 @@ class MapManagerTests: XCTestCase {
         let expectation = expectation(description: "Test after zero point one second")
         
         var isCompleted = false
-        let completion: (CLLocationCoordinate2D) -> () = { _ in
+        let completion: (CLLocation) -> () = { _ in
             isCompleted = true
         }
         let delegate = LocationManagerDelegate(locationServicesManager: sut.locationServicesManager)

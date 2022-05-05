@@ -58,7 +58,7 @@ class PositioningMotionManagerTests: XCTestCase {
             XCTGravity = gravity
         }
         
-        let result = XCTWaiter.wait(for: [expectation], timeout: 0.1)
+        let result = XCTWaiter.wait(for: [expectation], timeout: 1)
         if result == XCTWaiter.Result.timedOut {
             XCTAssertNotNil(XCTRotationRate)
             XCTAssertNotNil(XCTAttitude)
@@ -77,7 +77,7 @@ class PositioningMotionManagerTests: XCTestCase {
             XCTRotationRate = rotationRate
         }
         
-        let result = XCTWaiter.wait(for: [expectation], timeout: 0.1)
+        let result = XCTWaiter.wait(for: [expectation], timeout: 1)
         if result == XCTWaiter.Result.timedOut {
             XCTAssertNotNil(XCTRotationRate?.x)
             XCTAssertNotNil(XCTRotationRate?.y)
@@ -95,7 +95,7 @@ class PositioningMotionManagerTests: XCTestCase {
             XCTUserAcceleration = userAcceleration
         }
         
-        let result = XCTWaiter.wait(for: [expectation], timeout: 0.1)
+        let result = XCTWaiter.wait(for: [expectation], timeout: 1)
         if result == XCTWaiter.Result.timedOut {
             XCTAssertNotNil(XCTUserAcceleration?.x)
             XCTAssertNotNil(XCTUserAcceleration?.y)
@@ -113,7 +113,7 @@ class PositioningMotionManagerTests: XCTestCase {
             XCTAttitude = attitude
         }
         
-        let result = XCTWaiter.wait(for: [expectation], timeout: 0.1)
+        let result = XCTWaiter.wait(for: [expectation], timeout: 1)
         if result == XCTWaiter.Result.timedOut {
             XCTAssertNotNil(XCTAttitude?.roll)
             XCTAssertNotNil(XCTAttitude?.pitch)
@@ -131,7 +131,7 @@ class PositioningMotionManagerTests: XCTestCase {
             XCTGravity = gravity
         }
         
-        let result = XCTWaiter.wait(for: [expectation], timeout: 0.1)
+        let result = XCTWaiter.wait(for: [expectation], timeout: 1)
         if result == XCTWaiter.Result.timedOut {
             XCTAssertNotNil(XCTGravity?.x)
             XCTAssertNotNil(XCTGravity?.y)
