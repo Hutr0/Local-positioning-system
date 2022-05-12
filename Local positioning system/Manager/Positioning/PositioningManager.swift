@@ -14,15 +14,14 @@ class PositioningManager {
     let reducingInaccurancyManager = ReducingInaccuracyManager()
     let movementAnalysisManager = MovementAnalysisManager()
     
-    var currentCoordinates: CLLocation!
+    var currentPosition: Position!
+    let timeInterval = 0.01
     
     func startRecordingMotions(coordinatesOfStart: CLLocation, closure: @escaping (CLLocation) -> ()) {
-        
         var mdForReducingInaccurancy: [MotionData] = []
-        var motionsData: [MotionData] = []
-        currentCoordinates = coordinatesOfStart
+        currentPosition = Position(coordinates: coordinatesOfStart, speedX: 0, speedZ: 0)
         
-        positioningMotionManager.changeDeviceMotionUpdateInterval(to: 0.01)
+        positioningMotionManager.changeDeviceMotionUpdateInterval(to: timeInterval)
         positioningMotionManager.startDeviceMotionUpdate { [weak self] rotationRate, attitude, userAcceleration, gravity in
             guard let self = self else { return }
             
@@ -31,25 +30,20 @@ class PositioningManager {
                                                        userAcceleration: userAcceleration,
                                                        gravity: gravity))
             
-            if mdForReducingInaccurancy.count >= 10 {
+            if mdForReducingInaccurancy.count >= 5 {
                 let data = self.reducingInaccurancy(data: mdForReducingInaccurancy)
                 mdForReducingInaccurancy.removeAll()
                 
-                motionsData.append(data)
-            }
-            
-            if motionsData.count >= 10 {
-                self.updateCoordinates(motionsData: motionsData, closure: closure)
-                motionsData.removeAll()
+                self.updateCoordinates(motionData: data, closure: closure)
             }
         }
     }
     
-    func updateCoordinates(motionsData: [MotionData], closure: @escaping (CLLocation) -> ()) {
-        let newCoordinates = movementAnalysisManager.getNewCoordinates(currentCoordonates: currentCoordinates, motions: motionsData)
+    func updateCoordinates(motionData: MotionData, closure: @escaping (CLLocation) -> ()) {
+        let newPosition = movementAnalysisManager.getNewCoordinates(currentPosition: currentPosition, motion: motionData, time: timeInterval)
         
-        currentCoordinates = newCoordinates
-        closure(newCoordinates)
+        currentPosition = newPosition
+        closure(newPosition.coordinates)
     }
     
     func reducingInaccurancy(data: [MotionData]) -> MotionData {

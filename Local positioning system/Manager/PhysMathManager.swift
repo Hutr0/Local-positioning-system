@@ -8,7 +8,7 @@
 import Foundation
 import Accelerate
 
-class MathManager {
+class PhysMathManager {
     
     static func rotatePoint(pointToRotate: CGPoint, centerPoint: CGPoint, angleInDegrees: Double) -> CGPoint {
         
@@ -51,6 +51,14 @@ class MathManager {
         result = sqrt(rightSide)
         
         return result
+    }
+    
+    static func getNewPointValue(initialP: Double, initialSpeed: Double, time: Double, acceleration: Double) -> Double {
+        return initialP + initialSpeed * time + (acceleration * pow(time, 2)) / 2
+    }
+    
+    static func getSpeed(initialSpeed: Double, acceleration: Double, time: Double) -> Double {
+        return initialSpeed + acceleration * time
     }
     
     static func calculateIntersectionPoint(p0_x: Float, p0_y: Float, p1_x: Float, p1_y: Float, p2_x: Float, p2_y: Float, p3_x: Float, p3_y: Float) -> CGPoint? {

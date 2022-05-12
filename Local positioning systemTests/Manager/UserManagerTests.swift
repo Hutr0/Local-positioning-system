@@ -69,7 +69,7 @@ class UserManagerTests: XCTestCase {
         let fp = CGPoint(x: 0, y: 0)
         let sp = CGPoint(x: 5, y: 10)
         
-        let h = MathManager.calculateHypotenuse(firstPoint: fp, secondPoint: sp)
+        let h = PhysMathManager.calculateHypotenuse(firstPoint: fp, secondPoint: sp)
         let x = sp.x - fp.x
         let y = sp.y - fp.y
         

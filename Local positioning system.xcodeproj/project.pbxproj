@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E02A4826282D16D300EA7B87 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02A4825282D16D300EA7B87 /* Position.swift */; };
 		E03A4F032817370D0087BD9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F022817370D0087BD9F /* AppDelegate.swift */; };
 		E03A4F052817370D0087BD9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F042817370D0087BD9F /* SceneDelegate.swift */; };
 		E03A4F0A2817370D0087BD9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03A4F082817370D0087BD9F /* Main.storyboard */; };
@@ -57,8 +58,8 @@
 		E0E31DCD2819F4C300AD79C4 /* TimerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DCC2819F4C300AD79C4 /* TimerManagerTests.swift */; };
 		E0E31DD7281AF55400AD79C4 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DD6281AF55400AD79C4 /* UserManager.swift */; };
 		E0E31DD9281AF56D00AD79C4 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DD8281AF56D00AD79C4 /* UserManagerTests.swift */; };
-		E0E31DDB281B586A00AD79C4 /* MathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DDA281B586A00AD79C4 /* MathManager.swift */; };
-		E0E31DDD281B593800AD79C4 /* MathManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DDC281B593800AD79C4 /* MathManagerTests.swift */; };
+		E0E31DDB281B586A00AD79C4 /* PhysMathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DDA281B586A00AD79C4 /* PhysMathManager.swift */; };
+		E0E31DDD281B593800AD79C4 /* PhysMathManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DDC281B593800AD79C4 /* PhysMathManagerTests.swift */; };
 		E0E31DE1281C280C00AD79C4 /* TriangleSides.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31DE0281C280C00AD79C4 /* TriangleSides.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E02A4825282D16D300EA7B87 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		E03A4EFF2817370D0087BD9F /* Local positioning system.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Local positioning system.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03A4F022817370D0087BD9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E03A4F042817370D0087BD9F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,8 +136,8 @@
 		E0E31DCC2819F4C300AD79C4 /* TimerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManagerTests.swift; sourceTree = "<group>"; };
 		E0E31DD6281AF55400AD79C4 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		E0E31DD8281AF56D00AD79C4 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
-		E0E31DDA281B586A00AD79C4 /* MathManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathManager.swift; sourceTree = "<group>"; };
-		E0E31DDC281B593800AD79C4 /* MathManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathManagerTests.swift; sourceTree = "<group>"; };
+		E0E31DDA281B586A00AD79C4 /* PhysMathManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysMathManager.swift; sourceTree = "<group>"; };
+		E0E31DDC281B593800AD79C4 /* PhysMathManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysMathManagerTests.swift; sourceTree = "<group>"; };
 		E0E31DE0281C280C00AD79C4 /* TriangleSides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleSides.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				E0E31DE0281C280C00AD79C4 /* TriangleSides.swift */,
+				E02A4825282D16D300EA7B87 /* Position.swift */,
 				E0E31DD1281A0A1500AD79C4 /* Motion Data */,
 				E0E31DD0281A0A0600AD79C4 /* Building */,
 			);
@@ -267,7 +270,7 @@
 				E0E31DBE2819DAB700AD79C4 /* BuildingManager.swift */,
 				E0E31DC62819E35600AD79C4 /* LocationServicesManager.swift */,
 				E0E31DCA2819F4B300AD79C4 /* TimerManager.swift */,
-				E0E31DDA281B586A00AD79C4 /* MathManager.swift */,
+				E0E31DDA281B586A00AD79C4 /* PhysMathManager.swift */,
 				E0E31DAA2819999D00AD79C4 /* Positioning */,
 				E0E31DAB281999AA00AD79C4 /* Analysis */,
 			);
@@ -282,7 +285,7 @@
 				E0E31DC02819DAD300AD79C4 /* BuildingManagerTests.swift */,
 				E0E31DC82819E36F00AD79C4 /* LocationServicesManagerTests.swift */,
 				E0E31DCC2819F4C300AD79C4 /* TimerManagerTests.swift */,
-				E0E31DDC281B593800AD79C4 /* MathManagerTests.swift */,
+				E0E31DDC281B593800AD79C4 /* PhysMathManagerTests.swift */,
 				E0E31DAE2819AD7500AD79C4 /* Positioning */,
 				E0E31DAF2819AD8000AD79C4 /* Analysis */,
 			);
@@ -554,7 +557,7 @@
 				E0E31DC72819E35600AD79C4 /* LocationServicesManager.swift in Sources */,
 				E03A4F032817370D0087BD9F /* AppDelegate.swift in Sources */,
 				E0E31DAD2819AD6B00AD79C4 /* MapManager.swift in Sources */,
-				E0E31DDB281B586A00AD79C4 /* MathManager.swift in Sources */,
+				E0E31DDB281B586A00AD79C4 /* PhysMathManager.swift in Sources */,
 				E03A4F0D2817370D0087BD9F /* Local_positioning_system.xcdatamodeld in Sources */,
 				E0E31D8A28177E8600AD79C4 /* Gravity.swift in Sources */,
 				E0E31D8428177DED00AD79C4 /* UserAcceleration.swift in Sources */,
@@ -565,6 +568,7 @@
 				E03A4F052817370D0087BD9F /* SceneDelegate.swift in Sources */,
 				E0E31D9D28184DDC00AD79C4 /* MovementAnalysisManager.swift in Sources */,
 				E0E31DA7281982B900AD79C4 /* ScrollViewDelegate.swift in Sources */,
+				E02A4826282D16D300EA7B87 /* Position.swift in Sources */,
 				E0E31D8C281784AA00AD79C4 /* MotionData.swift in Sources */,
 				E0E31DB32819AEB300AD79C4 /* BuildingCoordinate.swift in Sources */,
 				E0E31DBF2819DAB700AD79C4 /* BuildingManager.swift in Sources */,
@@ -591,7 +595,7 @@
 				E0E31DCD2819F4C300AD79C4 /* TimerManagerTests.swift in Sources */,
 				E0E31D822817785E00AD79C4 /* PositioningManagerTests.swift in Sources */,
 				E0E31DC92819E36F00AD79C4 /* LocationServicesManagerTests.swift in Sources */,
-				E0E31DDD281B593800AD79C4 /* MathManagerTests.swift in Sources */,
+				E0E31DDD281B593800AD79C4 /* PhysMathManagerTests.swift in Sources */,
 				E08EAE71281747D6005F6A69 /* MainViewCotrollerTests.swift in Sources */,
 				E0E31D9F28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift in Sources */,
 				E0E31DC12819DAD300AD79C4 /* BuildingManagerTests.swift in Sources */,

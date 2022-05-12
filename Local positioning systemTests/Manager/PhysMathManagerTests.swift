@@ -9,13 +9,13 @@ import XCTest
 import CoreLocation
 @testable import Local_positioning_system
 
-class MathManagerTests: XCTestCase {
+class PhysMathManagerTests: XCTestCase {
     
     func testCalculatePercentWorksCorrectly() {
         let of = 3.5
         let to = 7.0
         
-        let result = MathManager.calculatePercent(number: of, hundredPercentNumber: to)
+        let result = PhysMathManager.calculatePercent(number: of, hundredPercentNumber: to)
         
         XCTAssertEqual(result, 50)
     }
@@ -24,7 +24,7 @@ class MathManagerTests: XCTestCase {
         let ofPercent = 44.0
         let number = 1400.0
         
-        let result = MathManager.calculateNumberOnPercent(lowerPercent: ofPercent, highterNumber: number)
+        let result = PhysMathManager.calculateNumberOnPercent(lowerPercent: ofPercent, highterNumber: number)
         
         XCTAssertEqual(result, 616)
     }
@@ -33,7 +33,7 @@ class MathManagerTests: XCTestCase {
         let firstPoint = CGPoint(x: 0, y: 4)
         let secondPoint = CGPoint(x: 5, y: 0)
         
-        let result = MathManager.calculateHypotenuse(firstPoint: firstPoint, secondPoint: secondPoint)
+        let result = PhysMathManager.calculateHypotenuse(firstPoint: firstPoint, secondPoint: secondPoint)
         
         XCTAssertEqual(result, sqrt(41))
     }
@@ -45,11 +45,11 @@ class MathManagerTests: XCTestCase {
         let sp = CGPoint(x: 4, y: 0.1)
 
         let ySide = point.y - sp.y
-        let h = MathManager.calculateHypotenuse(firstPoint: point, secondPoint: sp)
+        let h = PhysMathManager.calculateHypotenuse(firstPoint: point, secondPoint: sp)
         
-        let angle = MathManager.getAngle(oppositeCathet: ySide, hypotenuse: h)
+        let angle = PhysMathManager.getAngle(oppositeCathet: ySide, hypotenuse: h)
 
-        let result = MathManager.rotatePoint(pointToRotate: point, centerPoint: sp, angleInDegrees: angle)
+        let result = PhysMathManager.rotatePoint(pointToRotate: point, centerPoint: sp, angleInDegrees: angle)
 
         XCTAssertEqual(result.x, -0.38292140016222476)
         XCTAssertEqual(result.y, 0.10000000000000112)
@@ -62,14 +62,14 @@ class MathManagerTests: XCTestCase {
         let d = CGPoint(x: 3, y: 1)
 
         let adY = a.y - d.y
-        let adH = MathManager.calculateHypotenuse(firstPoint: a, secondPoint: d)
-        let angle = MathManager.getAngle(oppositeCathet: adY, hypotenuse: adH)
+        let adH = PhysMathManager.calculateHypotenuse(firstPoint: a, secondPoint: d)
+        let angle = PhysMathManager.getAngle(oppositeCathet: adY, hypotenuse: adH)
         
-        let newA = MathManager.rotatePoint(pointToRotate: a, centerPoint: d, angleInDegrees: angle)
+        let newA = PhysMathManager.rotatePoint(pointToRotate: a, centerPoint: d, angleInDegrees: angle)
         
-        let newB = MathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: angle)
+        let newB = PhysMathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: angle)
         
-        let newC = MathManager.rotatePoint(pointToRotate: c, centerPoint: d, angleInDegrees: angle)
+        let newC = PhysMathManager.rotatePoint(pointToRotate: c, centerPoint: d, angleInDegrees: angle)
         
         XCTAssertEqual(newA.x, -0.6055512754639891)
         XCTAssertEqual(newA.y, 0.9999999999999998)
@@ -86,15 +86,15 @@ class MathManagerTests: XCTestCase {
         let oc = 8.0
         let h = 10.0
 
-        let sin = MathManager.getAngle(oppositeCathet: oc, hypotenuse: h)
-        let cos = MathManager.getAngle(oppositeCathet: ac, hypotenuse: h)
+        let sin = PhysMathManager.getAngle(oppositeCathet: oc, hypotenuse: h)
+        let cos = PhysMathManager.getAngle(oppositeCathet: ac, hypotenuse: h)
 
         XCTAssertEqual(sin, 53.13010235415598)
         XCTAssertEqual(cos, 36.86989764584402)
     }
     
     func testCalculateIntersectionPointWorksCorrectly() {
-        let res = MathManager.calculateIntersectionPoint(p0_x: 0,
+        let res = PhysMathManager.calculateIntersectionPoint(p0_x: 0,
                                 p0_y: 0,
                                 p1_x: 10,
                                 p1_y: 10,
@@ -106,5 +106,26 @@ class MathManagerTests: XCTestCase {
         XCTAssertNotNil(res)
         XCTAssertEqual(res!.x, 3.5)
         XCTAssertEqual(res!.y, 3.5)
+    }
+    
+    func testGetSpeedWorksCorrectly() {
+        let initialSpeed = 0.0
+        let acceleration = 0.5
+        let time = 1.0
+        
+        let result = PhysMathManager.getSpeed(initialSpeed: initialSpeed, acceleration: acceleration, time: time)
+        
+        XCTAssertEqual(result, 0.5)
+    }
+    
+    func testGetNewPointValueWorksCorrectly() {
+        let initialP = 0.0
+        let initialSpeed = 0.0
+        let time = 1.0
+        let acceleration = 10.0
+        
+        let result = PhysMathManager.getNewPointValue(initialP: initialP, initialSpeed: initialSpeed, time: time, acceleration: acceleration)
+        
+        XCTAssertEqual(result, 5)
     }
 }

@@ -12,9 +12,11 @@ import CoreLocation
 class PositioningManagerTests: XCTestCase {
 
     var sut: PositioningManager!
+    var motionData: MotionData!
     
     override func setUpWithError() throws {
         sut = PositioningManager()
+        motionData = MotionData(rotationRate: RotationRate(first: 1, second: 1, fird: 1), attitude: Attitude(first: 1, second: 1, fird: 1), userAcceleration: UserAcceleration(first: 1, second: 1, fird: 1), gravity: Gravity(first: 1, second: 1, fird: 1))
     }
 
     override func tearDownWithError() throws {
@@ -159,34 +161,34 @@ class PositioningManagerTests: XCTestCase {
     func testStartRecordingMotionsCallsUpdateCoordinates() {
         sut = MockPositioningManager()
         
-        sut.updateCoordinates(motionsData: [], closure: {_ in})
+        sut.updateCoordinates(motionData: motionData, closure: {_ in})
         
         XCTAssertTrue((sut as! MockPositioningManager).isInsideUpdate)
     }
     
     func testUpdateCoordinatesSetsNewCoordinate() {
         let newCoordinates = CLLocation(latitude: 1, longitude: 1)
-        sut.currentCoordinates = newCoordinates
+        sut.currentPosition = Position(coordinates: newCoordinates, speedX: 0, speedZ: 0)
         
-        sut.updateCoordinates(motionsData: [], closure: {_ in})
+        sut.updateCoordinates(motionData: motionData, closure: {_ in})
         
-        XCTAssertNotEqual(sut.currentCoordinates, newCoordinates)
+        XCTAssertNotEqual(sut.currentPosition.coordinates, newCoordinates)
     }
     
     func testCurrentCoordinatesNotNilAfterStartRecordingMotions() {
         sut.startRecordingMotions(coordinatesOfStart: CLLocation(), closure: {_ in})
         
-        XCTAssertNotNil(sut.currentCoordinates)
+        XCTAssertNotNil(sut.currentPosition)
     }
     
     func testUpdateCoordinatesCallsClosure() {
-        sut.currentCoordinates = CLLocation()
+        sut.currentPosition = Position(coordinates: CLLocation(latitude: 0, longitude: 0), speedX: 0, speedZ: 0)
         var isInside = false
         let closure: ((CLLocation) -> ()) = { _ in
             isInside = true
         }
         
-        sut.updateCoordinates(motionsData: [], closure: closure)
+        sut.updateCoordinates(motionData: motionData, closure: closure)
         
         XCTAssertTrue(isInside)
     }
@@ -226,6 +228,24 @@ class PositioningManagerTests: XCTestCase {
             XCTFail("Delay interrupted")
         }
     }
+    
+    func testStartRecordingMotionsSetUpdateIntervalEqualsTimeInterval() {
+        let interval = sut.timeInterval
+        
+        sut.startRecordingMotions(coordinatesOfStart: CLLocation(), closure: {_ in})
+
+        XCTAssertEqual(interval, sut.positioningMotionManager.motionManager.deviceMotionUpdateInterval)
+    }
+    
+    func testUpdateCoordinatesSetsNewCoordinates() {
+        let startCurrentCoordinates = CLLocation(latitude: 10, longitude: 10)
+        sut.currentPosition = Position(coordinates: startCurrentCoordinates, speedX: 0, speedZ: 0)
+        
+        sut.updateCoordinates(motionData: motionData, closure: {_ in})
+        
+        XCTAssertNotEqual(startCurrentCoordinates.coordinate.latitude, sut.currentPosition.coordinates.coordinate.latitude)
+        XCTAssertNotEqual(startCurrentCoordinates.coordinate.longitude, sut.currentPosition.coordinates.coordinate.longitude)
+    }
 }
 
 extension PositioningManagerTests {
@@ -239,7 +259,7 @@ extension PositioningManagerTests {
             return MotionData(rotationRate: RotationRate(first: 0, second: 0, fird: 0), attitude: Attitude(first: 0, second: 0, fird: 0), userAcceleration: UserAcceleration(first: 0, second: 0, fird: 0), gravity: Gravity(first: 0, second: 0, fird: 0))
         }
         
-        override func updateCoordinates(motionsData: [MotionData], closure: @escaping (CLLocation) -> ()) {
+        override func updateCoordinates(motionData: MotionData, closure: @escaping (CLLocation) -> ()) {
             isInsideUpdate = true
         }
     }

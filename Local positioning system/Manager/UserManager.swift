@@ -24,23 +24,23 @@ class UserManager {
         let p = CGPoint(x: coordinates.longitude, y: coordinates.latitude)
         
         let sidesLength = calculateSidesLength(firstPoint: a, secondPoint: d)
-        let angle = MathManager.getAngle(oppositeCathet: sidesLength.y, hypotenuse: sidesLength.hypotenuse)
+        let angle = PhysMathManager.getAngle(oppositeCathet: sidesLength.y, hypotenuse: sidesLength.hypotenuse)
         
-        let newA = MathManager.rotatePoint(pointToRotate: a, centerPoint: d, angleInDegrees: angle)
-        let newB = MathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: angle)
-        let newC = MathManager.rotatePoint(pointToRotate: c, centerPoint: d, angleInDegrees: angle)
+        let newA = PhysMathManager.rotatePoint(pointToRotate: a, centerPoint: d, angleInDegrees: angle)
+        let newB = PhysMathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: angle)
+        let newC = PhysMathManager.rotatePoint(pointToRotate: c, centerPoint: d, angleInDegrees: angle)
         let newD = d
-        let newP = MathManager.rotatePoint(pointToRotate: p, centerPoint: d, angleInDegrees: angle)
+        let newP = PhysMathManager.rotatePoint(pointToRotate: p, centerPoint: d, angleInDegrees: angle)
         
         let maxWidth = max(newC.x, newD.x) - min(newA.x, newB.x)
         let minWidth = min(newC.x, newD.x) - max(newA.x, newB.x)
-        var maxPercentToTrailing = MathManager.calculatePercent(number: max(newD.x, newC.x) - newP.x, hundredPercentNumber: maxWidth)
-        var minPercentToTrailing = MathManager.calculatePercent(number: min(newD.x, newC.x) - newP.x, hundredPercentNumber: minWidth)
+        var maxPercentToTrailing = PhysMathManager.calculatePercent(number: max(newD.x, newC.x) - newP.x, hundredPercentNumber: maxWidth)
+        var minPercentToTrailing = PhysMathManager.calculatePercent(number: min(newD.x, newC.x) - newP.x, hundredPercentNumber: minWidth)
         
         let maxHeight = max(newB.y, newC.y) - min(newA.y, newD.y)
         let minHeight = min(newB.y, newC.y) - max(newA.y, newD.y)
-        var maxPercentToTop = MathManager.calculatePercent(number: max(newB.y, newC.y) - newP.y, hundredPercentNumber: maxHeight)
-        var minPercentToTop = MathManager.calculatePercent(number: min(newB.y, newC.y) - newP.y, hundredPercentNumber: minHeight)
+        var maxPercentToTop = PhysMathManager.calculatePercent(number: max(newB.y, newC.y) - newP.y, hundredPercentNumber: maxHeight)
+        var minPercentToTop = PhysMathManager.calculatePercent(number: min(newB.y, newC.y) - newP.y, hundredPercentNumber: minHeight)
         
         if maxPercentToTrailing > 100 { maxPercentToTrailing = 100 }
         if minPercentToTrailing < 0 { minPercentToTrailing = 0 }
@@ -69,15 +69,15 @@ class UserManager {
         let percentFromBeginning = 100 - percentToTrailing
         let percentFromBottom = 100 - percentToTop
         
-        let xCoordinatesOnMap = MathManager.calculateNumberOnPercent(lowerPercent: percentFromBeginning, highterNumber: mapWidth)
-        let yCoordinatesOnMap = MathManager.calculateNumberOnPercent(lowerPercent: percentFromBottom, highterNumber: mapHeight)
+        let xCoordinatesOnMap = PhysMathManager.calculateNumberOnPercent(lowerPercent: percentFromBeginning, highterNumber: mapWidth)
+        let yCoordinatesOnMap = PhysMathManager.calculateNumberOnPercent(lowerPercent: percentFromBottom, highterNumber: mapHeight)
         
         return CGPoint(x:xCoordinatesOnMap , y: yCoordinatesOnMap)
     }
     
     func calculateSidesLength(firstPoint: CGPoint, secondPoint: CGPoint) -> TriangleSides {
         
-        let hypotenuse = MathManager.calculateHypotenuse(firstPoint: firstPoint, secondPoint: secondPoint)
+        let hypotenuse = PhysMathManager.calculateHypotenuse(firstPoint: firstPoint, secondPoint: secondPoint)
         let x = max(firstPoint.x, secondPoint.x) - min(firstPoint.x, secondPoint.x)
         let y = max(firstPoint.y, secondPoint.y) - min(firstPoint.y, secondPoint.y)
         
