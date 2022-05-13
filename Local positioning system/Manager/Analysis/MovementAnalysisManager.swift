@@ -10,6 +10,12 @@ import CoreLocation
 
 class MovementAnalysisManager {
     func getNewCoordinates(currentPosition: Position, motion: MotionData, time: Double) -> Position {
+        let result = getNewPosition(currentPosition: currentPosition, motion: motion, time: time)
+        
+        return result
+    }
+    
+    func getNewPosition(currentPosition: Position, motion: MotionData, time: Double) -> Position {
         var speedX: Double = currentPosition.speedX
         var speedZ: Double = currentPosition.speedZ
         var x = currentPosition.coordinates.coordinate.longitude
