@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E02A4826282D16D300EA7B87 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02A4825282D16D300EA7B87 /* Position.swift */; };
 		E02A4828282F4C1C00EA7B87 /* GettingInsideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02A4827282F4C1C00EA7B87 /* GettingInsideManager.swift */; };
+		E02A482A282FC46700EA7B87 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02A4829282FC46700EA7B87 /* AlertManager.swift */; };
 		E03A4F032817370D0087BD9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F022817370D0087BD9F /* AppDelegate.swift */; };
 		E03A4F052817370D0087BD9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F042817370D0087BD9F /* SceneDelegate.swift */; };
 		E03A4F0A2817370D0087BD9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03A4F082817370D0087BD9F /* Main.storyboard */; };
@@ -84,6 +85,7 @@
 /* Begin PBXFileReference section */
 		E02A4825282D16D300EA7B87 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		E02A4827282F4C1C00EA7B87 /* GettingInsideManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingInsideManager.swift; sourceTree = "<group>"; };
+		E02A4829282FC46700EA7B87 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		E03A4EFF2817370D0087BD9F /* Local positioning system.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Local positioning system.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03A4F022817370D0087BD9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E03A4F042817370D0087BD9F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 		E08EAE7A281749A1005F6A69 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				E02A4829282FC46700EA7B87 /* AlertManager.swift */,
 				E0E31DAC2819AD6B00AD79C4 /* MapManager.swift */,
 				E0E31DD6281AF55400AD79C4 /* UserManager.swift */,
 				E0E31DBE2819DAB700AD79C4 /* BuildingManager.swift */,
@@ -582,6 +585,7 @@
 				E0E31DD7281AF55400AD79C4 /* UserManager.swift in Sources */,
 				E08EAE6F281747A5005F6A69 /* MainViewController.swift in Sources */,
 				E0E31D8E2818054200AD79C4 /* ReducingInaccuracyManager.swift in Sources */,
+				E02A482A282FC46700EA7B87 /* AlertManager.swift in Sources */,
 				E08EAE7328174866005F6A69 /* PositioningManager.swift in Sources */,
 				E0E31DC32819E14500AD79C4 /* LocationManagerDelegate.swift in Sources */,
 				E08EAE7C281749F3005F6A69 /* MainViewModel.swift in Sources */,

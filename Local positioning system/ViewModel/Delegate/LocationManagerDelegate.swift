@@ -23,12 +23,11 @@ class LocationManagerDelegate: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first, let completionHandler = completionHandler else { return }
-        print(location)
         completionHandler(location)
 //        completionHandler(CLLocation(latitude: 55.672423427107134, longitude: 37.47909789405624))
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+        AlertManager.showAlert(title: "Location manager did fail with error.", message: error.localizedDescription)
     }
 }

@@ -18,9 +18,7 @@ class MainViewModel {
     }
     
     func startPositioningUserOnMap(widht: CGFloat, height: CGFloat, completionHandler: @escaping (CGPoint) -> ()) {
-        mapManager.startGettingLocation(mapWidth: widht, mapHeight: height, closure: { point in
-            completionHandler(point)
-        })
+        mapManager.startGettingLocation(mapWidth: widht, mapHeight: height, closure: completionHandler)
     }
     
     func configure(scrollView: UIScrollView, closureForUserPositioning: @escaping () -> ()) {

@@ -12,14 +12,10 @@ class MapManager {
     lazy var buildingCoordinates = BuildingCoordinate()
     lazy var buildingArea = BuildingArea()
     
-    lazy var locationServicesManager = LocationServicesManager()
+    lazy var locationServicesManager = LocationServicesManager.shared
     lazy var userManager = UserManager()
     lazy var positioningManager = PositioningManager()
     lazy var gettingInsideManager = GettingInsideManager()
-    
-    func locationManagerAuthorizedWhenInUse() -> Bool {
-        return locationServicesManager.locationManager.authorizationStatus == .authorizedWhenInUse ? true : false
-    }
     
     func startGettingLocation(mapWidth: CGFloat, mapHeight: CGFloat, closure: @escaping (CGPoint) -> ()) {
         let completionHandler: ((CGPoint) -> ()) = { [weak self] point in
@@ -42,14 +38,14 @@ class MapManager {
                 let longitude = self.buildingCoordinates.enter.longitude
                 
                 let point = self.userManager.getUserCoordinatesForMap(mapWidth: mapWidth,
-                                                                 mapHeight: mapHeight,
-                                                                 coordinatesOfUser: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+                                                                      mapHeight: mapHeight,
+                                                                      coordinatesOfUser: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
                                                                       coordinatesOfBuilding: self.buildingCoordinates)
                 
                 completionHandler(point)
             }
             
-            gettingInsideManager.startDetectionGettingInsideArea(completionHandler: completionHandler)
+            gettingInsideManager.startDetectionGettingInside(completionHandler: completionHandler)
         } else {
             let latitude = buildingCoordinates.enter.latitude
             let longitude = buildingCoordinates.enter.longitude
@@ -61,5 +57,9 @@ class MapManager {
             
             completionHandler(point)
         }
+    }
+    
+    func locationManagerAuthorizedWhenInUse() -> Bool {
+        return locationServicesManager.locationManager.authorizationStatus == .authorizedWhenInUse ? true : false
     }
 }

@@ -27,12 +27,14 @@ class MainViewController: UIViewController {
         userY = self.user.frame.origin.y
         
         viewModel = MainViewModel(map: map)
+        
         viewModel.configure(scrollView: scrollView) { [weak self] in
             guard let self = self, let userX = self.userX, let userY = self.userY else { return }
             
             self.userConstraintToLeading.constant = userX * self.scrollView.zoomScale
             self.userConstraintToTop.constant = userY * self.scrollView.zoomScale
         }
+        
         viewModel.startPositioningUserOnMap(widht: map.frame.width, height: map.frame.height) { [weak self] point in
             guard let self = self else { return }
             

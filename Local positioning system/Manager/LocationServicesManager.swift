@@ -9,6 +9,11 @@ import Foundation
 import MapKit
 
 class LocationServicesManager {
+    
+    static let shared = LocationServicesManager()
+    
+    private init() {}
+    
     let locationManager = CLLocationManager()
     var locationManagerDelegate: LocationManagerDelegate!
     
@@ -20,8 +25,8 @@ class LocationServicesManager {
             locationManagerDelegate = LocationManagerDelegate(locationServicesManager: self)
             locationManager.delegate = locationManagerDelegate
         } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.showAlert(title: "Location Services are Disabled", message: "To endable it go: Settings -> Privacy -> Location Services and turn On")
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                AlertManager.showAlert(title: "Location Services are Disabled", message: "To endable it go: Settings -> Privacy -> Location Services and turn On")
             }
         }
     }
@@ -34,26 +39,12 @@ class LocationServicesManager {
             case .authorizedWhenInUse, .authorizedAlways:
                 break
             case .denied, .restricted:
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.showAlert(title: "Location Services are denied", message: "To enable your location tracking: Setting -> MyPlaces -> Location")
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    AlertManager.showAlert(title: "Location Services are denied", message: "To enable your location tracking: Setting -> MyPlaces -> Location")
                 }
                 break
             @unknown default:
                 print("New cases was added")
         }
-    }
-    
-    func showAlert(title: String, message: String) {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default)
-        
-        alert.addAction(okAction)
-        
-        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-        alertWindow.rootViewController = UIViewController()
-        alertWindow.windowLevel = UIWindow.Level.alert + 1
-        alertWindow.makeKeyAndVisible()
-        alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
     }
 }
