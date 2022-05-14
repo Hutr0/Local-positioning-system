@@ -17,9 +17,9 @@ class PositioningManager {
     var currentPosition: Position!
     let timeInterval = 0.01
     
-    func startRecordingMotions(coordinatesOfStart: CLLocation, closure: @escaping (CLLocation) -> ()) {
+    func startRecordingMotions(pointOfStart: CGPoint, closure: @escaping (CGPoint) -> ()) {
         var mdForReducingInaccurancy: [MotionData] = []
-        currentPosition = Position(coordinates: coordinatesOfStart, speedX: 0, speedZ: 0)
+        currentPosition = Position(coordinates: pointOfStart, speedX: 0, speedZ: 0)
         
         positioningMotionManager.changeDeviceMotionUpdateInterval(to: timeInterval)
         positioningMotionManager.startDeviceMotionUpdate { [weak self] rotationRate, attitude, userAcceleration, gravity in
@@ -39,7 +39,7 @@ class PositioningManager {
         }
     }
     
-    func updateCoordinates(motionData: MotionData, closure: @escaping (CLLocation) -> ()) {
+    func updateCoordinates(motionData: MotionData, closure: @escaping (CGPoint) -> ()) {
         let newPosition = movementAnalysisManager.getNewCoordinates(currentPosition: currentPosition, motion: motionData, time: timeInterval)
         
         currentPosition = newPosition

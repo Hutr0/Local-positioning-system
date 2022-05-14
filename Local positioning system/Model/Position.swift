@@ -5,11 +5,10 @@
 //  Created by Леонид Лукашевич on 12.05.2022.
 //
 
-import Foundation
-import CoreLocation
+import UIKit
 
 struct Position {
-    var coordinates: CLLocation
+    var coordinates: CGPoint
     var speedX: Double
     var speedZ: Double
 }

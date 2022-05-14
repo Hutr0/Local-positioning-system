@@ -26,7 +26,7 @@ class MapManagerTests: XCTestCase {
     }
     
     func testBuildingCoordinateNotNil() {
-        XCTAssertNotNil(sut.buildingCoordinate)
+        XCTAssertNotNil(sut.buildingCoordinates)
     }
     
     func testBuildingAreaNotNil() {
@@ -82,7 +82,7 @@ class MapManagerTests: XCTestCase {
     func testCheckGettingInsideBuildingWorksCorrectlyFirstTest() {
         let location = CLLocation(latitude: 55.67239263212078, longitude: 37.478994655052944)
         
-        let result = sut.checkGettingInside(in: sut.buildingCoordinate, userLocation: location)
+        let result = sut.checkGettingInside(in: sut.buildingCoordinates, userLocation: location)
         
         XCTAssertTrue(result)
     }
@@ -90,7 +90,7 @@ class MapManagerTests: XCTestCase {
     func testCheckGettingInsideBuildingWorksCorrectlySecondTest() {
         let location = CLLocation(latitude: 55.671592512248566, longitude: 37.47835052742039)
         
-        let result = sut.checkGettingInside(in: sut.buildingCoordinate, userLocation: location)
+        let result = sut.checkGettingInside(in: sut.buildingCoordinates, userLocation: location)
         
         XCTAssertFalse(result)
     }
@@ -98,7 +98,7 @@ class MapManagerTests: XCTestCase {
     func testCheckGettingInsideBuildingWorksCorrectlyThirdTest() {
         let location = CLLocation(latitude: 55.67239761556922, longitude: 37.478390897967074)
         
-        let result = sut.checkGettingInside(in: sut.buildingCoordinate, userLocation: location)
+        let result = sut.checkGettingInside(in: sut.buildingCoordinates, userLocation: location)
         
         XCTAssertFalse(result)
     }
@@ -189,5 +189,11 @@ class MapManagerTests: XCTestCase {
         } else {
             XCTFail("Delay interruped")
         }
+    }
+    
+    func testLocationManagerAuthorizedWhenInUse() {
+        let result = sut.locationServicesManager.locationManager.authorizationStatus == .authorizedWhenInUse ? true : false
+        
+        XCTAssertEqual(sut.locationManagerAuthorizedWhenInUse(), result)
     }
 }

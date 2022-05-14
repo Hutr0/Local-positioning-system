@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E02A4826282D16D300EA7B87 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02A4825282D16D300EA7B87 /* Position.swift */; };
+		E02A4828282F4C1C00EA7B87 /* GettingInsideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02A4827282F4C1C00EA7B87 /* GettingInsideManager.swift */; };
 		E03A4F032817370D0087BD9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F022817370D0087BD9F /* AppDelegate.swift */; };
 		E03A4F052817370D0087BD9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F042817370D0087BD9F /* SceneDelegate.swift */; };
 		E03A4F0A2817370D0087BD9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03A4F082817370D0087BD9F /* Main.storyboard */; };
@@ -82,6 +83,7 @@
 
 /* Begin PBXFileReference section */
 		E02A4825282D16D300EA7B87 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
+		E02A4827282F4C1C00EA7B87 /* GettingInsideManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingInsideManager.swift; sourceTree = "<group>"; };
 		E03A4EFF2817370D0087BD9F /* Local positioning system.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Local positioning system.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03A4F022817370D0087BD9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E03A4F042817370D0087BD9F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				E0E31DDA281B586A00AD79C4 /* PhysMathManager.swift */,
 				E0E31DAA2819999D00AD79C4 /* Positioning */,
 				E0E31DAB281999AA00AD79C4 /* Analysis */,
+				E02A4827282F4C1C00EA7B87 /* GettingInsideManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				E03A4F052817370D0087BD9F /* SceneDelegate.swift in Sources */,
 				E0E31D9D28184DDC00AD79C4 /* MovementAnalysisManager.swift in Sources */,
 				E0E31DA7281982B900AD79C4 /* ScrollViewDelegate.swift in Sources */,
+				E02A4828282F4C1C00EA7B87 /* GettingInsideManager.swift in Sources */,
 				E02A4826282D16D300EA7B87 /* Position.swift in Sources */,
 				E0E31D8C281784AA00AD79C4 /* MotionData.swift in Sources */,
 				E0E31DB32819AEB300AD79C4 /* BuildingCoordinate.swift in Sources */,

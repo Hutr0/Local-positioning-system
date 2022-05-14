@@ -9,19 +9,17 @@ import UIKit
 import CoreLocation
 
 class UserManager {
-    lazy var buildingCoordinate = BuildingCoordinate()
-    
-    func getUserCoordinatesForMap(mapWidth: CGFloat, mapHeight: CGFloat, coordinates: CLLocationCoordinate2D) -> CGPoint {
+    func getUserCoordinatesForMap(mapWidth: CGFloat, mapHeight: CGFloat, coordinatesOfUser: CLLocationCoordinate2D, coordinatesOfBuilding: BuildingCoordinate) -> CGPoint {
         
-        let a = CGPoint(x: buildingCoordinate.leftBottom.longitude,
-                         y: buildingCoordinate.leftBottom.latitude)
-        let b = CGPoint(x: buildingCoordinate.leftTop.longitude,
-                         y: buildingCoordinate.leftTop.latitude)
-        let c = CGPoint(x: buildingCoordinate.rightTop.longitude,
-                         y: buildingCoordinate.rightTop.latitude)
-        let d = CGPoint(x: buildingCoordinate.rightBottom.longitude,
-                         y: buildingCoordinate.rightBottom.latitude)
-        let p = CGPoint(x: coordinates.longitude, y: coordinates.latitude)
+        let a = CGPoint(x: coordinatesOfBuilding.leftBottom.longitude,
+                         y: coordinatesOfBuilding.leftBottom.latitude)
+        let b = CGPoint(x: coordinatesOfBuilding.leftTop.longitude,
+                         y: coordinatesOfBuilding.leftTop.latitude)
+        let c = CGPoint(x: coordinatesOfBuilding.rightTop.longitude,
+                         y: coordinatesOfBuilding.rightTop.latitude)
+        let d = CGPoint(x: coordinatesOfBuilding.rightBottom.longitude,
+                         y: coordinatesOfBuilding.rightBottom.latitude)
+        let p = CGPoint(x: coordinatesOfUser.longitude, y: coordinatesOfUser.latitude)
         
         let sidesLength = calculateSidesLength(firstPoint: a, secondPoint: d)
         let angle = PhysMathManager.getAngle(oppositeCathet: sidesLength.y, hypotenuse: sidesLength.hypotenuse)
