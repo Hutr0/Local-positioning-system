@@ -10,10 +10,10 @@ import XCTest
 
 class BuildingManagerTests: XCTestCase {
 
-    var sut: BuildingManager!
+    var sut: BuildingDataManager!
     
     override func setUpWithError() throws {
-        sut = BuildingManager()
+        sut = BuildingDataManager()
     }
 
     override func tearDownWithError() throws {

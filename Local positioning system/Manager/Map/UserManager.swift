@@ -9,20 +9,17 @@ import UIKit
 import CoreLocation
 
 class UserManager {
-    func getUserCoordinatesForMap(mapWidth: CGFloat, mapHeight: CGFloat, coordinatesOfUser: CLLocationCoordinate2D, coordinatesOfBuilding: BuildingCoordinate) -> CGPoint {
+    func getUserCoordinatesForMap(mapWidth: CGFloat, mapHeight: CGFloat, coordinatesOfUser: CLLocationCoordinate2D) -> CGPoint {
         
-        let a = CGPoint(x: coordinatesOfBuilding.leftBottom.longitude,
-                         y: coordinatesOfBuilding.leftBottom.latitude)
-        let b = CGPoint(x: coordinatesOfBuilding.leftTop.longitude,
-                         y: coordinatesOfBuilding.leftTop.latitude)
-        let c = CGPoint(x: coordinatesOfBuilding.rightTop.longitude,
-                         y: coordinatesOfBuilding.rightTop.latitude)
-        let d = CGPoint(x: coordinatesOfBuilding.rightBottom.longitude,
-                         y: coordinatesOfBuilding.rightBottom.latitude)
+        let bm = BuildingManager.shared
+        
+        let a = bm.getValue(ofPoint: .a, in: .coordinate)
+        let b = bm.getValue(ofPoint: .b, in: .coordinate)
+        let c = bm.getValue(ofPoint: .c, in: .coordinate)
+        let d = bm.getValue(ofPoint: .d, in: .coordinate)
         let p = CGPoint(x: coordinatesOfUser.longitude, y: coordinatesOfUser.latitude)
         
-        let sidesLength = calculateSidesLength(firstPoint: a, secondPoint: d)
-        let angle = PhysMathManager.getAngle(oppositeCathet: sidesLength.y, hypotenuse: sidesLength.hypotenuse)
+        let angle = bm.getAngleOfBuilding()
         
         let newA = PhysMathManager.rotatePoint(pointToRotate: a, centerPoint: d, angleInDegrees: angle)
         let newB = PhysMathManager.rotatePoint(pointToRotate: b, centerPoint: d, angleInDegrees: angle)
@@ -71,14 +68,5 @@ class UserManager {
         let yCoordinatesOnMap = PhysMathManager.calculateNumberOnPercent(lowerPercent: percentFromBottom, highterNumber: mapHeight)
         
         return CGPoint(x:xCoordinatesOnMap , y: yCoordinatesOnMap)
-    }
-    
-    func calculateSidesLength(firstPoint: CGPoint, secondPoint: CGPoint) -> TriangleSides {
-        
-        let hypotenuse = PhysMathManager.calculateHypotenuse(firstPoint: firstPoint, secondPoint: secondPoint)
-        let x = max(firstPoint.x, secondPoint.x) - min(firstPoint.x, secondPoint.x)
-        let y = max(firstPoint.y, secondPoint.y) - min(firstPoint.y, secondPoint.y)
-        
-        return TriangleSides(x: x, y: y, hypotenuse: hypotenuse)
     }
 }

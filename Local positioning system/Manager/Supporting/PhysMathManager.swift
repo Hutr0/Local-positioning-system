@@ -10,6 +10,33 @@ import Accelerate
 
 class PhysMathManager {
     
+    static func calculateSidesLength(firstPoint: CGPoint, secondPoint: CGPoint) -> TriangleSides {
+        
+        let hypotenuse = PhysMathManager.calculateHypotenuse(firstPoint: firstPoint, secondPoint: secondPoint)
+        let x = max(firstPoint.x, secondPoint.x) - min(firstPoint.x, secondPoint.x)
+        let y = max(firstPoint.y, secondPoint.y) - min(firstPoint.y, secondPoint.y)
+        
+        return TriangleSides(x: x, y: y, hypotenuse: hypotenuse)
+    }
+    
+    static func rotateAttitude(value: Double, byAngle angle: Double) -> Double {
+        let a = 3.0
+        let i = 1.5
+        let oneDegree = i / 90
+        
+        var result = value + (oneDegree * angle)
+        
+        if result >= a {
+            let overValue = result - a
+            result = -a + overValue
+        } else if result <= -a {
+            let overValue = result + a
+            result = a - overValue
+        }
+        
+        return result
+    }
+    
     static func rotatePoint(pointToRotate: CGPoint, centerPoint: CGPoint, angleInDegrees: Double) -> CGPoint {
         
         let angleInRadians = angleInDegrees * (Double.pi / 180)

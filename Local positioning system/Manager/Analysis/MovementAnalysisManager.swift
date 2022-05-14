@@ -31,3 +31,4 @@ class MovementAnalysisManager {
         return Position(coordinates: CGPoint(x: x, y: z), speedX: speedX, speedZ: speedZ)
     }
 }
+

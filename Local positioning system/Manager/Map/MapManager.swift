@@ -9,8 +9,7 @@ import UIKit
 import CoreLocation
 
 class MapManager {
-    lazy var buildingCoordinates = BuildingCoordinate()
-    lazy var buildingArea = BuildingArea()
+    lazy var buildingCoordinates = BuildingManager.shared.buildingCoordinates
     
     lazy var locationServicesManager = LocationServicesManager.shared
     lazy var userManager = UserManager()
@@ -34,13 +33,12 @@ class MapManager {
             let completionHandler: ((CLLocationCoordinate2D) -> ()) = { [weak self] location in
                 guard let self = self else { return }
                 
-                let latitude = self.buildingCoordinates.enter.latitude
-                let longitude = self.buildingCoordinates.enter.longitude
+                let latitude = location.latitude
+                let longitude = location.longitude
                 
                 let point = self.userManager.getUserCoordinatesForMap(mapWidth: mapWidth,
                                                                       mapHeight: mapHeight,
-                                                                      coordinatesOfUser: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                                                                      coordinatesOfBuilding: self.buildingCoordinates)
+                                                                      coordinatesOfUser: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
                 
                 completionHandler(point)
             }
@@ -52,8 +50,7 @@ class MapManager {
             
             let point = userManager.getUserCoordinatesForMap(mapWidth: mapWidth,
                                                              mapHeight: mapHeight,
-                                                             coordinatesOfUser: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                                                             coordinatesOfBuilding: buildingCoordinates)
+                                                             coordinatesOfUser: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
             
             completionHandler(point)
         }
