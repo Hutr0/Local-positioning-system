@@ -15,7 +15,37 @@ class MovementAnalysisManager {
         let pitch: Double = motion.attitude.pitch
         let roll: Double = motion.attitude.roll
         
+        yaw = getNewYaw(yaw, fromHeading: heading)
+        
+        let x = currentPosition.x
+        let y = currentPosition.y
+        let z = currentPosition.z
+        
+        var acceleration = motion.userAcceleration
+        
+        acceleration = conversionAxes(byYaw: yaw, withAcceleration: acceleration)
+        acceleration = conversionAxes(byPitch: pitch, withAcceleration: acceleration, andWithGravityZ: motion.gravity.z)
+        acceleration = conversionAxes(byRoll: roll, withAcceleration: acceleration)
+        
+        var speedX: Double = currentPosition.speedX
+        var speedY: Double = currentPosition.speedY
+        var speedZ: Double = currentPosition.speedZ
+           
+        let newX = PhysMathManager.getNewPointValue(initialP: x, initialSpeed: speedX, time: time, acceleration: acceleration.x)
+        let newY = PhysMathManager.getNewPointValue(initialP: y, initialSpeed: speedY, time: time, acceleration: acceleration.y)
+        let newZ = PhysMathManager.getNewPointValue(initialP: z, initialSpeed: speedZ, time: time, acceleration: acceleration.z)
+        
+        speedX = PhysMathManager.getSpeed(initialSpeed: speedX, acceleration: acceleration.x, time: time)
+        speedY = PhysMathManager.getSpeed(initialSpeed: speedY, acceleration: acceleration.y, time: time)
+        speedZ = PhysMathManager.getSpeed(initialSpeed: speedZ, acceleration: acceleration.z, time: time)
+        
+        return Position(x: newX, y: newY, z: newZ, speedX: speedX, speedY: speedY, speedZ: speedZ)
+    }
+    
+    private func getNewYaw(_ yaw: Double, fromHeading heading: Double) -> Double {
+        var yaw: Double!
         let angleToBuilding = BuildingManager.shared.getAngleOfBuilding()
+        
         if heading >= 180 {
             let angleToNorth = 360 - heading
             let angle = angleToNorth - angleToBuilding
@@ -26,18 +56,90 @@ class MovementAnalysisManager {
             yaw = PhysMathManager.rotateAttitude(value: yaw, byAngle: angle)
         }
         
-        let x = currentPosition.x
-        let y = currentPosition.y
-        let z = currentPosition.z
+        return yaw
+    }
+    
+    private func conversionAxes(byYaw yaw: Double, withAcceleration acceleration: UserAcceleration) -> UserAcceleration {
+        var x = acceleration.x
+        var y = acceleration.y
+        let z = acceleration.z
         
-        var speedX: Double = currentPosition.speedX
-        var speedY: Double = currentPosition.speedY
-        var speedZ: Double = currentPosition.speedZ
+        if yaw <= 0 && yaw >= -1.5 {
+            let percent = (yaw * 100) / -1.5
+            x = x / 100 * (100 - percent) + y / 100 * percent
+            y = y / 100 * (100 - percent) - x / 100 * percent
+        } else if yaw <= -1.5 && yaw >= -3 {
+            let percent = ((yaw + 1.5) * 100) / -1.5
+            x = y / 100 * (100 - percent) - x / 100 * percent
+            y = -x / 100 * (100 - percent) - y / 100 * percent
+        } else if yaw >= 0 && yaw <= 1.5 {
+            let percent = (yaw * 100) / 1.5
+            x = -y / 100 * (100 - percent) + x / 100 * percent
+            y = x / 100 * (100 - percent) + y / 100 * percent
+        } else if yaw >= 1.5 && yaw <= 3 {
+            let percent = ((yaw - 1.5) * 100) / 1.5
+            x = -x / 100 * (100 - percent) - y / 100 * percent
+            y = -y / 100 * (100 - percent) + x / 100 * percent
+        }
         
-        let accelerationX = -motion.userAcceleration.x
-        let accelerationY = -motion.userAcceleration.y
-        let accelerationZ = -motion.userAcceleration.z
+        return UserAcceleration(x: x, y: y, z: z)
+    }
+    
+    private func conversionAxes(byPitch pitch: Double, withAcceleration acceleration: UserAcceleration, andWithGravityZ gravityZ: Double) -> UserAcceleration {
+        let x = acceleration.x
+        var y = acceleration.y
+        var z = acceleration.z
         
+        if pitch <= 0 && pitch >= -1.5 {
+            let percent = (pitch * 100) / -1.5
+            if gravityZ <= 0 {
+                y = y / 100 * (100 - percent) - z / 100 * percent
+                z = -z / 100 * (100 - percent) - y / 100 * percent
+            } else {
+                y = -z / 100 * percent - y / 100 * (100 - percent)
+                z = -y / 100 * percent + z / 100 * (100 - percent)
+            }
+        } else if pitch >= 0 && pitch <= 1.5 {
+            let percent = (pitch * 100) / 1.5
+            if gravityZ <= 0 {
+                y = z / 100 * percent + y / 100 * (100 - percent)
+                z = y / 100 * percent - z / 100 * (100 - percent)
+            } else {
+                y = -y / 100 * (100 - percent) + z / 100 * percent
+                z = z / 100 * (100 - percent) + y / 100 * percent
+            }
+        }
+        
+        return UserAcceleration(x: x, y: y, z: z)
+    }
+    
+    private func conversionAxes(byRoll roll: Double, withAcceleration acceleration: UserAcceleration) -> UserAcceleration {
+        var x = acceleration.x
+        let y = acceleration.y
+        var z = acceleration.z
+        
+        if roll >= 0 && roll <= 1.5 {
+            let percent = (roll * 100) / 1.5
+            z = -z / 100 * (100 - percent) - x / 100 * percent
+            x = -x / 100 * (100 - percent) + z / 100 * percent
+        } else if roll >= 1.5 && roll <= 3 {
+            let percent = ((roll - 1.5) * 100) / 1.5
+            z = -x / 100 * (100 - percent) + z / 100 * percent
+            x = -z / 100 * (100 - percent) + x / 100 * percent
+        } else if roll <= 0 && roll >= -1.5 {
+            let percent = (roll * 100) / -1.5
+            z = -z / 100 * (100 - percent) + x / 100 * percent
+            x = -x / 100 * (100 - percent) - z / 100 * percent
+        } else if roll <= -1.5 && roll >= -3 {
+            let percent = ((roll + 1.5) * 100) / -1.5
+            z = x / 100 * (100 - percent) + z / 100 * percent
+            x = -z / 100 * (100 - percent) + x / 100 * percent
+        }
+        
+        return UserAcceleration(x: x, y: y, z: z)
+    }
+}
+
 //        LocationServicesManager.shared.getCurrentMagneticHeading { magneticHeading in
 //            var heading: CLLocationDirection!
 //            if magneticHeading == nil {
@@ -99,25 +201,3 @@ class MovementAnalysisManager {
 //        result.coordinates = correctNewPointValue
 //
 //        return result
-        
-        return Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
-    }
-    
-//    func getNewPosition(currentPosition: Position, motion: MotionData, time: Double) -> Position {
-//        var speedX: Double = currentPosition.speedX
-//        var speedZ: Double = currentPosition.speedZ
-//        var x = currentPosition.coordinates.x
-//        var z = currentPosition.coordinates.y
-//        let accelerationX = -motion.userAcceleration.x
-//        let accelerationZ = -motion.userAcceleration.z
-//
-//        x = PhysMathManager.getNewPointValue(initialP: x, initialSpeed: speedX, time: time, acceleration: accelerationX)
-//        z = PhysMathManager.getNewPointValue(initialP: z, initialSpeed: speedZ, time: time, acceleration: accelerationZ)
-//
-//        speedX = PhysMathManager.getSpeed(initialSpeed: speedX, acceleration: accelerationX, time: time)
-//        speedZ = PhysMathManager.getSpeed(initialSpeed: speedZ, acceleration: accelerationZ, time: time)
-//
-//        return Position(coordinates: CGPoint(x: x, y: z), speedX: speedX, speedZ: speedZ)
-//    }
-}
-
