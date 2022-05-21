@@ -23,7 +23,7 @@ class MapManager {
             self.positioningManager.startRecordingMotions(pointOfStart: point, closure: closure)
         }
         
-       checkGettingInside(mapWidth: mapWidth, mapHeight: mapHeight, completionHandler: completionHandler)
+        checkGettingInside(mapWidth: mapWidth, mapHeight: mapHeight, completionHandler: completionHandler)
     }
     
     func checkGettingInside(mapWidth: CGFloat, mapHeight: CGFloat, completionHandler: @escaping (CGPoint) -> ()) {

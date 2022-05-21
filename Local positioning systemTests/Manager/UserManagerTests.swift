@@ -32,7 +32,7 @@ class UserManagerTests: XCTestCase {
     func testGetUserCoordinatesForMapWorksCorrectly1() {
         let mapWidth: CGFloat = 1400
         let mapHeight: CGFloat = 900
-        let coordinates = BuildingCoordinate().rightTop
+        let coordinates = BuildingCoordinates().rightTop
         
         let result = sut.getUserCoordinatesForMap(mapWidth: mapWidth, mapHeight: mapHeight, coordinates: coordinates)
         
@@ -45,7 +45,7 @@ class UserManagerTests: XCTestCase {
     func testGetUserCoordinatesForMapWorksCorrectly2() {
         let mapWidth: CGFloat = 1400
         let mapHeight: CGFloat = 900
-        let coordinates = BuildingCoordinate().leftBottom
+        let coordinates = BuildingCoordinates().leftBottom
         let result = sut.getUserCoordinatesForMap(mapWidth: mapWidth, mapHeight: mapHeight, coordinates: coordinates)
         
         XCTAssertGreaterThanOrEqual(result.x, 0)

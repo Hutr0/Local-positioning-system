@@ -8,7 +8,11 @@
 import UIKit
 
 struct Position {
-    var coordinates: CGPoint
+    var x: Double
+    var y: Double
+    var z: Double
+    
     var speedX: Double
+    var speedY: Double
     var speedZ: Double
 }

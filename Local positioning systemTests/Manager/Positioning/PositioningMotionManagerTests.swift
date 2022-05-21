@@ -11,10 +11,10 @@ import CoreMotion
 
 class PositioningMotionManagerTests: XCTestCase {
 
-    var sut: PositioningMotionManager!
+    var sut: MotionManager!
     
     override func setUpWithError() throws {
-        sut = PositioningMotionManager()
+        sut = MotionManager()
     }
 
     override func tearDownWithError() throws {

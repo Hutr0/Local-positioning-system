@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 
 class GettingInsideManager {
-    lazy var buildingCoordinates = BuildingCoordinate()
+    lazy var buildingCoordinates = BuildingCoordinates()
     lazy var buildingArea = BuildingArea()
     
     lazy var locationServicesManager = LocationServicesManager.shared

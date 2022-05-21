@@ -23,30 +23,35 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        let motion = MotionData(rotationRate: RotationRate(first: 1, second: 1, fird: 1), attitude: Attitude(roll: 1, pitch: -0.5, yaw:-2), userAcceleration: UserAcceleration(first: 1, second: 1, fird: 1), gravity: Gravity(first: 1, second: 1, fird: 1))
+//        TimerManager().startTimer(timeInterval: 0.1) {
+//            MovementAnalysisManager().getNewCoordinates(currentPosition: Position(coordinates: CGPoint(), speedX: 0, speedY: 0, speedZ: 0), motion: motion, time: 1)
+//        }
+        
         userX = self.user.frame.origin.x
         userY = self.user.frame.origin.y
-        
+
         viewModel = MainViewModel(map: map)
-        
+
         viewModel.configure(scrollView: scrollView) { [weak self] in
             guard let self = self, let userX = self.userX, let userY = self.userY else { return }
-            
+
             self.userConstraintToLeading.constant = userX * self.scrollView.zoomScale
             self.userConstraintToTop.constant = userY * self.scrollView.zoomScale
         }
-        
+
         viewModel.startPositioningUserOnMap(widht: map.frame.width, height: map.frame.height) { [weak self] point in
             guard let self = self else { return }
-            
+
             self.user.isHidden = false
-            
+
             let x = point.x
             let y = point.y
             let sizeOfUser = self.user.frame.size
-            
+
             self.userX = x
             self.userY = y
-            
+
             self.user.layer.frame = CGRect(x: x * self.scrollView.zoomScale,
                                            y: y * self.scrollView.zoomScale,
                                            width: sizeOfUser.width, height: sizeOfUser.height)

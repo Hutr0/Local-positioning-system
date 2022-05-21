@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct BuildingCoordinate: BuildingProtocol {
+struct BuildingCoordinates: BuildingProtocol {
     let buildingManager = BuildingDataManager()
     
     var leftBottom: CLLocationCoordinate2D

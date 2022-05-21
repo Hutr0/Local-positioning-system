@@ -8,7 +8,7 @@
 import Foundation
 import CoreMotion
 
-class PositioningMotionManager {
+class MotionManager {
     
     let motionManager = CMMotionManager()
     

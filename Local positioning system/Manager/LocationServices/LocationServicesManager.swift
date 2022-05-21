@@ -47,4 +47,23 @@ class LocationServicesManager {
                 print("New cases was added")
         }
     }
+    
+    func getCurrentMagneticHeading(onCompletion completion: @escaping (CLLocationDirection?) -> ()) {
+        guard CLLocationManager.headingAvailable() else {
+            AlertManager.showAlert(title: "Heading is not available", message: "Your current angle to north will set to zero")
+            completion(nil)
+            return
+        }
+        
+        let completionHeading: ((CLHeading) -> ()) = { [weak self] heading in
+            guard let self = self else { return }
+            
+            completion(heading.magneticHeading)
+            self.locationManager.stopUpdatingHeading()
+        }
+        
+        guard let lmd = locationManager.delegate as? LocationManagerDelegate else { return }
+        lmd.completionHeading = completionHeading
+        locationManager.startUpdatingHeading()
+    }
 }

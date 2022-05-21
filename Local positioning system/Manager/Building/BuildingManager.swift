@@ -13,7 +13,7 @@ class BuildingManager {
     
     private init() {}
     
-    lazy var buildingCoordinates = BuildingCoordinate()
+    lazy var buildingCoordinates = BuildingCoordinates()
     lazy var buildingArea = BuildingArea()
     
     func getAngleOfBuilding() -> Double {

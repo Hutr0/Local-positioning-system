@@ -8,8 +8,8 @@
 import Foundation
 
 class TimerManager {
-    var timer: Timer!
-    var closure: (() -> ())!
+    private var timer: Timer!
+    private var closure: (() -> ())!
     
     func startTimer(timeInterval: TimeInterval, closure: @escaping () -> ()) {
         self.closure = closure
@@ -20,7 +20,7 @@ class TimerManager {
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(timerMethod), userInfo: nil, repeats: true)
     }
     
-    @objc func timerMethod() {
+    @objc private func timerMethod() {
         closure()
     }
     

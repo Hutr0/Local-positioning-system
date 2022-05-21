@@ -12,6 +12,7 @@ class LocationManagerDelegate: NSObject, CLLocationManagerDelegate {
     
     var locationServicesManager: LocationServicesManager!
     var completionHandler: ((CLLocation) -> ())?
+    var completionHeading: ((CLHeading) -> ())?
     
     init(locationServicesManager: LocationServicesManager) {
         self.locationServicesManager = locationServicesManager
@@ -25,6 +26,11 @@ class LocationManagerDelegate: NSObject, CLLocationManagerDelegate {
         guard let location = locations.first, let completionHandler = completionHandler else { return }
         completionHandler(location)
 //        completionHandler(CLLocation(latitude: 55.672423427107134, longitude: 37.47909789405624))
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        guard let completion = completionHeading else { return }
+        completion(newHeading)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
