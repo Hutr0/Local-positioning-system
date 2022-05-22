@@ -23,6 +23,7 @@
 		E03A4F29281737100087BD9F /* Local_positioning_systemUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F28281737100087BD9F /* Local_positioning_systemUITestsLaunchTests.swift */; };
 		E048190228399C6100277707 /* GettingInsideManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E048190128399C6000277707 /* GettingInsideManagerTests.swift */; };
 		E04819042839C3DF00277707 /* MotionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04819032839C3DF00277707 /* MotionManagerTests.swift */; };
+		E073C163283A32B700EDD113 /* BuildingDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E073C162283A32B700EDD113 /* BuildingDataManagerTests.swift */; };
 		E08EAE6F281747A5005F6A69 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EAE6E281747A5005F6A69 /* MainViewController.swift */; };
 		E08EAE71281747D6005F6A69 /* MainViewCotrollerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EAE70281747D6005F6A69 /* MainViewCotrollerTests.swift */; };
 		E08EAE7328174866005F6A69 /* PositioningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EAE7228174866005F6A69 /* PositioningManager.swift */; };
@@ -93,7 +94,6 @@
 		E02A482B2830613600EA7B87 /* BuildingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingManager.swift; sourceTree = "<group>"; };
 		E02A482D2830633200EA7B87 /* BuildingEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingEnums.swift; sourceTree = "<group>"; };
 		E02CDFD42839946400DE72B2 /* AlertManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManagerTests.swift; sourceTree = "<group>"; };
-		E02CDFD6283994DC00DE72B2 /* BuildingDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingDataManagerTests.swift; sourceTree = "<group>"; };
 		E03A4EFF2817370D0087BD9F /* Local positioning system.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Local positioning system.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03A4F022817370D0087BD9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E03A4F042817370D0087BD9F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +108,7 @@
 		E03A4F28281737100087BD9F /* Local_positioning_systemUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Local_positioning_systemUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E048190128399C6000277707 /* GettingInsideManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingInsideManagerTests.swift; sourceTree = "<group>"; };
 		E04819032839C3DF00277707 /* MotionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManagerTests.swift; sourceTree = "<group>"; };
+		E073C162283A32B700EDD113 /* BuildingDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingDataManagerTests.swift; sourceTree = "<group>"; };
 		E08EAE6E281747A5005F6A69 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E08EAE70281747D6005F6A69 /* MainViewCotrollerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCotrollerTests.swift; sourceTree = "<group>"; };
 		E08EAE7228174866005F6A69 /* PositioningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositioningManager.swift; sourceTree = "<group>"; };
@@ -238,7 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				E0E31DC02819DAD300AD79C4 /* BuildingManagerTests.swift */,
-				E02CDFD6283994DC00DE72B2 /* BuildingDataManagerTests.swift */,
+				E073C162283A32B700EDD113 /* BuildingDataManagerTests.swift */,
 			);
 			path = Building;
 			sourceTree = "<group>";
@@ -695,6 +696,7 @@
 				E0E31DC52819E18A00AD79C4 /* LocationManagerDelegateTests.swift in Sources */,
 				E0E31DD9281AF56D00AD79C4 /* UserManagerTests.swift in Sources */,
 				E04819042839C3DF00277707 /* MotionManagerTests.swift in Sources */,
+				E073C163283A32B700EDD113 /* BuildingDataManagerTests.swift in Sources */,
 				E0E31D902818056500AD79C4 /* ReducingInaccuracyManagerTests.swift in Sources */,
 				E0E31DBD2819D90900AD79C4 /* BuildingAreaTests.swift in Sources */,
 				E0E31DB72819B18100AD79C4 /* BuildingCoordinateTests.swift in Sources */,
