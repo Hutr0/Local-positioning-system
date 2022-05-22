@@ -25,7 +25,7 @@ struct BuildingCoordinates: BuildingProtocol {
         rightTop = CLLocationCoordinate2D()
         enter = CLLocationCoordinate2D()
         
-        let coordinates = buildingManager.getCoordinatesFromPlist(of: .coordinate)
+        let coordinates = buildingManager.getCoordinatesFromPlist(of: .coordinates)
         
         if !coordinates.isEmpty {
             for coordinate in coordinates {

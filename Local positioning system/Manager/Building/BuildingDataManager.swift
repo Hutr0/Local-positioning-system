@@ -16,7 +16,7 @@ class BuildingDataManager {
         
         var type: String
         switch buildingType {
-        case .coordinate:
+        case .coordinates:
             type = "Building coordinate"
         case .area:
             type = "Area coordinate"

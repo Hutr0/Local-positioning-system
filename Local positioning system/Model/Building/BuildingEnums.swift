@@ -12,6 +12,6 @@ enum BuildingPointName {
 }
 
 enum BuildingType {
-    case coordinate
+    case coordinates
     case area
 }

@@ -13,10 +13,10 @@ class UserManager {
         
         let bm = BuildingManager.shared
         
-        let a = bm.getValue(ofPoint: .a, in: .coordinate)
-        let b = bm.getValue(ofPoint: .b, in: .coordinate)
-        let c = bm.getValue(ofPoint: .c, in: .coordinate)
-        let d = bm.getValue(ofPoint: .d, in: .coordinate)
+        let a = bm.getValue(ofPoint: .a, in: .coordinates)
+        let b = bm.getValue(ofPoint: .b, in: .coordinates)
+        let c = bm.getValue(ofPoint: .c, in: .coordinates)
+        let d = bm.getValue(ofPoint: .d, in: .coordinates)
         let p = CGPoint(x: coordinatesOfUser.longitude, y: coordinatesOfUser.latitude)
         
         let angle = bm.getAngleOfBuilding()
@@ -29,13 +29,13 @@ class UserManager {
         
         let maxWidth = max(newC.x, newD.x) - min(newA.x, newB.x)
         let minWidth = min(newC.x, newD.x) - max(newA.x, newB.x)
-        var maxPercentToTrailing = PhysMathManager.calculatePercent(number: max(newD.x, newC.x) - newP.x, hundredPercentNumber: maxWidth)
-        var minPercentToTrailing = PhysMathManager.calculatePercent(number: min(newD.x, newC.x) - newP.x, hundredPercentNumber: minWidth)
+        var maxPercentToTrailing = PhysMathManager.calculatePercent(ofNumber: max(newD.x, newC.x) - newP.x, fromHundredPercentNumber: maxWidth)
+        var minPercentToTrailing = PhysMathManager.calculatePercent(ofNumber: min(newD.x, newC.x) - newP.x, fromHundredPercentNumber: minWidth)
         
         let maxHeight = max(newB.y, newC.y) - min(newA.y, newD.y)
         let minHeight = min(newB.y, newC.y) - max(newA.y, newD.y)
-        var maxPercentToTop = PhysMathManager.calculatePercent(number: max(newB.y, newC.y) - newP.y, hundredPercentNumber: maxHeight)
-        var minPercentToTop = PhysMathManager.calculatePercent(number: min(newB.y, newC.y) - newP.y, hundredPercentNumber: minHeight)
+        var maxPercentToTop = PhysMathManager.calculatePercent(ofNumber: max(newB.y, newC.y) - newP.y, fromHundredPercentNumber: maxHeight)
+        var minPercentToTop = PhysMathManager.calculatePercent(ofNumber: min(newB.y, newC.y) - newP.y, fromHundredPercentNumber: minHeight)
         
         if maxPercentToTrailing > 100 { maxPercentToTrailing = 100 }
         if minPercentToTrailing < 0 { minPercentToTrailing = 0 }
@@ -64,8 +64,8 @@ class UserManager {
         let percentFromBeginning = 100 - percentToTrailing
         let percentFromBottom = 100 - percentToTop
         
-        let xCoordinatesOnMap = PhysMathManager.calculateNumberOnPercent(lowerPercent: percentFromBeginning, highterNumber: mapWidth)
-        let yCoordinatesOnMap = PhysMathManager.calculateNumberOnPercent(lowerPercent: percentFromBottom, highterNumber: mapHeight)
+        let xCoordinatesOnMap = PhysMathManager.calculateNumber(lowerPercent: percentFromBeginning, highterNumber: mapWidth)
+        let yCoordinatesOnMap = PhysMathManager.calculateNumber(lowerPercent: percentFromBottom, highterNumber: mapHeight)
         
         return CGPoint(x:xCoordinatesOnMap , y: yCoordinatesOnMap)
     }

@@ -17,10 +17,10 @@ class BuildingManager {
     lazy var buildingArea = BuildingArea()
     
     func getAngleOfBuilding() -> Double {
-        let a = self.getValue(ofPoint: .a, in: .coordinate)
-        let d = self.getValue(ofPoint: .d, in: .coordinate)
+        let a = self.getValue(ofPoint: .a, in: .coordinates)
+        let d = self.getValue(ofPoint: .d, in: .coordinates)
         
-        let sidesLength = PhysMathManager.calculateSidesLength(firstPoint: a, secondPoint: d)
+        let sidesLength = PhysMathManager.calculateTriangleSidesLength(firstPoint: a, secondPoint: d)
         let angle = PhysMathManager.getAngle(oppositeCathet: sidesLength.y, hypotenuse: sidesLength.hypotenuse)
         
         return angle
@@ -30,7 +30,7 @@ class BuildingManager {
         var p = CGPoint()
         
         switch type {
-        case .coordinate:
+        case .coordinates:
             switch point {
             case .a:
                 p = CGPoint(x: buildingCoordinates.leftBottom.longitude,

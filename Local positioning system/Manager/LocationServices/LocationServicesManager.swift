@@ -22,7 +22,7 @@ class LocationServicesManager {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             checkLocationAutorization()
             
-            locationManagerDelegate = LocationManagerDelegate(locationServicesManager: self)
+            locationManagerDelegate = LocationManagerDelegate()
             locationManager.delegate = locationManagerDelegate
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now()) {

@@ -10,13 +10,9 @@ import CoreLocation
 
 class LocationManagerDelegate: NSObject, CLLocationManagerDelegate {
     
-    var locationServicesManager: LocationServicesManager!
+    lazy var locationServicesManager = LocationServicesManager.shared
     var completionHandler: ((CLLocation) -> ())?
     var completionHeading: ((CLHeading) -> ())?
-    
-    init(locationServicesManager: LocationServicesManager) {
-        self.locationServicesManager = locationServicesManager
-    }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         locationServicesManager.checkLocationAutorization()

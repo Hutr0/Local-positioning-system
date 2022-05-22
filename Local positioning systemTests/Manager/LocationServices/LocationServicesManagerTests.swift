@@ -14,14 +14,14 @@ class LocationServicesManagerTests: XCTestCase {
     var sut: LocationServicesManager!
     
     override func setUpWithError() throws {
-        sut = LocationServicesManager()
+        sut = LocationServicesManager.shared
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
     
-    func testCheckLocationServicesSetsDesiredAccuracyOnkCLLocationAccuracyBestIfLocationServicesEnabled() {
+    func testCheckLocationServicesSetsDesiredAccuracyOnCLLocationAccuracyBestIfLocationServicesEnabled() {
         sut.checkLocationServices()
         
         if CLLocationManager.locationServicesEnabled() {
@@ -30,11 +30,31 @@ class LocationServicesManagerTests: XCTestCase {
     }
     
     func testCheckLocationServicesStartCheckLocationAutorizationIfLocationServicesEnabled() {
-        sut = MockLocationServicesManager()
+        sut = MockLocationServicesManager.shared
         sut.checkLocationServices()
         
         if CLLocationManager.locationServicesEnabled() {
             XCTAssertTrue((sut as! MockLocationServicesManager).isInside)
+        }
+    }
+    
+    func testGetCurrentMagneticHeadingWorksCorrectly() {
+        let expectation = expectation(description: "Test after zero point one seconds")
+        var value: CLLocationDirection?
+        
+        sut.getCurrentMagneticHeading { dir in
+            value = dir
+        }
+        
+        if CLLocationManager.headingAvailable() {
+            let result = XCTWaiter.wait(for: [expectation], timeout: 0.1)
+            if result == XCTWaiter.Result.timedOut {
+                XCTAssertNotNil(value)
+            } else {
+                XCTFail("Delay interrupted")
+            }
+        } else {
+            XCTAssertNil(value)
         }
     }
 }

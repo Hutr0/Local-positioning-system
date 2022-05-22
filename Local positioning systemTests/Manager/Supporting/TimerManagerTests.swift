@@ -37,10 +37,19 @@ class TimerManagerTests: XCTestCase {
     }
 
     func testStopTimerStopsTimer() {
-        sut.startTimer(timeInterval: 0.5) {}
+        let expectation = expectation(description: "Test after zero point twelve")
+        var isInside = false
+        sut.startTimer(timeInterval: 0.1) {
+            isInside = true
+        }
         sut.stopTimer()
         
-        XCTAssertTrue(sut.timer.fireDate < .now)
+        let result = XCTWaiter.wait(for: [expectation], timeout: 0.12)
+        if result == XCTWaiter.Result.timedOut {
+            XCTAssertFalse(isInside)
+        } else {
+            XCTFail("Delay interrupted")
+        }
     }
     
     func testStartTimerMultiplyDontStartsTimer() {

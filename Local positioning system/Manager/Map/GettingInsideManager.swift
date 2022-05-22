@@ -9,64 +9,27 @@ import Foundation
 import CoreLocation
 
 class GettingInsideManager {
-    lazy var buildingCoordinates = BuildingCoordinates()
-    lazy var buildingArea = BuildingArea()
     
     lazy var locationServicesManager = LocationServicesManager.shared
-    lazy var timerManager = TimerManager()
+    lazy var buildingCoordinates = BuildingCoordinates()
     
     func startDetectionGettingInside(completionHandler: @escaping (CLLocationCoordinate2D) -> ()) {
         let completion: ((CLLocation) -> ()) = { [weak self] location in
             guard let self = self else { return }
             
-            self.getCurrentUserLocation() { location in
-                let isInside = self.checkGettingInside(in: self.buildingCoordinates, userLocation: location)
+//            self.getCurrentUserLocation() { location in
+            let isInside = self.checkGettingInside(in: self.buildingCoordinates, userLocation: location.coordinate)
                 
                 if isInside {
-                    completionHandler(location)
+                    completionHandler(location.coordinate)
                     self.locationServicesManager.locationManager.stopUpdatingLocation()
                 }
-            }
+//            }
         }
         
         setCompletionToLocationManagerDelegate(completion: completion)
         locationServicesManager.locationManager.startUpdatingLocation()
     }
-    
-//    func startDetectionGettingInsideBuilding(completionHandler: @escaping (CLLocationCoordinate2D) -> ()) {
-//        timerManager.startTimer(timeInterval: 1) { [weak self] in
-//            guard let self = self else { return }
-//
-//            self.getCurrentUserLocation() { location in
-//                let isInArea = self.checkGettingInside(in: self.buildingArea, userLocation: location)
-//                if !isInArea {
-//                    self.timerManager.stopTimer()
-//                    self.startDetectionGettingInside(completionHandler: completionHandler)
-//                }
-//
-//                let isInside = self.checkGettingInside(in: self.buildingCoordinates, userLocation: location)
-//                if isInside {
-//                    self.timerManager.stopTimer()
-//
-//
-////                    let closure: ((CLLocation) -> ()) = { loc in
-////                        completionHandler(loc.coordinate)
-////
-////                        if !self.checkGettingInside(in: self.buildingCoordinates, userLocation: loc) {
-////                            self.locationServicesManager.locationManager.stopUpdatingLocation()
-////                            self.positioningManager.positioningMotionManager.stopDeviceMotionUpdate()
-////                            self.startDetectionGettingInsideBuilding()
-////                        }
-////                    }
-//
-////                    self.setCompletionToLocationManagerDelegate(completion: completionHandler)
-////                    self.locationServicesManager.locationManager.startUpdatingLocation()
-//
-////                    self.positioningManager.startRecordingMotions(coordinatesOfStart: location, closure: closure)
-//                }
-//            }
-//        }
-//    }
     
     func checkGettingInside(in coordinates: BuildingProtocol, userLocation: CLLocationCoordinate2D) -> Bool {
         let lb = coordinates.leftBottom
@@ -101,10 +64,6 @@ class GettingInsideManager {
         return (secondX - firstX) * (pointY - firstY) - (secondY - firstY) * (pointX - firstX)
     }
     
-//    func stopDetectionGettingInsideArea() {
-//        timerManager.stopTimer()
-//    }
-    
     func setCompletionToLocationManagerDelegate(completion: @escaping (CLLocation) -> ()) {
         let delegate = locationServicesManager.locationManager.delegate
         guard delegate != nil else { return }
@@ -112,16 +71,16 @@ class GettingInsideManager {
         (delegate as! LocationManagerDelegate).completionHandler = completion
     }
     
-    func getCurrentUserLocation(completion: @escaping (CLLocationCoordinate2D) -> ()) {
-        let completion: ((CLLocation) -> ()) = { location in
-            completion(location.coordinate)
-        }
-
-        setCompletionToLocationManagerDelegate(completion: completion)
-
-        locationServicesManager.locationManager.requestLocation()
-        
-//        let coord = CLLocationCoordinate2D(latitude: 55.67240880567305, longitude: 37.47905855501432)
-//        completion(coord)
-    }
+//    func getCurrentUserLocation(completion: @escaping (CLLocationCoordinate2D) -> ()) {
+//        let completion: ((CLLocation) -> ()) = { location in
+//            completion(location.coordinate)
+//        }
+//
+//        setCompletionToLocationManagerDelegate(completion: completion)
+//
+//        locationServicesManager.locationManager.requestLocation()
+//
+////        let coord = CLLocationCoordinate2D(latitude: 55.67240880567305, longitude: 37.47905855501432)
+////        completion(coord)
+//    }
 }

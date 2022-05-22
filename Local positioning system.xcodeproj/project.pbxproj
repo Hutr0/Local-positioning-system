@@ -12,6 +12,7 @@
 		E02A482A282FC46700EA7B87 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02A4829282FC46700EA7B87 /* AlertManager.swift */; };
 		E02A482C2830613600EA7B87 /* BuildingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02A482B2830613600EA7B87 /* BuildingManager.swift */; };
 		E02A482E2830633200EA7B87 /* BuildingEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02A482D2830633200EA7B87 /* BuildingEnums.swift */; };
+		E02CDFD52839946400DE72B2 /* AlertManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02CDFD42839946400DE72B2 /* AlertManagerTests.swift */; };
 		E03A4F032817370D0087BD9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F022817370D0087BD9F /* AppDelegate.swift */; };
 		E03A4F052817370D0087BD9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F042817370D0087BD9F /* SceneDelegate.swift */; };
 		E03A4F0A2817370D0087BD9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03A4F082817370D0087BD9F /* Main.storyboard */; };
@@ -20,10 +21,11 @@
 		E03A4F122817370F0087BD9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03A4F102817370F0087BD9F /* LaunchScreen.storyboard */; };
 		E03A4F27281737100087BD9F /* Local_positioning_systemUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F26281737100087BD9F /* Local_positioning_systemUITests.swift */; };
 		E03A4F29281737100087BD9F /* Local_positioning_systemUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F28281737100087BD9F /* Local_positioning_systemUITestsLaunchTests.swift */; };
+		E048190228399C6100277707 /* GettingInsideManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E048190128399C6000277707 /* GettingInsideManagerTests.swift */; };
 		E08EAE6F281747A5005F6A69 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EAE6E281747A5005F6A69 /* MainViewController.swift */; };
 		E08EAE71281747D6005F6A69 /* MainViewCotrollerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EAE70281747D6005F6A69 /* MainViewCotrollerTests.swift */; };
 		E08EAE7328174866005F6A69 /* PositioningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EAE7228174866005F6A69 /* PositioningManager.swift */; };
-		E08EAE75281748F3005F6A69 /* PositioningMotionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EAE74281748F3005F6A69 /* PositioningMotionManagerTests.swift */; };
+		E08EAE75281748F3005F6A69 /* MotionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EAE74281748F3005F6A69 /* MotionManagerTests.swift */; };
 		E08EAE7C281749F3005F6A69 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EAE7B281749F3005F6A69 /* MainViewModel.swift */; };
 		E08EAE7E28174A0C005F6A69 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08EAE7D28174A0C005F6A69 /* MainViewModelTests.swift */; };
 		E0E31D802817782C00AD79C4 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E31D7F2817782C00AD79C4 /* MotionManager.swift */; };
@@ -90,6 +92,8 @@
 		E02A4829282FC46700EA7B87 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		E02A482B2830613600EA7B87 /* BuildingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingManager.swift; sourceTree = "<group>"; };
 		E02A482D2830633200EA7B87 /* BuildingEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingEnums.swift; sourceTree = "<group>"; };
+		E02CDFD42839946400DE72B2 /* AlertManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManagerTests.swift; sourceTree = "<group>"; };
+		E02CDFD6283994DC00DE72B2 /* BuildingDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingDataManagerTests.swift; sourceTree = "<group>"; };
 		E03A4EFF2817370D0087BD9F /* Local positioning system.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Local positioning system.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03A4F022817370D0087BD9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E03A4F042817370D0087BD9F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,10 +106,11 @@
 		E03A4F22281737100087BD9F /* Local positioning systemUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Local positioning systemUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03A4F26281737100087BD9F /* Local_positioning_systemUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Local_positioning_systemUITests.swift; sourceTree = "<group>"; };
 		E03A4F28281737100087BD9F /* Local_positioning_systemUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Local_positioning_systemUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E048190128399C6000277707 /* GettingInsideManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingInsideManagerTests.swift; sourceTree = "<group>"; };
 		E08EAE6E281747A5005F6A69 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E08EAE70281747D6005F6A69 /* MainViewCotrollerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCotrollerTests.swift; sourceTree = "<group>"; };
 		E08EAE7228174866005F6A69 /* PositioningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositioningManager.swift; sourceTree = "<group>"; };
-		E08EAE74281748F3005F6A69 /* PositioningMotionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositioningMotionManagerTests.swift; sourceTree = "<group>"; };
+		E08EAE74281748F3005F6A69 /* MotionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManagerTests.swift; sourceTree = "<group>"; };
 		E08EAE7B281749F3005F6A69 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		E08EAE7D28174A0C005F6A69 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		E0E31D7F2817782C00AD79C4 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
@@ -209,6 +214,43 @@
 				E0E31DC62819E35600AD79C4 /* LocationServicesManager.swift */,
 			);
 			path = LocationServices;
+			sourceTree = "<group>";
+		};
+		E02CDFD02839821200DE72B2 /* LocationServices */ = {
+			isa = PBXGroup;
+			children = (
+				E0E31DC82819E36F00AD79C4 /* LocationServicesManagerTests.swift */,
+			);
+			path = LocationServices;
+			sourceTree = "<group>";
+		};
+		E02CDFD1283988EB00DE72B2 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				E0E31DB02819AD9400AD79C4 /* MapManagerTests.swift */,
+				E048190128399C6000277707 /* GettingInsideManagerTests.swift */,
+				E0E31DD8281AF56D00AD79C4 /* UserManagerTests.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		E02CDFD22839890600DE72B2 /* Building */ = {
+			isa = PBXGroup;
+			children = (
+				E0E31DC02819DAD300AD79C4 /* BuildingManagerTests.swift */,
+				E02CDFD6283994DC00DE72B2 /* BuildingDataManagerTests.swift */,
+			);
+			path = Building;
+			sourceTree = "<group>";
+		};
+		E02CDFD32839893200DE72B2 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				E0E31DCC2819F4C300AD79C4 /* TimerManagerTests.swift */,
+				E0E31DDC281B593800AD79C4 /* PhysMathManagerTests.swift */,
+				E02CDFD42839946400DE72B2 /* AlertManagerTests.swift */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 		E03A4EF62817370D0087BD9F = {
@@ -323,14 +365,12 @@
 		E08EAE7F28174C8E005F6A69 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				E0E31DB02819AD9400AD79C4 /* MapManagerTests.swift */,
-				E0E31DD8281AF56D00AD79C4 /* UserManagerTests.swift */,
-				E0E31DC02819DAD300AD79C4 /* BuildingManagerTests.swift */,
-				E0E31DC82819E36F00AD79C4 /* LocationServicesManagerTests.swift */,
-				E0E31DCC2819F4C300AD79C4 /* TimerManagerTests.swift */,
-				E0E31DDC281B593800AD79C4 /* PhysMathManagerTests.swift */,
+				E02CDFD1283988EB00DE72B2 /* Map */,
 				E0E31DAE2819AD7500AD79C4 /* Positioning */,
 				E0E31DAF2819AD8000AD79C4 /* Analysis */,
+				E02CDFD22839890600DE72B2 /* Building */,
+				E02CDFD02839821200DE72B2 /* LocationServices */,
+				E02CDFD32839893200DE72B2 /* Supporting */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -392,7 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				E0E31D812817785E00AD79C4 /* PositioningManagerTests.swift */,
-				E08EAE74281748F3005F6A69 /* PositioningMotionManagerTests.swift */,
+				E08EAE74281748F3005F6A69 /* MotionManagerTests.swift */,
 				E0E31D8F2818056500AD79C4 /* ReducingInaccuracyManagerTests.swift */,
 			);
 			path = Positioning;
@@ -642,12 +682,14 @@
 				E0E31D9428182DE200AD79C4 /* AttitudeTests.swift in Sources */,
 				E0E31DCD2819F4C300AD79C4 /* TimerManagerTests.swift in Sources */,
 				E0E31D822817785E00AD79C4 /* PositioningManagerTests.swift in Sources */,
+				E02CDFD52839946400DE72B2 /* AlertManagerTests.swift in Sources */,
+				E048190228399C6100277707 /* GettingInsideManagerTests.swift in Sources */,
 				E0E31DC92819E36F00AD79C4 /* LocationServicesManagerTests.swift in Sources */,
 				E0E31DDD281B593800AD79C4 /* PhysMathManagerTests.swift in Sources */,
 				E08EAE71281747D6005F6A69 /* MainViewCotrollerTests.swift in Sources */,
 				E0E31D9F28184DEE00AD79C4 /* MovementAnalysisManagerTests.swift in Sources */,
 				E0E31DC12819DAD300AD79C4 /* BuildingManagerTests.swift in Sources */,
-				E08EAE75281748F3005F6A69 /* PositioningMotionManagerTests.swift in Sources */,
+				E08EAE75281748F3005F6A69 /* MotionManagerTests.swift in Sources */,
 				E0E31D9A2818312100AD79C4 /* GravityTests.swift in Sources */,
 				E0E31D9828182FB300AD79C4 /* UserAccelerationTests.swift in Sources */,
 				E0E31DA9281982FE00AD79C4 /* ScrollViewDelegateTests.swift in Sources */,

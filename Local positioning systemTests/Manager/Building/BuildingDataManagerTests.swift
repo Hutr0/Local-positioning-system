@@ -8,7 +8,7 @@
 import XCTest
 @testable import Local_positioning_system
 
-class BuildingManagerTests: XCTestCase {
+class BuildingDataManagerTests: XCTestCase {
 
     var sut: BuildingDataManager!
     

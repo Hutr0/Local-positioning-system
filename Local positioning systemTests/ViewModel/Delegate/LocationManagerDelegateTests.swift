@@ -14,20 +14,25 @@ class LocationManagerDelegateTests: XCTestCase {
     var sut: LocationManagerDelegate!
 
     override func setUpWithError() throws {
-        sut = LocationManagerDelegate(locationServicesManager: LocationServicesManager())
+        sut = LocationManagerDelegate()
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
     
-    func testMapManagerNotNilAfterInit() {
+    func testLocationServicesManagerNotNilAfterInit() {
         XCTAssertNotNil(sut.locationServicesManager)
     }
     
     func testCompletionHandlerNotNilAfterSet() {
         sut.completionHandler = { _ in }
         XCTAssertNotNil(sut.completionHandler)
+    }
+    
+    func testCompletionHeadingNotNilAfterSet() {
+        sut.completionHandler = { _ in }
+        XCTAssertNotNil(sut.completionHeading)
     }
     
     func testUpdateLocationCallsCompletionHandler() {
@@ -51,5 +56,16 @@ class LocationManagerDelegateTests: XCTestCase {
         sut.locationManager(CLLocationManager(), didUpdateLocations: [startLocation])
         
         XCTAssertEqual(location, startLocation)
+    }
+    
+    func testUpdateHeadingCallsCompletionHeading() {
+        var isCalled = false
+        sut.completionHeading = { _ in
+            isCalled = true
+        }
+        
+        sut.locationManager(sut.locationServicesManager.locationManager, didUpdateHeading: CLHeading())
+        
+        XCTAssertTrue(isCalled)
     }
 }

@@ -23,11 +23,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let motion = MotionData(rotationRate: RotationRate(first: 1, second: 1, fird: 1), attitude: Attitude(roll: 1, pitch: -0.5, yaw:-2), userAcceleration: UserAcceleration(first: 1, second: 1, fird: 1), gravity: Gravity(first: 1, second: 1, fird: 1))
-//        TimerManager().startTimer(timeInterval: 0.1) {
-//            MovementAnalysisManager().getNewCoordinates(currentPosition: Position(coordinates: CGPoint(), speedX: 0, speedY: 0, speedZ: 0), motion: motion, time: 1)
-//        }
-        
         userX = self.user.frame.origin.x
         userY = self.user.frame.origin.y
 

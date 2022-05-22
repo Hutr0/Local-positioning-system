@@ -49,11 +49,11 @@ class MovementAnalysisManager {
         if heading >= 180 {
             let angleToNorth = 360 - heading
             let angle = angleToNorth - angleToBuilding
-            yaw = PhysMathManager.rotateAttitude(value: yaw, byAngle: -angle)
+            yaw = PhysMathManager.rotateYaw(withValue: yaw, byAngle: -angle)
         } else {
             let angleToNorth: Double = heading
             let angle = angleToNorth - angleToBuilding
-            yaw = PhysMathManager.rotateAttitude(value: yaw, byAngle: angle)
+            yaw = PhysMathManager.rotateYaw(withValue: yaw, byAngle: angle)
         }
         
         return yaw
