@@ -30,11 +30,10 @@ class LocationServicesManagerTests: XCTestCase {
     }
     
     func testCheckLocationServicesStartCheckLocationAutorizationIfLocationServicesEnabled() {
-        sut = MockLocationServicesManager.shared
         sut.checkLocationServices()
         
         if CLLocationManager.locationServicesEnabled() {
-            XCTAssertTrue((sut as! MockLocationServicesManager).isInside)
+            XCTAssertNotNil(sut.locationManager.delegate)
         }
     }
     
@@ -55,16 +54,6 @@ class LocationServicesManagerTests: XCTestCase {
             }
         } else {
             XCTAssertNil(value)
-        }
-    }
-}
-
-extension LocationServicesManagerTests {
-    class MockLocationServicesManager: LocationServicesManager {
-        var isInside = false
-        
-        override func checkLocationAutorization() {
-            isInside = true
         }
     }
 }

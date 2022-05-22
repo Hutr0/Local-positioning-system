@@ -31,7 +31,7 @@ class LocationManagerDelegateTests: XCTestCase {
     }
     
     func testCompletionHeadingNotNilAfterSet() {
-        sut.completionHandler = { _ in }
+        sut.completionHeading = { _ in }
         XCTAssertNotNil(sut.completionHeading)
     }
     

@@ -115,11 +115,29 @@ class PhysMathManagerTests: XCTestCase {
     
     func testRotateYawWorksCorrectlyWithNegativeValue() {
         let yaw = -0.75
-        let angle = 45.0
+        let angle = -45.0
         
         let result = PhysMathManager.rotateYaw(withValue: yaw, byAngle: angle)
         
         XCTAssertEqual(-1.5, result)
+    }
+    
+    func testRotateYawWorksCorrectlyWithAdjacentValueFirst() {
+        let yaw = -2.75
+        let angle = -45.0
+        
+        let result = PhysMathManager.rotateYaw(withValue: yaw, byAngle: angle)
+        
+        XCTAssertEqual(2.5, result)
+    }
+    
+    func testRotateYawWorksCorrectlyWithAdjacentValueSecond() {
+        let yaw = 2.75
+        let angle = 45.0
+        
+        let result = PhysMathManager.rotateYaw(withValue: yaw, byAngle: angle)
+        
+        XCTAssertEqual(-2.5, result)
     }
     
     func testGetNewPointValueWorksCorrectly() {

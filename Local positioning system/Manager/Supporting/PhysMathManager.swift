@@ -74,7 +74,7 @@ class PhysMathManager {
             result = -a + overValue
         } else if result <= -a {
             let overValue = result + a
-            result = a - overValue
+            result = a + overValue
         }
         
         return result

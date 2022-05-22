@@ -33,11 +33,14 @@ class GettingInsideManagerTests: XCTestCase {
         let expectation = expectation(description: "Test after zero point one")
         var isInside = false
         var loc: Double = 0
+        let delegate = LocationManagerDelegate()
+        sut.locationServicesManager.locationManager.delegate = delegate
         
         sut.startDetectionGettingInside(completionHandler: { location in
             loc = location.longitude
             isInside = true
         })
+        delegate.locationManager(sut.locationServicesManager.locationManager, didUpdateLocations: [CLLocation(latitude: 55.67239263212078, longitude: 37.478994655052944)])
         
         let result = XCTWaiter.wait(for: [expectation], timeout: 0.1)
         if result == XCTWaiter.Result.timedOut {

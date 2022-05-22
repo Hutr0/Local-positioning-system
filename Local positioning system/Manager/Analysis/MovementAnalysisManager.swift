@@ -42,78 +42,86 @@ class MovementAnalysisManager {
         return Position(x: newX, y: newY, z: newZ, speedX: speedX, speedY: speedY, speedZ: speedZ)
     }
     
-    private func getNewYaw(_ yaw: Double, fromHeading heading: Double) -> Double {
-        var yaw: Double!
+    func getNewYaw(_ yaw: Double, fromHeading heading: Double) -> Double {
+        var newYaw: Double!
         let angleToBuilding = BuildingManager.shared.getAngleOfBuilding()
         
         if heading >= 180 {
             let angleToNorth = 360 - heading
-            let angle = angleToNorth - angleToBuilding
-            yaw = PhysMathManager.rotateYaw(withValue: yaw, byAngle: -angle)
+            let angle = angleToNorth + angleToBuilding
+            newYaw = PhysMathManager.rotateYaw(withValue: yaw, byAngle: -angle)
         } else {
             let angleToNorth: Double = heading
             let angle = angleToNorth - angleToBuilding
-            yaw = PhysMathManager.rotateYaw(withValue: yaw, byAngle: angle)
+            newYaw = PhysMathManager.rotateYaw(withValue: yaw, byAngle: angle)
         }
         
-        return yaw
+        return newYaw
     }
     
-    private func conversionAxes(byYaw yaw: Double, withAcceleration acceleration: UserAcceleration) -> UserAcceleration {
-        var x = acceleration.x
-        var y = acceleration.y
+    func conversionAxes(byYaw yaw: Double, withAcceleration acceleration: UserAcceleration) -> UserAcceleration {
+        let x = acceleration.x
+        let y = acceleration.y
         let z = acceleration.z
+        
+        var newX: Double = x
+        var newY: Double = y
+        let newZ: Double = z
         
         if yaw <= 0 && yaw >= -1.5 {
             let percent = (yaw * 100) / -1.5
-            x = x / 100 * (100 - percent) + y / 100 * percent
-            y = y / 100 * (100 - percent) - x / 100 * percent
+            newX = x / 100 * (100 - percent) + y / 100 * percent
+            newY = y / 100 * (100 - percent) - x / 100 * percent
         } else if yaw <= -1.5 && yaw >= -3 {
             let percent = ((yaw + 1.5) * 100) / -1.5
-            x = y / 100 * (100 - percent) - x / 100 * percent
-            y = -x / 100 * (100 - percent) - y / 100 * percent
+            newX = y / 100 * (100 - percent) - x / 100 * percent
+            newY = -x / 100 * (100 - percent) - y / 100 * percent
         } else if yaw >= 0 && yaw <= 1.5 {
             let percent = (yaw * 100) / 1.5
-            x = -y / 100 * (100 - percent) + x / 100 * percent
-            y = x / 100 * (100 - percent) + y / 100 * percent
+            newX = -y / 100 * (100 - percent) + x / 100 * percent
+            newY = x / 100 * (100 - percent) + y / 100 * percent
         } else if yaw >= 1.5 && yaw <= 3 {
             let percent = ((yaw - 1.5) * 100) / 1.5
-            x = -x / 100 * (100 - percent) - y / 100 * percent
-            y = -y / 100 * (100 - percent) + x / 100 * percent
+            newX = -x / 100 * (100 - percent) - y / 100 * percent
+            newY = -y / 100 * (100 - percent) + x / 100 * percent
         }
         
-        return UserAcceleration(x: x, y: y, z: z)
+        return UserAcceleration(x: newX, y: newY, z: newZ)
     }
     
-    private func conversionAxes(byPitch pitch: Double, withAcceleration acceleration: UserAcceleration, andWithGravityZ gravityZ: Double) -> UserAcceleration {
+    func conversionAxes(byPitch pitch: Double, withAcceleration acceleration: UserAcceleration, andWithGravityZ gravityZ: Double) -> UserAcceleration {
         let x = acceleration.x
-        var y = acceleration.y
-        var z = acceleration.z
+        let y = acceleration.y
+        let z = acceleration.z
+        
+        let newX: Double = x
+        var newY: Double = y
+        var newZ: Double = z
         
         if pitch <= 0 && pitch >= -1.5 {
             let percent = (pitch * 100) / -1.5
             if gravityZ <= 0 {
-                y = y / 100 * (100 - percent) - z / 100 * percent
-                z = -z / 100 * (100 - percent) - y / 100 * percent
+                newY = y / 100 * (100 - percent) - z / 100 * percent
+                newZ = -z / 100 * (100 - percent) - y / 100 * percent
             } else {
-                y = -z / 100 * percent - y / 100 * (100 - percent)
-                z = -y / 100 * percent + z / 100 * (100 - percent)
+                newY = -z / 100 * percent - y / 100 * (100 - percent)
+                newZ = -y / 100 * percent + z / 100 * (100 - percent)
             }
         } else if pitch >= 0 && pitch <= 1.5 {
             let percent = (pitch * 100) / 1.5
             if gravityZ <= 0 {
-                y = z / 100 * percent + y / 100 * (100 - percent)
-                z = y / 100 * percent - z / 100 * (100 - percent)
+                newY = z / 100 * percent + y / 100 * (100 - percent)
+                newZ = y / 100 * percent - z / 100 * (100 - percent)
             } else {
-                y = -y / 100 * (100 - percent) + z / 100 * percent
-                z = z / 100 * (100 - percent) + y / 100 * percent
+                newY = -y / 100 * (100 - percent) + z / 100 * percent
+                newZ = z / 100 * (100 - percent) + y / 100 * percent
             }
         }
         
-        return UserAcceleration(x: x, y: y, z: z)
+        return UserAcceleration(x: newX, y: newY, z: newZ)
     }
     
-    private func conversionAxes(byRoll roll: Double, withAcceleration acceleration: UserAcceleration) -> UserAcceleration {
+    func conversionAxes(byRoll roll: Double, withAcceleration acceleration: UserAcceleration) -> UserAcceleration {
         var x = acceleration.x
         let y = acceleration.y
         var z = acceleration.z
