@@ -22,6 +22,138 @@ class MovementAnalysisManagerTests: XCTestCase {
         sut = nil
     }
     
+    func testGetNewCoordinatesSpeed() {
+        let position = Position(x: 0, y: 0, z: 0, speedX: 1, speedY: 1, speedZ: 1)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let gravity = Gravity(x: 0, y: 0, z: 0)
+        
+        let roll = 0.0
+        let pitch = 0.0
+        let yaw = 0.0
+        
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: roll, pitch: pitch, yaw: yaw),
+                                userAcceleration: userAcceleration,
+                                gravity: gravity)
+        
+        let newYaw = sut.getNewYaw(yaw, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byPitch: pitch, withAcceleration: axes, andWithGravityZ: gravity.z)
+        axes = sut.conversionAxes(byRoll: roll, withAcceleration: axes)
+        let x = PhysMathManager.getNewPointValue(initialP: position.x, initialSpeed: 1, time: 1, acceleration: axes.x)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 1, time: 1, acceleration: axes.y)
+        let z = PhysMathManager.getNewPointValue(initialP: position.z, initialSpeed: 1, time: 1, acceleration: axes.z)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
+        XCTAssertEqual(result.x, x)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, z)
+    }
+    
+    // MARK: - Method 'getNewCoordinates' by all parameters
+    
+    func testGetNewCoordinatesByAllParametersWorksCorrectlyFirst() {
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let gravity = Gravity(x: 0, y: 0, z: 0)
+        
+        let roll = 0.0
+        let pitch = 0.0
+        let yaw = 0.0
+        
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: roll, pitch: pitch, yaw: yaw),
+                                userAcceleration: userAcceleration,
+                                gravity: gravity)
+        
+        let newYaw = sut.getNewYaw(yaw, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byPitch: pitch, withAcceleration: axes, andWithGravityZ: gravity.z)
+        axes = sut.conversionAxes(byRoll: roll, withAcceleration: axes)
+        let x = PhysMathManager.getNewPointValue(initialP: position.x, initialSpeed: 0, time: 1, acceleration: axes.x)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        let z = PhysMathManager.getNewPointValue(initialP: position.z, initialSpeed: 0, time: 1, acceleration: axes.z)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
+        XCTAssertEqual(result.x, x)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, z)
+    }
+    
+    func testGetNewCoordinatesByAllParametersWorksCorrectlySecond() {
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let gravity = Gravity(x: 0, y: 0, z: 0)
+        
+        let roll = 0.75
+        let pitch = 0.75
+        let yaw = 0.75
+        
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: roll, pitch: pitch, yaw: yaw),
+                                userAcceleration: userAcceleration,
+                                gravity: gravity)
+        
+        let newYaw = sut.getNewYaw(yaw, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byPitch: pitch, withAcceleration: axes, andWithGravityZ: gravity.z)
+        axes = sut.conversionAxes(byRoll: roll, withAcceleration: axes)
+        let x = PhysMathManager.getNewPointValue(initialP: position.x, initialSpeed: 0, time: 1, acceleration: axes.x)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        let z = PhysMathManager.getNewPointValue(initialP: position.z, initialSpeed: 0, time: 1, acceleration: axes.z)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
+        XCTAssertEqual(result.x, x)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, z)
+    }
+    
+    func testGetNewCoordinatesByAllParametersWorksCorrectlyThird() {
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let gravity = Gravity(x: 0, y: 0, z: 0)
+        
+        let roll = -0.75
+        let pitch = -0.75
+        let yaw = -0.75
+        
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: roll, pitch: pitch, yaw: yaw),
+                                userAcceleration: userAcceleration,
+                                gravity: gravity)
+        
+        let newYaw = sut.getNewYaw(yaw, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byPitch: pitch, withAcceleration: axes, andWithGravityZ: gravity.z)
+        axes = sut.conversionAxes(byRoll: roll, withAcceleration: axes)
+        let x = PhysMathManager.getNewPointValue(initialP: position.x, initialSpeed: 0, time: 1, acceleration: axes.x)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        let z = PhysMathManager.getNewPointValue(initialP: position.z, initialSpeed: 0, time: 1, acceleration: axes.z)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
+        XCTAssertEqual(result.x, x)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, z)
+    }
+    
+    // MARK: - Method 'getNewCoordinates' by Roll
+    
     func testGetNewCoordinatesByRollWorksCorrectlyFirst() {
         let roll = 0.0
         let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
@@ -45,6 +177,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, x)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, 0.5)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByRollWorksCorrectlySecond() {
@@ -70,6 +206,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, x)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, 0.5)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByRollWorksCorrectlyThird() {
@@ -95,6 +235,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, x)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, 0.5)
+        
+        XCTAssertLessThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByRollWorksCorrectlyFourth() {
@@ -120,6 +264,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, x)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, 0.0)
+        
+        XCTAssertLessThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByRollWorksCorrectlyFifth() {
@@ -145,6 +293,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, x)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, -0.5)
+        
+        XCTAssertLessThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertLessThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByRollWorksCorrectlySixth() {
@@ -170,6 +322,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, x)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, -0.5)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertLessThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByRollWorksCorrectlySeventh() {
@@ -195,6 +351,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, x)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, -0.5)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertLessThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByRollWorksCorrectlyEighth() {
@@ -220,7 +380,13 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, x)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, 0.0)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
+    
+    // MARK: - Method 'getNewCoordinates' by Pitch
     
     func testGetNewCoordinatesByPitchWorksCorreclyFirst() {
         let pitch = 0.0
@@ -246,6 +412,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByPitchWorksCorreclySecond() {
@@ -272,6 +442,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertLessThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByPitchWorksCorreclyThird() {
@@ -298,6 +472,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertLessThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByPitchWorksCorreclyForth() {
@@ -324,6 +502,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertLessThanOrEqual(result.y, 0)
+        XCTAssertLessThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByPitchWorksCorreclyFifth() {
@@ -350,6 +532,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertLessThanOrEqual(result.y, 0)
+        XCTAssertLessThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByPitchWorksCorreclySixth() {
@@ -376,6 +562,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertLessThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByPitchWorksCorreclySeventh() {
@@ -402,6 +592,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertLessThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByPitchWorksCorreclyEighth() {
@@ -428,7 +622,13 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertLessThanOrEqual(result.z, 0)
     }
+    
+    // MARK: - Method 'getNewCoordinates' by Yaw
     
     func testGetNewCoordinatesByYawWorksCorreclyFirst() {
         let yaw = 0.0
@@ -448,6 +648,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, pointY)
         XCTAssertEqual(result.z, 0.5)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByYawWorksCorreclySecond() {
@@ -469,6 +673,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(NSString(format:"%.15f", result.x), NSString(format: "%.15f", x))
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, 0.5)
+        
+        XCTAssertLessThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByYawWorksCorreclyThird() {
@@ -490,6 +698,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(NSString(format:"%.15f", result.x), NSString(format: "%.15f", x))
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, 0.5)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByYawWorksCorreclyFourth() {
@@ -511,6 +723,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(NSString(format:"%.15f", result.x), NSString(format: "%.15f", x))
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, 0.5)
+        
+        XCTAssertLessThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByYawWorksCorreclyFifth() {
@@ -532,6 +748,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(NSString(format:"%.15f", result.x), NSString(format: "%.15f", x))
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, 0.5)
+        
+        XCTAssertLessThanOrEqual(result.x, 0)
+        XCTAssertGreaterThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByYawWorksCorreclySixth() {
@@ -553,6 +773,10 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(NSString(format:"%.15f", result.x), NSString(format: "%.15f", x))
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, 0.5)
+        
+        XCTAssertLessThanOrEqual(result.x, 0)
+        XCTAssertLessThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
     
     func testGetNewCoordinatesByYawWorksCorreclySeventh() {
@@ -574,7 +798,13 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(NSString(format:"%.15f", result.x), NSString(format: "%.15f", x))
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, 0.5)
+        
+        XCTAssertGreaterThanOrEqual(result.x, 0)
+        XCTAssertLessThanOrEqual(result.y, 0)
+        XCTAssertGreaterThanOrEqual(result.z, 0)
     }
+    
+    // MARK: - Method 'getNewYaw'
     
     func testGetNewYawWorksCorrectlyFirst() {
         let heading = 90.0
@@ -686,6 +916,8 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result, newYaw)
     }
     
+    // MARK: - Method 'conversionAxes' by Yaw
+    
     func testConversionAxesByYawCalculateTopRightSectionAcceleration() {
         let yaw = -0.75
         let acceleration = UserAcceleration(x: 5, y: 4, z: 3)
@@ -729,6 +961,8 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.y, acceleration.x / 2 + acceleration.y / 2)
         XCTAssertEqual(result.z, acceleration.z)
     }
+    
+    // MARK: - Method 'conversionAxes' by Pitch
     
     func testConversionAxesByPitchCalculateBottomRightSectionAcceleration() {
         let pitch = -0.75
@@ -777,6 +1011,8 @@ class MovementAnalysisManagerTests: XCTestCase {
         XCTAssertEqual(result.y, acceleration.z / 2 + acceleration.y / 2)
         XCTAssertEqual(result.z, -acceleration.y / 2 + acceleration.z / 2)
     }
+    
+    // MARK: - Method 'conversionAxes' by Roll
     
     func testConversionAxesByRollCalculateTopRightSectionAcceleration() {
         let pitch = 0.75
