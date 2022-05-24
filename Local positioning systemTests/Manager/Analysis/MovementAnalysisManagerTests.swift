@@ -22,6 +22,206 @@ class MovementAnalysisManagerTests: XCTestCase {
         sut = nil
     }
     
+    func testGetNewCoordinatesByRollWorksCorrectlyFirst() {
+        let roll = 0.0
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 5, y: 8, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: roll, pitch: 0, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: 0))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byRoll: roll, withAcceleration: axes)
+        let x = PhysMathManager.getNewPointValue(initialP: position.x, initialSpeed: 0, time: 1, acceleration: axes.x)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
+        XCTAssertEqual(result.x, x)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, 0.5)
+    }
+    
+    func testGetNewCoordinatesByRollWorksCorrectlySecond() {
+        let roll = 0.75
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: roll, pitch: 0, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: 0))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byRoll: roll, withAcceleration: axes)
+        let x = PhysMathManager.getNewPointValue(initialP: position.x, initialSpeed: 0, time: 1, acceleration: axes.x)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
+        XCTAssertEqual(result.x, x)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, 0.5)
+    }
+    
+    func testGetNewCoordinatesByRollWorksCorrectlyThird() {
+        let roll = 1.5
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: roll, pitch: 0, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: 0))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byRoll: roll, withAcceleration: axes)
+        let x = PhysMathManager.getNewPointValue(initialP: position.x, initialSpeed: 0, time: 1, acceleration: axes.x)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
+        XCTAssertEqual(result.x, x)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, 0.5)
+    }
+    
+    func testGetNewCoordinatesByRollWorksCorrectlyFourth() {
+        let roll = 2.25
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: roll, pitch: 0, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: 0))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byRoll: roll, withAcceleration: axes)
+        let x = PhysMathManager.getNewPointValue(initialP: position.x, initialSpeed: 0, time: 1, acceleration: axes.x)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
+        XCTAssertEqual(result.x, x)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, 0.0)
+    }
+    
+    func testGetNewCoordinatesByRollWorksCorrectlyFifth() {
+        let roll = 3.0
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 12, y: 13, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: roll, pitch: 0, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: 0))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byRoll: roll, withAcceleration: axes)
+        let x = PhysMathManager.getNewPointValue(initialP: position.x, initialSpeed: 0, time: 1, acceleration: axes.x)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
+        XCTAssertEqual(result.x, x)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, -0.5)
+    }
+    
+    func testGetNewCoordinatesByRollWorksCorrectlySixth() {
+        let roll = -2.25
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: roll, pitch: 0, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: 0))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byRoll: roll, withAcceleration: axes)
+        let x = PhysMathManager.getNewPointValue(initialP: position.x, initialSpeed: 0, time: 1, acceleration: axes.x)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
+        XCTAssertEqual(result.x, x)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, -0.5)
+    }
+    
+    func testGetNewCoordinatesByRollWorksCorrectlySeventh() {
+        let roll = -1.5
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: roll, pitch: 0, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: 0))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byRoll: roll, withAcceleration: axes)
+        let x = PhysMathManager.getNewPointValue(initialP: position.x, initialSpeed: 0, time: 1, acceleration: axes.x)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
+        XCTAssertEqual(result.x, x)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, -0.5)
+    }
+    
+    func testGetNewCoordinatesByRollWorksCorrectlyEighth() {
+        let roll = -0.75
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: roll, pitch: 0, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: 0))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byRoll: roll, withAcceleration: axes)
+        let x = PhysMathManager.getNewPointValue(initialP: position.x, initialSpeed: 0, time: 1, acceleration: axes.x)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
+        XCTAssertEqual(result.x, x)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, 0.0)
+    }
+    
     func testGetNewCoordinatesByPitchWorksCorreclyFirst() {
         let pitch = 0.0
         let gravity = -1.0
@@ -40,6 +240,9 @@ class MovementAnalysisManagerTests: XCTestCase {
         
         let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
         
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
@@ -63,12 +266,15 @@ class MovementAnalysisManagerTests: XCTestCase {
         
         let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
         
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
     }
     
-    func testGetNewCoordinatesByPitchWorksCorreclyFird() {
+    func testGetNewCoordinatesByPitchWorksCorreclyThird() {
         let pitch = -1.5
         let gravity = -1.0
         let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
@@ -86,6 +292,9 @@ class MovementAnalysisManagerTests: XCTestCase {
         
         let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
         
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
@@ -109,6 +318,9 @@ class MovementAnalysisManagerTests: XCTestCase {
         
         let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
         
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
@@ -132,6 +344,9 @@ class MovementAnalysisManagerTests: XCTestCase {
         
         let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
         
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
@@ -155,6 +370,9 @@ class MovementAnalysisManagerTests: XCTestCase {
         
         let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
         
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
@@ -178,6 +396,9 @@ class MovementAnalysisManagerTests: XCTestCase {
         
         let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
         
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)
@@ -201,6 +422,9 @@ class MovementAnalysisManagerTests: XCTestCase {
         
         let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
         
+        print("X: \(result.x)")
+        print("Y: \(result.y)")
+        print("Z: \(result.z)")
         XCTAssertEqual(result.x, 0.5)
         XCTAssertEqual(result.y, y)
         XCTAssertEqual(result.z, z)

@@ -27,6 +27,8 @@ class MovementAnalysisManager {
         acceleration = conversionAxes(byPitch: pitch, withAcceleration: acceleration, andWithGravityZ: motion.gravity.z)
         acceleration = conversionAxes(byRoll: roll, withAcceleration: acceleration)
         
+        print("Acceleration: \(acceleration), Yaw: \(yaw)")
+        
         var speedX: Double = currentPosition.speedX
         var speedY: Double = currentPosition.speedY
         var speedZ: Double = currentPosition.speedZ
@@ -72,7 +74,7 @@ class MovementAnalysisManager {
             let percent = (yaw * 100) / -1.5
             newX = x / 100 * (100 - percent) + y / 100 * percent
             newY = y / 100 * (100 - percent) - x / 100 * percent
-        } else if yaw <= -1.5 && yaw >= -3 {
+        } else if yaw <= -1.5 {
             let percent = ((yaw + 1.5) * 100) / -1.5
             newX = y / 100 * (100 - percent) - x / 100 * percent
             newY = -x / 100 * (100 - percent) - y / 100 * percent
@@ -80,7 +82,7 @@ class MovementAnalysisManager {
             let percent = (yaw * 100) / 1.5
             newX = -y / 100 * (100 - percent) + x / 100 * percent
             newY = x / 100 * (100 - percent) + y / 100 * percent
-        } else if yaw >= 1.5 && yaw <= 3 {
+        } else if yaw >= 1.5 {
             let percent = ((yaw - 1.5) * 100) / 1.5
             newX = -x / 100 * (100 - percent) - y / 100 * percent
             newY = -y / 100 * (100 - percent) + x / 100 * percent
@@ -134,18 +136,18 @@ class MovementAnalysisManager {
             let percent = (roll * 100) / 1.5
             newX = x / 100 * (100 - percent) - z / 100 * percent
             newZ = z / 100 * (100 - percent) + x / 100 * percent
-        } else if roll >= 1.5 && roll <= 3 {
+        } else if roll >= 1.5 {
             let percent = ((roll - 1.5) * 100) / 1.5
             newX = -z / 100 * (100 - percent) - x / 100 * percent
             newZ = x / 100 * (100 - percent) - z / 100 * percent
         } else if roll <= 0 && roll >= -1.5 {
             let percent = (roll * 100) / -1.5
-            newX = z / 100 * (100 - percent) + x / 100 * percent
-            newZ = -x / 100 * (100 - percent) + z / 100 * percent
-        } else if roll <= -1.5 && roll >= -3 {
+            newX = z / 100 * percent + x / 100 * (100 - percent)
+            newZ = -x / 100 * percent + z / 100 * (100 - percent)
+        } else if roll <= -1.5 {
             let percent = ((roll + 1.5) * 100) / -1.5
-            newX = -x / 100 * (100 - percent) + z / 100 * percent
-            newZ = -z / 100 * (100 - percent) - x / 100 * percent            
+            newX = -x / 100 * percent + z / 100 * (100 - percent)
+            newZ = -z / 100 * percent - x / 100 * (100 - percent)
         }
         
         return UserAcceleration(x: newX, y: newY, z: newZ)
