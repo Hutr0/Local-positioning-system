@@ -22,6 +22,190 @@ class MovementAnalysisManagerTests: XCTestCase {
         sut = nil
     }
     
+    func testGetNewCoordinatesByPitchWorksCorreclyFirst() {
+        let pitch = 0.0
+        let gravity = -1.0
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: 0, pitch: pitch, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: gravity))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byPitch: pitch, withAcceleration: axes, andWithGravityZ: gravity)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        let z = PhysMathManager.getNewPointValue(initialP: position.z, initialSpeed: 0, time: 1, acceleration: axes.z)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        XCTAssertEqual(result.x, 0.5)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, z)
+    }
+    
+    func testGetNewCoordinatesByPitchWorksCorreclySecond() {
+        let pitch = -0.75
+        let gravity = -1.0
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: 0, pitch: pitch, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: gravity))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byPitch: pitch, withAcceleration: axes, andWithGravityZ: gravity)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        let z = PhysMathManager.getNewPointValue(initialP: position.z, initialSpeed: 0, time: 1, acceleration: axes.z)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        XCTAssertEqual(result.x, 0.5)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, z)
+    }
+    
+    func testGetNewCoordinatesByPitchWorksCorreclyFird() {
+        let pitch = -1.5
+        let gravity = -1.0
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: 0, pitch: pitch, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: gravity))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byPitch: pitch, withAcceleration: axes, andWithGravityZ: gravity)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        let z = PhysMathManager.getNewPointValue(initialP: position.z, initialSpeed: 0, time: 1, acceleration: axes.z)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        XCTAssertEqual(result.x, 0.5)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, z)
+    }
+    
+    func testGetNewCoordinatesByPitchWorksCorreclyForth() {
+        let pitch = -0.75
+        let gravity = 1.0
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: 0, pitch: pitch, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: gravity))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byPitch: pitch, withAcceleration: axes, andWithGravityZ: gravity)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        let z = PhysMathManager.getNewPointValue(initialP: position.z, initialSpeed: 0, time: 1, acceleration: axes.z)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        XCTAssertEqual(result.x, 0.5)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, z)
+    }
+    
+    func testGetNewCoordinatesByPitchWorksCorreclyFifth() {
+        let pitch = 0.0
+        let gravity = 1.0
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: 0, pitch: pitch, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: gravity))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byPitch: pitch, withAcceleration: axes, andWithGravityZ: gravity)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        let z = PhysMathManager.getNewPointValue(initialP: position.z, initialSpeed: 0, time: 1, acceleration: axes.z)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        XCTAssertEqual(result.x, 0.5)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, z)
+    }
+    
+    func testGetNewCoordinatesByPitchWorksCorreclySixth() {
+        let pitch = 0.75
+        let gravity = 1.0
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: 0, pitch: pitch, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: gravity))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byPitch: pitch, withAcceleration: axes, andWithGravityZ: gravity)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        let z = PhysMathManager.getNewPointValue(initialP: position.z, initialSpeed: 0, time: 1, acceleration: axes.z)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        XCTAssertEqual(result.x, 0.5)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, z)
+    }
+    
+    func testGetNewCoordinatesByPitchWorksCorreclySeventh() {
+        let pitch = 1.5
+        let gravity = 1.0
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: 0, pitch: pitch, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: gravity))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byPitch: pitch, withAcceleration: axes, andWithGravityZ: gravity)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        let z = PhysMathManager.getNewPointValue(initialP: position.z, initialSpeed: 0, time: 1, acceleration: axes.z)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        XCTAssertEqual(result.x, 0.5)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, z)
+    }
+    
+    func testGetNewCoordinatesByPitchWorksCorreclyEighth() {
+        let pitch = 0.75
+        let gravity = 1.0
+        let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
+        let userAcceleration = UserAcceleration(x: 1, y: 1, z: 1)
+        let motion = MotionData(rotationRate: RotationRate(x: 0, y: 0, z: 0),
+                                attitude: Attitude(roll: 0, pitch: pitch, yaw: 0),
+                                userAcceleration: userAcceleration,
+                                gravity: Gravity(x: 0, y: 0, z: gravity))
+        
+        let newYaw = sut.getNewYaw(0.0, fromHeading: 0)
+        var axes = sut.conversionAxes(byYaw: newYaw, withAcceleration: userAcceleration)
+        axes = sut.conversionAxes(byPitch: pitch, withAcceleration: axes, andWithGravityZ: gravity)
+        let y = PhysMathManager.getNewPointValue(initialP: position.y, initialSpeed: 0, time: 1, acceleration: axes.y)
+        let z = PhysMathManager.getNewPointValue(initialP: position.z, initialSpeed: 0, time: 1, acceleration: axes.z)
+        
+        let result = sut.getNewCoordinates(currentPosition: position, motion: motion, time: 1, heading: 0)
+        
+        XCTAssertEqual(result.x, 0.5)
+        XCTAssertEqual(result.y, y)
+        XCTAssertEqual(result.z, z)
+    }
+    
     func testGetNewCoordinatesByYawWorksCorreclyFirst() {
         let yaw = 0.0
         let position = Position(x: 0, y: 0, z: 0, speedX: 0, speedY: 0, speedZ: 0)
