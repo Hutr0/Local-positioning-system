@@ -8,6 +8,8 @@
 import UIKit
 
 class MainViewController: UIViewController {
+    @IBOutlet weak var xaaa: UILabel!
+    @IBOutlet weak var yaaa: UILabel!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var map: UIImageView!
@@ -44,6 +46,9 @@ class MainViewController: UIViewController {
             let y = point.y
             let sizeOfUser = self.user.frame.size
 
+            self.xaaa.text = "x: \(x)"
+            self.yaaa.text = "y: \(y)"
+            
             self.userX = x
             self.userY = y
 

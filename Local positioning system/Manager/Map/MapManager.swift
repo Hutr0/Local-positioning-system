@@ -20,10 +20,38 @@ class MapManager {
         let completionHandler: ((CGPoint) -> ()) = { [weak self] point in
             guard let self = self else { return }
             
-            self.positioningManager.startRecordingMotions(pointOfStart: point, closure: closure)
+            let pointInMeters = MapManager.convertPointFromMapToMeters(point: point)
+            
+            self.positioningManager.startRecordingMotions(pointOfStart: pointInMeters, closure: closure)
         }
         
         checkGettingInside(mapWidth: mapWidth, mapHeight: mapHeight, completionHandler: completionHandler)
+    }
+    
+    static func convertPointFromMapToMeters(point: CGPoint) -> CGPoint {
+        let x = point.x
+        let y = point.y
+        
+        let percentOfX = PhysMathManager.calculatePercent(ofNumber: x, fromHundredPercentNumber: 1400)
+        let percentOfY = PhysMathManager.calculatePercent(ofNumber: y, fromHundredPercentNumber: 900)
+        
+        let newX = PhysMathManager.calculateNumber(lowerPercent: percentOfX, highterNumber: 73)
+        let newY = PhysMathManager.calculateNumber(lowerPercent: percentOfY, highterNumber: 45)
+        
+        return CGPoint(x: newX, y: newY)
+    }
+    
+    static func convertPointFromMetersToMap(point: CGPoint) -> CGPoint {
+        let x = point.x
+        let y = point.y
+        
+        let percentOfX = PhysMathManager.calculatePercent(ofNumber: x, fromHundredPercentNumber: 73)
+        let percentOfY = PhysMathManager.calculatePercent(ofNumber: y, fromHundredPercentNumber: 45)
+        
+        let newX = PhysMathManager.calculateNumber(lowerPercent: percentOfX, highterNumber: 1400)
+        let newY = PhysMathManager.calculateNumber(lowerPercent: percentOfY, highterNumber: 900)
+        
+        return CGPoint(x: newX, y: newY)
     }
     
     func checkGettingInside(mapWidth: CGFloat, mapHeight: CGFloat, completionHandler: @escaping (CGPoint) -> ()) {

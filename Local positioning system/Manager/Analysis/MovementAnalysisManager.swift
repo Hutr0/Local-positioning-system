@@ -9,6 +9,17 @@ import UIKit
 import CoreLocation
 
 class MovementAnalysisManager {
+    
+    var isAccelerationX: Bool = true
+    var isPositiveSignX: Bool? = nil
+    var counterX: Int = 0
+    var isAccelerationY = true
+    var isPositiveSignY: Bool? = nil
+    var counterY: Int = 0
+    var isAccelerationZ = true
+    var isPositiveSignZ: Bool? = nil
+    var counterZ: Int = 0
+    
     func getNewCoordinates(currentPosition: Position, motion: MotionData, time: Double, heading: Double) -> Position {
         
         var yaw: Double = motion.attitude.yaw
@@ -23,11 +34,25 @@ class MovementAnalysisManager {
         
         var acceleration = motion.userAcceleration
         
+        acceleration.x = -acceleration.x
+        acceleration.y = -acceleration.y
+        acceleration.z = -acceleration.z
+        
+        if NSString(format: "%.1f", acceleration.x) == "0.0" || NSString(format: "%.1f", acceleration.x) == "-0.0" {
+            acceleration.x = 0
+        }
+        if NSString(format: "%.1f", acceleration.y) == "0.0" || NSString(format: "%.1f", acceleration.y) == "-0.0" {
+            acceleration.y = 0
+        }
+        if NSString(format: "%.1f", acceleration.z) == "0.0" || NSString(format: "%.1f", acceleration.z) == "-0.0" {
+            acceleration.z = 0
+        }
+        
+        print("Acceleration: \(acceleration)")
+        
         acceleration = conversionAxes(byYaw: yaw, withAcceleration: acceleration)
         acceleration = conversionAxes(byPitch: pitch, withAcceleration: acceleration, andWithGravityZ: motion.gravity.z)
         acceleration = conversionAxes(byRoll: roll, withAcceleration: acceleration)
-        
-        print("Acceleration: \(acceleration), Yaw: \(yaw)")
         
         var speedX: Double = currentPosition.speedX
         var speedY: Double = currentPosition.speedY
@@ -37,9 +62,87 @@ class MovementAnalysisManager {
         let newY = PhysMathManager.getNewPointValue(initialP: y, initialSpeed: speedY, time: time, acceleration: acceleration.y)
         let newZ = PhysMathManager.getNewPointValue(initialP: z, initialSpeed: speedZ, time: time, acceleration: acceleration.z)
         
-        speedX = PhysMathManager.getSpeed(initialSpeed: speedX, acceleration: acceleration.x, time: time)
-        speedY = PhysMathManager.getSpeed(initialSpeed: speedY, acceleration: acceleration.y, time: time)
-        speedZ = PhysMathManager.getSpeed(initialSpeed: speedZ, acceleration: acceleration.z, time: time)
+        if isPositiveSignX == nil {
+            if NSString(format: "%.1f", acceleration.x) != "0.0" && NSString(format: "%.1f", acceleration.x) != "-0.0" {
+                isPositiveSignX = acceleration.x > 0 ? true : false
+            }
+        }
+        if isPositiveSignY == nil {
+            if NSString(format: "%.1f", acceleration.y) != "0.0" && NSString(format: "%.1f", acceleration.y) != "-0.0" {
+                isPositiveSignY = acceleration.y > 0 ? true : false
+            }
+        }
+        if isPositiveSignZ == nil {
+            if NSString(format: "%.1f", acceleration.z) != "0.0" && NSString(format: "%.1f", acceleration.z) != "-0.0" {
+                isPositiveSignZ = acceleration.z > 0 ? true : false
+            }
+        }
+        
+        if isPositiveSignX != nil {
+            if isAccelerationX {
+                if (acceleration.x > 0) == isPositiveSignX && acceleration.x != 0 {
+                    speedX = PhysMathManager.getSpeed(initialSpeed: speedX, acceleration: acceleration.x, time: time)
+                } else {
+                    isPositiveSignX!.toggle()
+                    isAccelerationX = false
+                }
+            } else {
+                if counterX >= 7 {
+                    if NSString(format: "%.1f", acceleration.x) == "0.0" || NSString(format: "%.1f", acceleration.x) == "-0.0" {
+                        isPositiveSignX = nil
+                        isAccelerationX = true
+                        speedX = 0
+                        counterX = 0
+                    }
+                } else {
+                    counterX += 1
+                }
+            }
+        }
+        if isPositiveSignY != nil {
+            if isAccelerationY {
+                if (acceleration.y > 0) == isPositiveSignY && acceleration.y != 0 {
+                    speedY = PhysMathManager.getSpeed(initialSpeed: speedY, acceleration: acceleration.y, time: time)
+                } else {
+                    isPositiveSignY!.toggle()
+                    isAccelerationY = false
+                }
+            } else {
+                if counterY >= 7 {
+                    if NSString(format: "%.1f", acceleration.y) == "0.0" || NSString(format: "%.1f", acceleration.y) == "-0.0" {
+                        isPositiveSignY = nil
+                        isAccelerationY = true
+                        speedY = 0
+                        counterY = 0
+                    }
+                } else {
+                    counterY += 1
+                }
+            }
+        }
+        if isPositiveSignZ != nil {
+            if isAccelerationZ {
+                if (acceleration.z > 0) == isPositiveSignZ && acceleration.z != 0 {
+                    speedZ = PhysMathManager.getSpeed(initialSpeed: speedZ, acceleration: acceleration.z, time: time)
+                } else {
+                    isPositiveSignZ!.toggle()
+                    isAccelerationZ = false
+                }
+            } else {
+                if counterZ >= 7 {
+                    if NSString(format: "%.1f", acceleration.z) == "0.0" || NSString(format: "%.1f", acceleration.z) == "-0.0" {
+                        isPositiveSignZ = nil
+                        isAccelerationZ = true
+                        speedZ = 0
+                        counterZ = 0
+                    }
+                } else {
+                    counterZ += 1
+                }
+            }
+        }
+        
+        print("Speed X: \(speedX), \nSpeed Y: \(speedY), \nSpeed Z: \(speedZ)")
         
         return Position(x: newX, y: newY, z: newZ, speedX: speedX, speedY: speedY, speedZ: speedZ)
     }
@@ -153,3 +256,75 @@ class MovementAnalysisManager {
         return UserAcceleration(x: newX, y: newY, z: newZ)
     }
 }
+
+//        if acceleration.x == 0 {
+//            speedX = 0
+//        } else {
+//            speedX = PhysMathManager.getSpeed(initialSpeed: speedX, acceleration: acceleration.x, time: time)
+//        }
+//        if acceleration.y == 0 {
+//            speedY = 0
+//        } else {
+//            speedY = PhysMathManager.getSpeed(initialSpeed: speedY, acceleration: acceleration.y, time: time)
+//        }
+//        if acceleration.z == 0 {
+//            speedZ = 0
+//        } else {
+//            speedZ = PhysMathManager.getSpeed(initialSpeed: speedZ, acceleration: acceleration.z, time: time)
+//        }
+
+//        if isPositiveSignX == nil { isPositiveSignX = acceleration.x > 0 ? true : false }
+//        if isPositiveSignY == nil { isPositiveSignY = acceleration.y > 0 ? true : false }
+//        if isPositiveSignZ == nil { isPositiveSignZ = acceleration.z > 0 ? true : false }
+//
+//        if isAccelerationX {
+//            if (acceleration.x > 0) == isPositiveSignX {
+//                speedX = PhysMathManager.getSpeed(initialSpeed: speedX, acceleration: acceleration.x, time: time)
+//            }
+//            else {
+//                isPositiveSignX!.toggle()
+//                isAccelerationX = false
+//            }
+//        } else {
+//            if NSString(format: "%.2f", acceleration.x) == "0.00" || NSString(format: "%.2f", acceleration.x) == "-0.00" {
+//                isPositiveSignX = nil
+//                isAccelerationX = true
+//                speedX = 0
+//            }
+//        }
+//
+//        if isAccelerationY {
+//            if (acceleration.y > 0) == isPositiveSignY {
+//                speedY = PhysMathManager.getSpeed(initialSpeed: speedY, acceleration: acceleration.y, time: time)
+//            }
+//            else {
+//                isPositiveSignY!.toggle()
+//                isAccelerationY = false
+//            }
+//        } else {
+//            if NSString(format: "%.1f", acceleration.y) == "0.0" || NSString(format: "%.1f", acceleration.y) == "-0.0" {
+//                isPositiveSignY = nil
+//                isAccelerationY = true
+//                speedY = 0
+//            }
+//        }
+//
+//        if isAccelerationZ {
+//            if (acceleration.z > 0) == isPositiveSignZ {
+//                speedZ = PhysMathManager.getSpeed(initialSpeed: speedZ, acceleration: acceleration.z, time: time)
+//            }
+//            else {
+//                isPositiveSignZ!.toggle()
+//                isAccelerationZ = false
+//            }
+//        } else {
+//            if NSString(format: "%.1f", acceleration.z) == "0.0" || NSString(format: "%.1f", acceleration.z) == "-0.0" {
+//                isPositiveSignZ = nil
+//                isAccelerationZ = true
+//                speedZ = 0
+//            }
+//        }
+        
+//        speedX = PhysMathManager.getSpeed(initialSpeed: speedX, acceleration: acceleration.x, time: time)
+//        speedY = PhysMathManager.getSpeed(initialSpeed: speedY, acceleration: acceleration.y, time: time)
+//        speedZ = PhysMathManager.getSpeed(initialSpeed: speedZ, acceleration: acceleration.z, time: time)0

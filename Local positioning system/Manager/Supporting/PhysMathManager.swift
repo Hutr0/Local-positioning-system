@@ -9,7 +9,7 @@ import Foundation
 import Accelerate
 
 class PhysMathManager {
-    
+        
     static func calculateTriangleSidesLength(firstPoint: CGPoint, secondPoint: CGPoint) -> TriangleSides {
         
         let hypotenuse = PhysMathManager.calculateHypotenuse(firstPoint: firstPoint, secondPoint: secondPoint)
