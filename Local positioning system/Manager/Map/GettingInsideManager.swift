@@ -21,8 +21,8 @@ class GettingInsideManager {
             let isInside = self.checkGettingInside(in: self.buildingCoordinates, userLocation: location.coordinate)
                 
                 if isInside {
-                    completionHandler(location.coordinate)
                     self.locationServicesManager.locationManager.stopUpdatingLocation()
+                    completionHandler(location.coordinate)
                 }
 //            }
         }

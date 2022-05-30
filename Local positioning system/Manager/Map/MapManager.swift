@@ -19,39 +19,29 @@ class MapManager {
     func startGettingLocation(mapWidth: CGFloat, mapHeight: CGFloat, closure: @escaping (CGPoint) -> ()) {
         let completionHandler: ((CGPoint) -> ()) = { [weak self] point in
             guard let self = self else { return }
-            
-            let pointInMeters = MapManager.convertPointFromMapToMeters(point: point)
-            
-            self.positioningManager.startRecordingMotions(pointOfStart: pointInMeters, closure: closure)
+                        
+            if CLLocationManager.locationServicesEnabled() && self.locationManagerAuthorizedWhenInUse() {
+                let completion: ((CLLocation) -> ()) = { location in
+                    
+                    let latitude = location.coordinate.latitude
+                    let longitude = location.coordinate.longitude
+                    
+                    let point = self.userManager.getUserCoordinatesForMap(mapWidth: mapWidth,
+                                                                          mapHeight: mapHeight,
+                                                                          coordinatesOfUser: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+                   
+                    closure(point)
+                }
+                
+                self.gettingInsideManager.setCompletionToLocationManagerDelegate(completion: completion)
+                self.locationServicesManager.locationManager.startUpdatingLocation()
+            } else {
+                let pointInMeters = MapManager.convertPointFromMapToMeters(point: point)
+                self.positioningManager.startRecordingMotions(pointOfStart: pointInMeters, closure: closure)
+            }
         }
         
         checkGettingInside(mapWidth: mapWidth, mapHeight: mapHeight, completionHandler: completionHandler)
-    }
-    
-    static func convertPointFromMapToMeters(point: CGPoint) -> CGPoint {
-        let x = point.x
-        let y = point.y
-        
-        let percentOfX = PhysMathManager.calculatePercent(ofNumber: x, fromHundredPercentNumber: 1400)
-        let percentOfY = PhysMathManager.calculatePercent(ofNumber: y, fromHundredPercentNumber: 900)
-        
-        let newX = PhysMathManager.calculateNumber(lowerPercent: percentOfX, highterNumber: 73)
-        let newY = PhysMathManager.calculateNumber(lowerPercent: percentOfY, highterNumber: 45)
-        
-        return CGPoint(x: newX, y: newY)
-    }
-    
-    static func convertPointFromMetersToMap(point: CGPoint) -> CGPoint {
-        let x = point.x
-        let y = point.y
-        
-        let percentOfX = PhysMathManager.calculatePercent(ofNumber: x, fromHundredPercentNumber: 73)
-        let percentOfY = PhysMathManager.calculatePercent(ofNumber: y, fromHundredPercentNumber: 45)
-        
-        let newX = PhysMathManager.calculateNumber(lowerPercent: percentOfX, highterNumber: 1400)
-        let newY = PhysMathManager.calculateNumber(lowerPercent: percentOfY, highterNumber: 900)
-        
-        return CGPoint(x: newX, y: newY)
     }
     
     func checkGettingInside(mapWidth: CGFloat, mapHeight: CGFloat, completionHandler: @escaping (CGPoint) -> ()) {
@@ -86,5 +76,31 @@ class MapManager {
     
     func locationManagerAuthorizedWhenInUse() -> Bool {
         return locationServicesManager.locationManager.authorizationStatus == .authorizedWhenInUse ? true : false
+    }
+    
+    static func convertPointFromMapToMeters(point: CGPoint) -> CGPoint {
+        let x = point.x
+        let y = point.y
+        
+        let percentOfX = PhysMathManager.calculatePercent(ofNumber: x, fromHundredPercentNumber: 1460)
+        let percentOfY = PhysMathManager.calculatePercent(ofNumber: y, fromHundredPercentNumber: 900)
+        
+        let newX = PhysMathManager.calculateNumber(lowerPercent: percentOfX, highterNumber: 73)
+        let newY = PhysMathManager.calculateNumber(lowerPercent: percentOfY, highterNumber: 45)
+        
+        return CGPoint(x: newX, y: newY)
+    }
+    
+    static func convertPointFromMetersToMap(point: CGPoint) -> CGPoint {
+        let x = point.x
+        let y = point.y
+        
+        let percentOfX = PhysMathManager.calculatePercent(ofNumber: x, fromHundredPercentNumber: 73)
+        let percentOfY = PhysMathManager.calculatePercent(ofNumber: y, fromHundredPercentNumber: 45)
+        
+        let newX = PhysMathManager.calculateNumber(lowerPercent: percentOfX, highterNumber: 1460)
+        let newY = PhysMathManager.calculateNumber(lowerPercent: percentOfY, highterNumber: 900)
+        
+        return CGPoint(x: newX, y: newY)
     }
 }

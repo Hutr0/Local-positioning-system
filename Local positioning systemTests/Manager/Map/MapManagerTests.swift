@@ -74,6 +74,32 @@ class MapManagerTests: XCTestCase {
         
         XCTAssertTrue(isInside)
     }
+    
+    func testConvertPointFromMapToMetersWorksCorrectly() {
+        let firstPoint = CGPoint(x: 0, y: 0)
+        let secondPoint = CGPoint(x: 1460, y: 900)
+        
+        let firstPointResult = MapManager.convertPointFromMapToMeters(point: firstPoint)
+        let secondPointResult = MapManager.convertPointFromMapToMeters(point: secondPoint)
+        
+        XCTAssertEqual(firstPointResult.x, 0)
+        XCTAssertEqual(firstPointResult.y, 0)
+        XCTAssertEqual(secondPointResult.x, 73)
+        XCTAssertEqual(secondPointResult.y, 45)
+    }
+    
+    func testConvertPointFromMetersToMapWorksCorrectly() {
+        let firstPoint = CGPoint(x: 0, y: 0)
+        let secondPoint = CGPoint(x: 73, y: 45)
+        
+        let firstPointResult = MapManager.convertPointFromMetersToMap(point: firstPoint)
+        let secondPointResult = MapManager.convertPointFromMetersToMap(point: secondPoint)
+        
+        XCTAssertEqual(firstPointResult.x, 0)
+        XCTAssertEqual(firstPointResult.y, 0)
+        XCTAssertEqual(secondPointResult.x, 1460)
+        XCTAssertEqual(secondPointResult.y, 900)
+    }
 }
 
 extension MapManagerTests {

@@ -15,12 +15,12 @@ class PositioningManager {
     let movementAnalysisManager = MovementAnalysisManager()
     
     var currentPosition: Position!
-    let timeInterval = 0.01
+    let timeInterval: Double = 1/60
     let countOfValuesForReducingInacurancy = 5
     
     func startRecordingMotions(pointOfStart: CGPoint, closure: @escaping (CGPoint) -> ()) {
 //        var mdForReducingInaccurancy: [MotionData] = []
-        currentPosition = Position(x: pointOfStart.x, y: 0, z: pointOfStart.y, speedX: 0, speedY: 0, speedZ: 0)
+        currentPosition = Position(x: pointOfStart.x, y: pointOfStart.y, z: 0, speedX: 0, speedY: 0, speedZ: 0)
         
         var magneticHeading: Double?
         let timer = TimerManager()
@@ -70,69 +70,68 @@ class PositioningManager {
         let newPosition = movementAnalysisManager.getNewCoordinates(currentPosition: currentPosition, motion: motionData, time: timeInterval /* * Double(countOfValuesForReducingInacurancy)*/, heading: heading)
         
         currentPosition = newPosition
-//        print(newPosition)
         
-        let newXZ = MapManager.convertPointFromMetersToMap(point: CGPoint(x: newPosition.x, y: newPosition.z))
+        let mapPoint = MapManager.convertPointFromMetersToMap(point: CGPoint(x: newPosition.x, y: newPosition.y))
         
-        closure(newXZ)
+        closure(mapPoint)
     }
     
 //    func reducingInaccurancy(data: [MotionData]) -> MotionData {
 //        return reducingInaccurancyManager.reduceInaccurancy(motionsData: data)
 //    }
     
-    func getNewCoord() {}
-    func reduceSpeed() {}
-    func a() {
-        let data: Double = 0.0
-        var isAcceleration = true
-        var isPositiveSign: Bool? = nil
-        
-        if isPositiveSign == nil { isPositiveSign = data < 0 ? false : true }
-        
-        if isAcceleration {
-            if (data < 0) == isPositiveSign { getNewCoord() }
-            else {
-                isPositiveSign!.toggle()
-                isAcceleration = false
-                reduceSpeed()
-            }
-        } else {
-            if (data < 0) != isPositiveSign {
-                isAcceleration = true
-                isPositiveSign!.toggle()
-                getNewCoord()
-            } else {
-                reduceSpeed()
-            }
-        }
-    }
-    func b() {
-        let data: Double = 0.0
-        var previousData: Double = 0.0
-        var isPositiveSign: Bool? = nil
-        
-        if isPositiveSign == nil { isPositiveSign = data < 0 ? false : true }
-        
-        if (data < 0) == isPositiveSign {
-            previousData = data
-            getNewCoord()
-        } else {
-            if isPositiveSign! {
-                if data >= previousData {
-                    previousData = data
-                    getNewCoord()
-                } else {
-                    //
-                }
-            } else {
-                if data <= previousData {
-                    previousData = data
-                    getNewCoord()
-                } else {
-                    //
-                }
-            }
-        }
-    }
+//    func getNewCoord() {}
+//    func reduceSpeed() {}
+//    func a() {
+//        let data: Double = 0.0
+//        var isAcceleration = true
+//        var isPositiveSign: Bool? = nil
+//
+//        if isPositiveSign == nil { isPositiveSign = data < 0 ? false : true }
+//
+//        if isAcceleration {
+//            if (data < 0) == isPositiveSign { getNewCoord() }
+//            else {
+//                isPositiveSign!.toggle()
+//                isAcceleration = false
+//                reduceSpeed()
+//            }
+//        } else {
+//            if (data < 0) != isPositiveSign {
+//                isAcceleration = true
+//                isPositiveSign!.toggle()
+//                getNewCoord()
+//            } else {
+//                reduceSpeed()
+//            }
+//        }
+//    }
+//    func b() {
+//        let data: Double = 0.0
+//        var previousData: Double = 0.0
+//        var isPositiveSign: Bool? = nil
+//
+//        if isPositiveSign == nil { isPositiveSign = data < 0 ? false : true }
+//
+//        if (data < 0) == isPositiveSign {
+//            previousData = data
+//            getNewCoord()
+//        } else {
+//            if isPositiveSign! {
+//                if data >= previousData {
+//                    previousData = data
+//                    getNewCoord()
+//                } else {
+//                    //
+//                }
+//            } else {
+//                if data <= previousData {
+//                    previousData = data
+//                    getNewCoord()
+//                } else {
+//                    //
+//                }
+//            }
+//        }
+//    }
 }
