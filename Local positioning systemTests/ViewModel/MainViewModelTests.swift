@@ -24,8 +24,8 @@ class MainViewModelTests: XCTestCase {
         scrollView = nil
     }
 
-    func testPositioningManagerIsSet() {
-        XCTAssertNotNil(sut.positioningManager)
+    func testMapManagerIsSet() {
+        XCTAssertNotNil(sut.mapManager)
     }
     
     func testCalculateEnterPointCalculatesCorrectlyPoint() {
@@ -88,5 +88,18 @@ class MainViewModelTests: XCTestCase {
         sut.scrollViewDelegate.closureForUserPositioning!()
         
         XCTAssertTrue(isInside)
+    }
+    
+    func testCalculateEnterPointWorksCorrectly() {
+        let scrollView = UIScrollView()
+        scrollView.contentSize.height = 700
+        scrollView.contentSize.width = 1400
+        scrollView.frame.size.height = 300
+        scrollView.frame.size.width = 600
+        
+        let result = sut.calculateEnterPoint(for: scrollView)
+        
+        XCTAssertEqual(400, result.x)
+        XCTAssertEqual(500, result.y)
     }
 }

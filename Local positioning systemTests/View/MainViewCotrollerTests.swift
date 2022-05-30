@@ -41,6 +41,14 @@ class MainViewCotrollerTests: XCTestCase {
         XCTAssertNotNil(sut.map)
     }
     
+    func testUserConstraintToLeadingNotNil() {
+        XCTAssertNotNil(sut.userConstraintToLeading)
+    }
+    
+    func testUserConstraintToTopNotNil() {
+        XCTAssertNotNil(sut.userConstraintToTop)
+    }
+    
     func testScrollViewHasDelegate() {
         XCTAssertNotNil(sut.scrollView.delegate)
     }

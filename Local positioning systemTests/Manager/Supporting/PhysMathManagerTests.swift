@@ -11,22 +11,15 @@ import CoreLocation
 
 class PhysMathManagerTests: XCTestCase {
     
-    func testCalculatePercentWorksCorrectly() {
-        let of = 3.5
-        let to = 7.0
+    func testCalculateTriangleSidesLength() {
+        let first = CGPoint(x: 0, y: 0)
+        let second = CGPoint(x: 5, y: 5)
         
-        let result = PhysMathManager.calculatePercent(number: of, hundredPercentNumber: to)
+        let result = PhysMathManager.calculateTriangleSidesLength(firstPoint: first, secondPoint: second)
         
-        XCTAssertEqual(result, 50)
-    }
-    
-    func testCalculateSmallerNumberWorksCorrectly() {
-        let ofPercent = 44.0
-        let number = 1400.0
-        
-        let result = PhysMathManager.calculateNumberOnPercent(lowerPercent: ofPercent, highterNumber: number)
-        
-        XCTAssertEqual(result, 616)
+        XCTAssertEqual(result.x, 5)
+        XCTAssertEqual(result.y, 5)
+        XCTAssertEqual(result.hypotenuse, sqrt(50))
     }
     
     func testCalculateHypotenuseCalculatesWidth() {
@@ -36,6 +29,24 @@ class PhysMathManagerTests: XCTestCase {
         let result = PhysMathManager.calculateHypotenuse(firstPoint: firstPoint, secondPoint: secondPoint)
         
         XCTAssertEqual(result, sqrt(41))
+    }
+    
+    func testCalculatePercentWorksCorrectly() {
+        let of = 3.5
+        let from = 7.0
+        
+        let result = PhysMathManager.calculatePercent(ofNumber: of, fromHundredPercentNumber: from)
+        
+        XCTAssertEqual(result, 50)
+    }
+    
+    func testCalculateNumberWorksCorrectly() {
+        let ofPercent = 44.0
+        let number = 1400.0
+        
+        let result = PhysMathManager.calculateNumber(lowerPercent: ofPercent, highterNumber: number)
+        
+        XCTAssertEqual(result, 616)
     }
     
     func testRotatePointWorksCorrectly() {
@@ -93,29 +104,40 @@ class PhysMathManagerTests: XCTestCase {
         XCTAssertEqual(cos, 36.86989764584402)
     }
     
-    func testCalculateIntersectionPointWorksCorrectly() {
-        let res = PhysMathManager.calculateIntersectionPoint(p0_x: 0,
-                                p0_y: 0,
-                                p1_x: 10,
-                                p1_y: 10,
-                                p2_x: 0,
-                                p2_y: 7,
-                                p3_x: 7,
-                                p3_y: 0)
+    func testRotateYawWorksCorrectlyWithPositiveValue() {
+        let yaw = 0.75
+        let angle = 45.0
         
-        XCTAssertNotNil(res)
-        XCTAssertEqual(res!.x, 3.5)
-        XCTAssertEqual(res!.y, 3.5)
+        let result = PhysMathManager.rotateYaw(withValue: yaw, byAngle: angle)
+        
+        XCTAssertEqual(1.5, result)
     }
     
-    func testGetSpeedWorksCorrectly() {
-        let initialSpeed = 0.0
-        let acceleration = 0.5
-        let time = 1.0
+    func testRotateYawWorksCorrectlyWithNegativeValue() {
+        let yaw = -0.75
+        let angle = -45.0
         
-        let result = PhysMathManager.getSpeed(initialSpeed: initialSpeed, acceleration: acceleration, time: time)
+        let result = PhysMathManager.rotateYaw(withValue: yaw, byAngle: angle)
         
-        XCTAssertEqual(result, 0.5)
+        XCTAssertEqual(-1.5, result)
+    }
+    
+    func testRotateYawWorksCorrectlyWithAdjacentValueFirst() {
+        let yaw = -2.75
+        let angle = -45.0
+        
+        let result = PhysMathManager.rotateYaw(withValue: yaw, byAngle: angle)
+        
+        XCTAssertEqual(2.5, result)
+    }
+    
+    func testRotateYawWorksCorrectlyWithAdjacentValueSecond() {
+        let yaw = 2.75
+        let angle = 45.0
+        
+        let result = PhysMathManager.rotateYaw(withValue: yaw, byAngle: angle)
+        
+        XCTAssertEqual(-2.5, result)
     }
     
     func testGetNewPointValueWorksCorrectly() {
@@ -128,4 +150,30 @@ class PhysMathManagerTests: XCTestCase {
         
         XCTAssertEqual(result, 5)
     }
+    
+    func testGetSpeedWorksCorrectly() {
+        let initialSpeed = 0.0
+        let acceleration = 0.5
+        let time = 1.0
+        
+        let result = PhysMathManager.getSpeed(initialSpeed: initialSpeed, acceleration: acceleration, time: time)
+        
+        XCTAssertEqual(result, 0.5)
+    }
+    
+    func testCalculateIntersectionPointWorksCorrectly() {
+        let res = PhysMathManager.calculateIntersectionPoint(p0_x: 0,
+                                                             p0_y: 0,
+                                                             p1_x: 10,
+                                                             p1_y: 10,
+                                                             p2_x: 0,
+                                                             p2_y: 7,
+                                                             p3_x: 7,
+                                                             p3_y: 0)
+        
+        XCTAssertNotNil(res)
+        XCTAssertEqual(res!.x, 3.5)
+        XCTAssertEqual(res!.y, 3.5)
+    }
+    
 }

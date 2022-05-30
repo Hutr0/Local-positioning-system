@@ -11,10 +11,10 @@ import CoreLocation
 
 class BuildingCoordinateTests: XCTestCase {
     
-    var sut: BuildingCoordinate!
+    var sut: BuildingCoordinates!
 
     override func setUpWithError() throws {
-        sut = BuildingCoordinate()
+        sut = BuildingCoordinates()
     }
 
     override func tearDownWithError() throws {

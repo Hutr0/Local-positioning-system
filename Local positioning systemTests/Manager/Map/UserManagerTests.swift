@@ -21,20 +21,16 @@ class UserManagerTests: XCTestCase {
         sut = nil
     }
     
-    func testbuildingCoordinateNotNil() {
-        XCTAssertNotNil(sut.buildingCoordinate)
-    }
-    
     func testGetUserCoordinatesForMapReturnsNotNil() {
-        XCTAssertNotNil(sut.getUserCoordinatesForMap(mapWidth: 0, mapHeight: 0, coordinates: CLLocationCoordinate2D()))
+        XCTAssertNotNil(sut.getUserCoordinatesForMap(mapWidth: 0, mapHeight: 0, coordinatesOfUser: CLLocationCoordinate2D()))
     }
     
     func testGetUserCoordinatesForMapWorksCorrectly1() {
         let mapWidth: CGFloat = 1400
         let mapHeight: CGFloat = 900
-        let coordinates = BuildingCoordinate().rightTop
+        let coordinates = BuildingCoordinates().rightTop
         
-        let result = sut.getUserCoordinatesForMap(mapWidth: mapWidth, mapHeight: mapHeight, coordinates: coordinates)
+        let result = sut.getUserCoordinatesForMap(mapWidth: mapWidth, mapHeight: mapHeight, coordinatesOfUser: coordinates)
         
         XCTAssertGreaterThanOrEqual(result.x, mapWidth - 5)
         XCTAssertGreaterThanOrEqual(result.y, mapHeight - 5)
@@ -45,8 +41,8 @@ class UserManagerTests: XCTestCase {
     func testGetUserCoordinatesForMapWorksCorrectly2() {
         let mapWidth: CGFloat = 1400
         let mapHeight: CGFloat = 900
-        let coordinates = BuildingCoordinate().leftBottom
-        let result = sut.getUserCoordinatesForMap(mapWidth: mapWidth, mapHeight: mapHeight, coordinates: coordinates)
+        let coordinates = BuildingCoordinates().leftBottom
+        let result = sut.getUserCoordinatesForMap(mapWidth: mapWidth, mapHeight: mapHeight, coordinatesOfUser: coordinates)
         
         XCTAssertGreaterThanOrEqual(result.x, 0)
         XCTAssertGreaterThanOrEqual(result.y, 0)
@@ -59,24 +55,9 @@ class UserManagerTests: XCTestCase {
         let mapHeight: CGFloat = 900
         let coordinates = CLLocationCoordinate2D(latitude: 55.67239468839017, longitude: 37.47906302533583)
         
-        let result = sut.getUserCoordinatesForMap(mapWidth: mapWidth, mapHeight: mapHeight, coordinates: coordinates)
+        let result = sut.getUserCoordinatesForMap(mapWidth: mapWidth, mapHeight: mapHeight, coordinatesOfUser: coordinates)
         
         XCTAssertEqual(result.x, 684.4382951208179)
         XCTAssertEqual(result.y, 444.47277675042284)
-    }
-    
-    func testCalculateSidesLengthWorksCorrecly() {
-        let fp = CGPoint(x: 0, y: 0)
-        let sp = CGPoint(x: 5, y: 10)
-        
-        let h = PhysMathManager.calculateHypotenuse(firstPoint: fp, secondPoint: sp)
-        let x = sp.x - fp.x
-        let y = sp.y - fp.y
-        
-        let result = sut.calculateSidesLength(firstPoint: fp, secondPoint: sp)
-        
-        XCTAssertEqual(h, result.hypotenuse)
-        XCTAssertEqual(x, result.x)
-        XCTAssertEqual(y, result.y)
     }
 }

@@ -9,6 +9,37 @@ import Foundation
 import Accelerate
 
 class PhysMathManager {
+        
+    static func calculateTriangleSidesLength(firstPoint: CGPoint, secondPoint: CGPoint) -> TriangleSides {
+        
+        let hypotenuse = PhysMathManager.calculateHypotenuse(firstPoint: firstPoint, secondPoint: secondPoint)
+        let x = max(firstPoint.x, secondPoint.x) - min(firstPoint.x, secondPoint.x)
+        let y = max(firstPoint.y, secondPoint.y) - min(firstPoint.y, secondPoint.y)
+        
+        return TriangleSides(x: x, y: y, hypotenuse: hypotenuse)
+    }
+    
+    static func calculateHypotenuse(firstPoint: CGPoint, secondPoint: CGPoint) -> Double {
+        
+        var result: Double
+        
+        let x = secondPoint.x - firstPoint.x
+        let y = secondPoint.y - firstPoint.y
+        
+        let rightSide = pow(x, 2) + pow(y, 2)
+        
+        result = sqrt(rightSide)
+        
+        return result
+    }
+    
+    static func calculatePercent(ofNumber number: Double, fromHundredPercentNumber hundredPercentNumber: Double) -> Double {
+        return (number * 100) / hundredPercentNumber
+    }
+    
+    static func calculateNumber(lowerPercent: Double, highterNumber: Double) -> Double {
+        return (highterNumber * lowerPercent) / 100
+    }
     
     static func rotatePoint(pointToRotate: CGPoint, centerPoint: CGPoint, angleInDegrees: Double) -> CGPoint {
         
@@ -31,24 +62,20 @@ class PhysMathManager {
         return arcsin
     }
     
-    static func calculatePercent(number: Double, hundredPercentNumber: Double) -> Double {
-        return (number * 100) / hundredPercentNumber
-    }
-    
-    static func calculateNumberOnPercent(lowerPercent: Double, highterNumber: Double) -> Double {
-        return (highterNumber * lowerPercent) / 100
-    }
-    
-    static func calculateHypotenuse(firstPoint: CGPoint, secondPoint: CGPoint) -> Double {
+    static func rotateYaw(withValue value: Double, byAngle angle: Double) -> Double {
+        let a = 3.0
+        let i = 1.5
+        let oneDegree = i / 90
         
-        var result: Double
+        var result = value + (oneDegree * angle)
         
-        let x = secondPoint.x - firstPoint.x
-        let y = secondPoint.y - firstPoint.y
-        
-        let rightSide = pow(x, 2) + pow(y, 2)
-        
-        result = sqrt(rightSide)
+        if result >= a {
+            let overValue = result - a
+            result = -a + overValue
+        } else if result <= -a {
+            let overValue = result + a
+            result = a + overValue
+        }
         
         return result
     }

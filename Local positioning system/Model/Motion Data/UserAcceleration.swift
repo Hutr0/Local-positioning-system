@@ -8,9 +8,9 @@
 import Foundation
 
 struct UserAcceleration: MotionProtocol {
-    let x: Double
-    let y: Double
-    let z: Double
+    var x: Double
+    var y: Double
+    var z: Double
     
     init(x: Double, y: Double, z: Double) {
         self.x = x

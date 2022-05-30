@@ -8,20 +8,15 @@
 import Foundation
 import CoreLocation
 
-class BuildingManager {
-    enum TypeOfData {
-        case coordinate
-        case area
-    }
-    
-    func getCoordinatesFromPlist(of typeOfData: TypeOfData) -> [String: CLLocationCoordinate2D] {
+class BuildingDataManager {
+    func getCoordinatesFromPlist(of buildingType: BuildingType) -> [String: CLLocationCoordinate2D] {
         
         guard let path = Bundle.main.path(forResource: "Data", ofType: "plist") else { return [:] }
         guard let dictionary = NSDictionary(contentsOfFile: path) else { return [:] }
         
         var type: String
-        switch typeOfData {
-        case .coordinate:
+        switch buildingType {
+        case .coordinates:
             type = "Building coordinate"
         case .area:
             type = "Area coordinate"
@@ -43,7 +38,7 @@ class BuildingManager {
         return coordinates
     }
     
-    func getCoordinate(coordinate: [String: String]) -> CLLocationCoordinate2D? {
+    private func getCoordinate(coordinate: [String: String]) -> CLLocationCoordinate2D? {
         guard let latitude = coordinate["latitude"],
               let longitude = coordinate["longitude"],
               let dLatitude = Double(latitude),

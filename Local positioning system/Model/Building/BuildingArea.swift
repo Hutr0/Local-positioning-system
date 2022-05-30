@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 
 struct BuildingArea: BuildingProtocol {
-    let buildingManager = BuildingManager()
+    let buildingManager = BuildingDataManager()
     
     var leftBottom: CLLocationCoordinate2D
     var leftTop: CLLocationCoordinate2D

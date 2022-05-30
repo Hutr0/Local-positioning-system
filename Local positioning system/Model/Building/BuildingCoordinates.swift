@@ -8,8 +8,8 @@
 import Foundation
 import CoreLocation
 
-struct BuildingCoordinate: BuildingProtocol {
-    let buildingManager = BuildingManager()
+struct BuildingCoordinates: BuildingProtocol {
+    let buildingManager = BuildingDataManager()
     
     var leftBottom: CLLocationCoordinate2D
     var leftTop: CLLocationCoordinate2D
@@ -25,7 +25,7 @@ struct BuildingCoordinate: BuildingProtocol {
         rightTop = CLLocationCoordinate2D()
         enter = CLLocationCoordinate2D()
         
-        let coordinates = buildingManager.getCoordinatesFromPlist(of: .coordinate)
+        let coordinates = buildingManager.getCoordinatesFromPlist(of: .coordinates)
         
         if !coordinates.isEmpty {
             for coordinate in coordinates {

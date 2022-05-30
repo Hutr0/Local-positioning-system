@@ -11,21 +11,14 @@ import CoreLocation
 class MainViewModel {
     
     var scrollViewDelegate: ScrollViewDelegate!
-    lazy var positioningManager = PositioningManager()
     lazy var mapManager = MapManager()
-    lazy var userManager = UserManager()
     
     init(map: UIImageView) {
         scrollViewDelegate = ScrollViewDelegate(map: map)
     }
     
     func startPositioningUserOnMap(widht: CGFloat, height: CGFloat, completionHandler: @escaping (CGPoint) -> ()) {
-        mapManager.startGettingLocation(closureIfWeAreInside: { [weak self] loc in
-            guard let self = self else { return }
-            
-            let coordinates = self.userManager.getUserCoordinatesForMap(mapWidth: widht, mapHeight: height, coordinates: loc)
-            completionHandler(coordinates)
-        })
+        mapManager.startGettingLocation(mapWidth: widht, mapHeight: height, closure: completionHandler)
     }
     
     func configure(scrollView: UIScrollView, closureForUserPositioning: @escaping () -> ()) {
