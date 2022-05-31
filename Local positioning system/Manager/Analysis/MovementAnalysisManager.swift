@@ -93,8 +93,9 @@ class MovementAnalysisManager {
 //                    speedX = PhysMathManager.getSpeed(initialSpeed: speedX, acceleration: acceleration.x, time: time)
                     maxValueX += acceleration.x
                 } else {
-                    isPositiveSignX!.toggle()
+//                    isPositiveSignX!.toggle()
                     isAccelerationX = false
+                    maxValueX += acceleration.x
                 }
             } else {
                 if (maxValueX < 0) == isPositiveSignX {
@@ -117,8 +118,9 @@ class MovementAnalysisManager {
 //                    speedY = PhysMathManager.getSpeed(initialSpeed: speedY, acceleration: acceleration.y, time: time)
                     maxValueY += acceleration.y
                 } else {
-                    isPositiveSignY!.toggle()
+//                    isPositiveSignY!.toggle()
                     isAccelerationY = false
+                    maxValueY += acceleration.y
                 }
             } else {
                 if (maxValueY < 0) == isPositiveSignY {
@@ -141,8 +143,9 @@ class MovementAnalysisManager {
 //                    speedZ = PhysMathManager.getSpeed(initialSpeed: speedZ, acceleration: acceleration.z, time: time)
                     maxValueZ += acceleration.z
                 } else {
-                    isPositiveSignZ!.toggle()
+//                    isPositiveSignZ!.toggle()
                     isAccelerationZ = false
+                    maxValueZ += acceleration.z
                 }
             } else {
                 if (maxValueZ < 0) == isPositiveSignZ {

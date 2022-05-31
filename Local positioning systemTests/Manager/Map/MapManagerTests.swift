@@ -49,14 +49,14 @@ class MapManagerTests: XCTestCase {
         XCTAssertTrue((sut as! MockMapManagerFirst).isInside)
     }
     
-    func testStartGettingLocationCallsCompletion() {
-        sut = MockMapManagerSecond()
-        sut.positioningManager = MockPositioningManager()
-        
-        sut.startGettingLocation(mapWidth: 0, mapHeight: 0, closure: {_ in})
-        
-        XCTAssertTrue((sut.positioningManager as! MockPositioningManager).isInside)
-    }
+//    func testStartGettingLocationCallsCompletion() {
+//        sut = MockMapManagerSecond()
+//        sut.positioningManager = MockPositioningManager()
+//        
+//        sut.startGettingLocation(mapWidth: 0, mapHeight: 0, closure: {_ in})
+//        
+//        XCTAssertTrue((sut.positioningManager as! MockPositioningManager).isInside)
+//    }
     
     func testLocationManagerAuthorizedWhenInUse() {
         let result = sut.locationServicesManager.locationManager.authorizationStatus == .authorizedWhenInUse ? true : false
@@ -100,6 +100,32 @@ class MapManagerTests: XCTestCase {
         XCTAssertEqual(secondPointResult.x, 1460)
         XCTAssertEqual(secondPointResult.y, 900)
     }
+    
+    func testStartGettingLocationStartsPositioningByGPSIfGPSIsAvailable() {
+        let expectation = expectation(description: "Test")
+        let locationServicesEnabled = CLLocationManager.locationServicesEnabled()
+        sut = MockMapManagerSecond()
+        sut.positioningManager = MockPositioningManager()
+        var p: CGPoint = CGPoint(x: 0, y: 0)
+        
+        sut.startGettingLocation(mapWidth: 0, mapHeight: 0) { point in
+            p = point
+        }
+
+        let result = XCTWaiter.wait(for: [expectation], timeout: 0.1)
+        if result == XCTWaiter.Result.timedOut {
+            if locationServicesEnabled && sut.locationManagerAuthorizedWhenInUse() {
+                
+                XCTAssertEqual(p.x, 0)
+                XCTAssertEqual(p.y, 0)
+            } else {
+                let pm = sut.positioningManager as! MockPositioningManager
+                XCTAssertTrue(pm.isInside)
+            }
+        } else {
+            XCTFail()
+        }
+    }
 }
 
 extension MapManagerTests {
@@ -115,7 +141,7 @@ extension MapManagerTests {
         var isInside = false
         
         override func checkGettingInside(mapWidth: CGFloat, mapHeight: CGFloat, completionHandler: @escaping (CGPoint) -> ()) {
-            completionHandler(CGPoint())
+            completionHandler(CGPoint(x: 12, y: 12))
         }
     }
     
@@ -132,4 +158,12 @@ extension MapManagerTests {
             completionHandler(CLLocationCoordinate2D())
         }
     }
+    
+//    class MockLocationManagerDelegate: LocationManagerDelegate {
+//        var isInside = false
+//        
+//        override func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//            isInside = true
+//        }
+//    }
 }

@@ -176,4 +176,16 @@ class PhysMathManagerTests: XCTestCase {
         XCTAssertEqual(res!.y, 3.5)
     }
     
+    func testCalculateIntersectionPointReturnsNilIfNotIntersect() {
+        let res = PhysMathManager.calculateIntersectionPoint(p0_x: 0,
+                                                             p0_y: 0,
+                                                             p1_x: 10,
+                                                             p1_y: 10,
+                                                             p2_x: 0,
+                                                             p2_y: 0,
+                                                             p3_x: 10,
+                                                             p3_y: 10)
+        
+        XCTAssertNil(res)
+    }
 }

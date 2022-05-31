@@ -10,13 +10,22 @@ import XCTest
 
 class AlertManagerTests: XCTestCase {
 
-    var sut: AlertManager!
+    var vc: MainViewController!
     
     override func setUpWithError() throws {
-        sut = AlertManager()
+        vc = (UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! MainViewController)
+        
+        UIWindow().rootViewController = vc
     }
 
     override func tearDownWithError() throws {
-        sut = nil
+        vc = nil
     }
+    
+//    func testAlertHasTitle() {
+//        AlertManager.showAlert(title: "Test Title", message: "")
+//        
+//        XCTAssertTrue(vc.presentedViewController is UIAlertController)
+//        XCTAssertEqual(vc.presentedViewController?.title, "Test Title")
+//    }
 }

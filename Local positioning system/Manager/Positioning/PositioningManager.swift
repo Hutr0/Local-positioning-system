@@ -19,7 +19,7 @@ class PositioningManager {
     let countOfValuesForReducingInacurancy = 5
     
     func startRecordingMotions(pointOfStart: CGPoint, closure: @escaping (CGPoint) -> ()) {
-//        var mdForReducingInaccurancy: [MotionData] = []
+        var mdForReducingInaccurancy: [MotionData] = []
         currentPosition = Position(x: pointOfStart.x, y: pointOfStart.y, z: 0, speedX: 0, speedY: 0, speedZ: 0)
         
         var magneticHeading: Double?
@@ -40,34 +40,34 @@ class PositioningManager {
         motionManager.startDeviceMotionUpdate { [weak self] rotationRate, attitude, userAcceleration, gravity in
             guard let self = self else { return }
             
-            self.updateCoordinates(heading: magneticHeading ?? 0,
-                                   motionData: MotionData(rotationRate: rotationRate,
-                                                          attitude: attitude,
-                                                          userAcceleration: userAcceleration,
-                                                          gravity: gravity),
-                                   closure: closure)
+//            self.updateCoordinates(heading: magneticHeading ?? 0,
+//                                   motionData: MotionData(rotationRate: rotationRate,
+//                                                          attitude: attitude,
+//                                                          userAcceleration: userAcceleration,
+//                                                          gravity: gravity),
+//                                   closure: closure)
             
-//            mdForReducingInaccurancy.append(MotionData(rotationRate: rotationRate,
-//                                                       attitude: attitude,
-//                                                       userAcceleration: userAcceleration,
-//                                                       gravity: gravity))
+            mdForReducingInaccurancy.append(MotionData(rotationRate: rotationRate,
+                                                       attitude: attitude,
+                                                       userAcceleration: userAcceleration,
+                                                       gravity: gravity))
             
-//            if mdForReducingInaccurancy.count >= self.countOfValuesForReducingInacurancy && magneticHeading != nil {
-//                let data = self.reducingInaccurancy(data: mdForReducingInaccurancy)
-//                mdForReducingInaccurancy.removeAll()
-//
-//                self.updateCoordinates(heading: magneticHeading!, motionData: data, closure: closure)
-//            }
+            if mdForReducingInaccurancy.count >= self.countOfValuesForReducingInacurancy && magneticHeading != nil {
+                let data = self.reducingInaccurancy(data: mdForReducingInaccurancy)
+                mdForReducingInaccurancy.removeAll()
+
+                self.updateCoordinates(heading: magneticHeading ?? 0, motionData: data, closure: closure)
+            }
             
-//            if mdForReducingInaccurancy.count >= self.countOfValuesForReducingInacurancy * 2 && magneticHeading == nil {
-//                AlertManager.showAlert(title: "Magnetic heading cannot be gained", message: "Your current angle to north will set to zero")
-//                magneticHeading = 0
-//            }
+            if mdForReducingInaccurancy.count >= self.countOfValuesForReducingInacurancy * 2 && magneticHeading == nil {
+                AlertManager.showAlert(title: "Magnetic heading cannot be gained", message: "Your current angle to north will set to zero")
+                magneticHeading = 0
+            }
         }
     }
     
     func updateCoordinates(heading: Double, motionData: MotionData, closure: @escaping (CGPoint) -> ()) {
-        let newPosition = movementAnalysisManager.getNewCoordinates(currentPosition: currentPosition, motion: motionData, time: timeInterval /* * Double(countOfValuesForReducingInacurancy)*/, heading: heading)
+        let newPosition = movementAnalysisManager.getNewCoordinates(currentPosition: currentPosition, motion: motionData, time: timeInterval * Double(countOfValuesForReducingInacurancy), heading: heading)
         
         currentPosition = newPosition
         
@@ -76,9 +76,9 @@ class PositioningManager {
         closure(mapPoint)
     }
     
-//    func reducingInaccurancy(data: [MotionData]) -> MotionData {
-//        return reducingInaccurancyManager.reduceInaccurancy(motionsData: data)
-//    }
+    func reducingInaccurancy(data: [MotionData]) -> MotionData {
+        return reducingInaccurancyManager.reduceInaccurancy(motionsData: data)
+    }
     
 //    func getNewCoord() {}
 //    func reduceSpeed() {}
