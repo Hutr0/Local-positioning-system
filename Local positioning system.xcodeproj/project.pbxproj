@@ -12,7 +12,6 @@
 		E02A482A282FC46700EA7B87 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02A4829282FC46700EA7B87 /* AlertManager.swift */; };
 		E02A482C2830613600EA7B87 /* BuildingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02A482B2830613600EA7B87 /* BuildingManager.swift */; };
 		E02A482E2830633200EA7B87 /* BuildingEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02A482D2830633200EA7B87 /* BuildingEnums.swift */; };
-		E02CDFD52839946400DE72B2 /* AlertManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02CDFD42839946400DE72B2 /* AlertManagerTests.swift */; };
 		E03A4F032817370D0087BD9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F022817370D0087BD9F /* AppDelegate.swift */; };
 		E03A4F052817370D0087BD9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A4F042817370D0087BD9F /* SceneDelegate.swift */; };
 		E03A4F0A2817370D0087BD9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03A4F082817370D0087BD9F /* Main.storyboard */; };
@@ -93,7 +92,6 @@
 		E02A4829282FC46700EA7B87 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		E02A482B2830613600EA7B87 /* BuildingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingManager.swift; sourceTree = "<group>"; };
 		E02A482D2830633200EA7B87 /* BuildingEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingEnums.swift; sourceTree = "<group>"; };
-		E02CDFD42839946400DE72B2 /* AlertManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManagerTests.swift; sourceTree = "<group>"; };
 		E03A4EFF2817370D0087BD9F /* Local positioning system.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Local positioning system.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03A4F022817370D0087BD9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E03A4F042817370D0087BD9F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -249,7 +247,6 @@
 			children = (
 				E0E31DCC2819F4C300AD79C4 /* TimerManagerTests.swift */,
 				E0E31DDC281B593800AD79C4 /* PhysMathManagerTests.swift */,
-				E02CDFD42839946400DE72B2 /* AlertManagerTests.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -683,7 +680,6 @@
 				E0E31D9428182DE200AD79C4 /* AttitudeTests.swift in Sources */,
 				E0E31DCD2819F4C300AD79C4 /* TimerManagerTests.swift in Sources */,
 				E0E31D822817785E00AD79C4 /* PositioningManagerTests.swift in Sources */,
-				E02CDFD52839946400DE72B2 /* AlertManagerTests.swift in Sources */,
 				E048190228399C6100277707 /* GettingInsideManagerTests.swift in Sources */,
 				E0E31DC92819E36F00AD79C4 /* LocationServicesManagerTests.swift in Sources */,
 				E0E31DDD281B593800AD79C4 /* PhysMathManagerTests.swift in Sources */,
