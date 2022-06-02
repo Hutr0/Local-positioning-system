@@ -12,9 +12,29 @@ class MainViewController: UIViewController {
     @IBOutlet weak var yaaa: UILabel!
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var map: UIImageView!
+    @IBOutlet weak var upButton: UIButton! {
+        didSet {
+            upButton.imageView?.layer.transform = CATransform3DMakeScale(0.08, 0.08, 0.08)
+        }
+    }
+    @IBOutlet weak var downButton: UIButton! {
+        didSet {
+            downButton.imageView?.layer.transform = CATransform3DMakeScale(0.08, 0.08, 0.08)
+        }
+    }
     
-    @IBOutlet weak var user: UIImageView!
+    @IBOutlet weak var map: UIImageView! {
+        didSet {
+            viewModel = MainViewModel(map: map)
+        }
+    }
+    
+    @IBOutlet weak var user: UIImageView! {
+        didSet {
+            userX = user.frame.origin.x
+            userY = user.frame.origin.y
+        }
+    }
     @IBOutlet weak var userConstraintToLeading: NSLayoutConstraint!
     @IBOutlet weak var userConstraintToTop: NSLayoutConstraint!
     
@@ -24,11 +44,6 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        userX = self.user.frame.origin.x
-        userY = self.user.frame.origin.y
-
-        viewModel = MainViewModel(map: map)
 
         viewModel.configure(scrollView: scrollView) { [weak self] in
             guard let self = self, let userX = self.userX, let userY = self.userY else { return }
@@ -56,5 +71,13 @@ class MainViewController: UIViewController {
                                            y: y * self.scrollView.zoomScale,
                                            width: sizeOfUser.width, height: sizeOfUser.height)
         }
+    }
+    
+    @IBAction func upButtonTapped(_ sender: UIButton) {
+        map.image = UIImage(named: "up mirea map")
+    }
+    
+    @IBAction func downButtonTapped(_ sender: UIButton) {
+        map.image = UIImage(named: "down mirea map")
     }
 }

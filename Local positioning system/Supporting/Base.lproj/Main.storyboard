@@ -19,7 +19,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePy-V7-wIf">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mirea map" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21v-ly-KWj">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="up mirea map" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21v-ly-KWj">
                                         <rect key="frame" x="0.0" y="0.0" width="1460" height="900"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="900" id="32e-Ji-fbr"/>
@@ -45,6 +45,36 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="L56-gV-JAX"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="rOo-67-7P4"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbl-4o-Rm2">
+                                <rect key="frame" x="358" y="64" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="8uo-uo-HVL"/>
+                                    <constraint firstAttribute="height" constant="50" id="tjv-2E-7Xi"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="up">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                    <color key="baseForegroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="upButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bph-Lw-Oro"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U53-Be-Lac">
+                                <rect key="frame" x="358" y="134" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="GGL-Xd-j3K"/>
+                                    <constraint firstAttribute="height" constant="50" id="VcK-kR-FRI"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="down">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                    <color key="baseForegroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="downButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6RG-5x-GDg"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2i-Pa-X4e">
                                 <rect key="frame" x="193" y="452.66666666666669" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -62,18 +92,24 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ePy-V7-wIf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="36F-Gx-NOu"/>
+                            <constraint firstItem="Vbl-4o-Rm2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="7Gc-mA-v4x"/>
                             <constraint firstItem="f2i-Pa-X4e" firstAttribute="bottom" secondItem="NGA-UB-p4p" secondAttribute="top" constant="-40" id="C3f-UC-mH5"/>
                             <constraint firstItem="f2i-Pa-X4e" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Pmc-Yr-kZE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="U53-Be-Lac" secondAttribute="trailing" constant="20" id="Qh3-4W-bUG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vbl-4o-Rm2" secondAttribute="trailing" constant="20" id="RwT-9u-Bg6"/>
                             <constraint firstItem="ePy-V7-wIf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="XDP-XG-4SV"/>
                             <constraint firstAttribute="bottom" secondItem="ePy-V7-wIf" secondAttribute="bottom" id="YJj-1M-bfb"/>
+                            <constraint firstItem="U53-Be-Lac" firstAttribute="top" secondItem="Vbl-4o-Rm2" secondAttribute="bottom" constant="20" id="mcV-03-eIR"/>
                             <constraint firstItem="f2i-Pa-X4e" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oVw-gc-G5h"/>
                             <constraint firstItem="NGA-UB-p4p" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vfa-Di-V2T"/>
                             <constraint firstItem="ePy-V7-wIf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ySy-XM-SSv"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="downButton" destination="U53-Be-Lac" id="hHC-zO-7dh"/>
                         <outlet property="map" destination="21v-ly-KWj" id="Vpj-Oe-AjD"/>
                         <outlet property="scrollView" destination="ePy-V7-wIf" id="hyv-TA-ab2"/>
+                        <outlet property="upButton" destination="Vbl-4o-Rm2" id="BdD-3U-xRg"/>
                         <outlet property="user" destination="QIT-cM-sUR" id="CVz-F7-0wq"/>
                         <outlet property="userConstraintToLeading" destination="RM1-a2-pbM" id="dRs-a2-GqY"/>
                         <outlet property="userConstraintToTop" destination="tYq-hh-gcl" id="vbF-jr-Cyh"/>
@@ -87,7 +123,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="mirea map" width="1460" height="900"/>
+        <image name="down" width="512" height="512"/>
+        <image name="up" width="512" height="512"/>
+        <image name="up mirea map" width="1460" height="900"/>
         <image name="user" width="256" height="256"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
