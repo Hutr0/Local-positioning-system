@@ -48,6 +48,7 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbl-4o-Rm2">
                                 <rect key="frame" x="358" y="64" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.98782461684880429" green="0.67475288633278685" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="8uo-uo-HVL"/>
                                     <constraint firstAttribute="height" constant="50" id="tjv-2E-7Xi"/>
@@ -63,6 +64,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U53-Be-Lac">
                                 <rect key="frame" x="358" y="134" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.9878246168" green="0.67475288629999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="GGL-Xd-j3K"/>
                                     <constraint firstAttribute="height" constant="50" id="VcK-kR-FRI"/>

@@ -13,11 +13,13 @@ class MainViewController: UIViewController {
     @IBOutlet weak var upButton: UIButton! {
         didSet {
             upButton.imageView?.layer.transform = CATransform3DMakeScale(0.08, 0.08, 0.08)
+            upButton.layer.cornerRadius = upButton.bounds.size.width / 2
         }
     }
     @IBOutlet weak var downButton: UIButton! {
         didSet {
             downButton.imageView?.layer.transform = CATransform3DMakeScale(0.08, 0.08, 0.08)
+            downButton.layer.cornerRadius = downButton.bounds.size.width / 2
         }
     }
     
