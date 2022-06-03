@@ -85,8 +85,8 @@ class MapManager {
         let percentOfX = PhysMathManager.calculatePercent(ofNumber: x, fromHundredPercentNumber: 1460)
         let percentOfY = PhysMathManager.calculatePercent(ofNumber: y, fromHundredPercentNumber: 900)
         
-        let newX = PhysMathManager.calculateNumber(lowerPercent: percentOfX, highterNumber: 73)
-        let newY = PhysMathManager.calculateNumber(lowerPercent: percentOfY, highterNumber: 45)
+        let newX = PhysMathManager.calculateNumber(lowerPercent: percentOfX, highterNumber: 78.5)
+        let newY = PhysMathManager.calculateNumber(lowerPercent: percentOfY, highterNumber: 46)
         
         return CGPoint(x: newX, y: newY)
     }
@@ -95,8 +95,8 @@ class MapManager {
         let x = point.x
         let y = point.y
         
-        let percentOfX = PhysMathManager.calculatePercent(ofNumber: x, fromHundredPercentNumber: 73)
-        let percentOfY = PhysMathManager.calculatePercent(ofNumber: y, fromHundredPercentNumber: 45)
+        let percentOfX = PhysMathManager.calculatePercent(ofNumber: x, fromHundredPercentNumber: 78.5)
+        let percentOfY = PhysMathManager.calculatePercent(ofNumber: y, fromHundredPercentNumber: 46)
         
         let newX = PhysMathManager.calculateNumber(lowerPercent: percentOfX, highterNumber: 1460)
         let newY = PhysMathManager.calculateNumber(lowerPercent: percentOfY, highterNumber: 900)

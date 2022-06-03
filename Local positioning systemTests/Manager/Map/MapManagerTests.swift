@@ -84,13 +84,13 @@ class MapManagerTests: XCTestCase {
         
         XCTAssertEqual(firstPointResult.x, 0)
         XCTAssertEqual(firstPointResult.y, 0)
-        XCTAssertEqual(secondPointResult.x, 73)
-        XCTAssertEqual(secondPointResult.y, 45)
+        XCTAssertEqual(secondPointResult.x, 78.5)
+        XCTAssertEqual(secondPointResult.y, 46)
     }
     
     func testConvertPointFromMetersToMapWorksCorrectly() {
         let firstPoint = CGPoint(x: 0, y: 0)
-        let secondPoint = CGPoint(x: 73, y: 45)
+        let secondPoint = CGPoint(x: 78.5, y: 46)
         
         let firstPointResult = MapManager.convertPointFromMetersToMap(point: firstPoint)
         let secondPointResult = MapManager.convertPointFromMetersToMap(point: secondPoint)
