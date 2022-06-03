@@ -76,33 +76,17 @@
                                     <action selector="downButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6RG-5x-GDg"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2i-Pa-X4e">
-                                <rect key="frame" x="193" y="452.66666666666669" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGA-UB-p4p">
-                                <rect key="frame" x="193" y="513.66666666666663" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ePy-V7-wIf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="36F-Gx-NOu"/>
                             <constraint firstItem="Vbl-4o-Rm2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="7Gc-mA-v4x"/>
-                            <constraint firstItem="f2i-Pa-X4e" firstAttribute="bottom" secondItem="NGA-UB-p4p" secondAttribute="top" constant="-40" id="C3f-UC-mH5"/>
-                            <constraint firstItem="f2i-Pa-X4e" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Pmc-Yr-kZE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="U53-Be-Lac" secondAttribute="trailing" constant="20" id="Qh3-4W-bUG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vbl-4o-Rm2" secondAttribute="trailing" constant="20" id="RwT-9u-Bg6"/>
                             <constraint firstItem="ePy-V7-wIf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="XDP-XG-4SV"/>
                             <constraint firstAttribute="bottom" secondItem="ePy-V7-wIf" secondAttribute="bottom" id="YJj-1M-bfb"/>
                             <constraint firstItem="U53-Be-Lac" firstAttribute="top" secondItem="Vbl-4o-Rm2" secondAttribute="bottom" constant="20" id="mcV-03-eIR"/>
-                            <constraint firstItem="f2i-Pa-X4e" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oVw-gc-G5h"/>
-                            <constraint firstItem="NGA-UB-p4p" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vfa-Di-V2T"/>
                             <constraint firstItem="ePy-V7-wIf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ySy-XM-SSv"/>
                         </constraints>
                     </view>
@@ -114,8 +98,6 @@
                         <outlet property="user" destination="QIT-cM-sUR" id="CVz-F7-0wq"/>
                         <outlet property="userConstraintToLeading" destination="RM1-a2-pbM" id="dRs-a2-GqY"/>
                         <outlet property="userConstraintToTop" destination="tYq-hh-gcl" id="vbF-jr-Cyh"/>
-                        <outlet property="xaaa" destination="f2i-Pa-X4e" id="9Vh-ah-vsb"/>
-                        <outlet property="yaaa" destination="NGA-UB-p4p" id="RJA-Nx-Pdl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -32,6 +32,8 @@ class MainViewModel {
         
         let enterPoint = calculateEnterPoint(for: scrollView)
         scrollView.setContentOffset(enterPoint, animated: false)
+        
+        scrollView.setZoomScale(0.2, animated: false)
     }
     
     func calculateEnterPoint(for scrollView: UIScrollView) -> CGPoint {
