@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 
 protocol BuildingProtocol {
-    var buildingManager: BuildingDataManager { get }
+    var buildingDataManager: BuildingDataManager { get }
     
     var leftBottom: CLLocationCoordinate2D { get set }
     var leftTop: CLLocationCoordinate2D { get set }

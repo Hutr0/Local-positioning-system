@@ -22,10 +22,10 @@ class BuildingCoordinateTests: XCTestCase {
     }
     
     func testInit() {
-        let lb = CLLocationCoordinate2D(latitude: 55.67252498442427, longitude: 37.47844079363455)
-        let lt = CLLocationCoordinate2D(latitude: 55.672788164529, longitude: 37.478994655052944)
-        let rb = CLLocationCoordinate2D(latitude: 55.672003413955736, longitude: 37.47914128789388)
-        let rt = CLLocationCoordinate2D(latitude: 55.67224525582763, longitude: 37.47972036203386)
+        let lb = CLLocationCoordinate2D(latitude: 55.6725759185084336, longitude: 37.478279674560135)
+        let lt = CLLocationCoordinate2D(latitude: 55.67301506732467, longitude: 37.478791533281635)
+        let rb = CLLocationCoordinate2D(latitude: 55.6718141891654276, longitude: 37.47903792110716)
+        let rt = CLLocationCoordinate2D(latitude: 55.67225333798167, longitude: 37.47954977982864)
         let e = CLLocationCoordinate2D(latitude: 55.67219200458108, longitude: 37.4788591774319)
         
         XCTAssertEqual(sut.leftBottom.longitude, lb.longitude)

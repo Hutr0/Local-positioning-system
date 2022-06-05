@@ -30,17 +30,17 @@ class MainViewModel {
         
         scrollView.layoutIfNeeded()
         
-        let enterPoint = calculateEnterPoint(for: scrollView)
-        scrollView.setContentOffset(enterPoint, animated: false)
+//        let enterPoint = calculateEnterPoint(for: scrollView)
+//        scrollView.setContentOffset(enterPoint, animated: false)
         
         scrollView.setZoomScale(0.2, animated: false)
     }
     
-    func calculateEnterPoint(for scrollView: UIScrollView) -> CGPoint {
-        let centerOffsetX = (scrollView.contentSize.width - scrollView.frame.size.width) / 2
-        let centerOffsetY = scrollView.contentSize.height - scrollView.frame.size.height + 100
-        let enterPoint = CGPoint(x: centerOffsetX, y: centerOffsetY)
-        
-        return enterPoint
-    }
+//    func calculateEnterPoint(for scrollView: UIScrollView) -> CGPoint {
+//        let centerOffsetX = (scrollView.contentSize.width - scrollView.frame.size.width) / 2
+//        let centerOffsetY = scrollView.contentSize.height - scrollView.frame.size.height + 100
+//        let enterPoint = CGPoint(x: centerOffsetX, y: centerOffsetY)
+//        
+//        return enterPoint
+//    }
 }

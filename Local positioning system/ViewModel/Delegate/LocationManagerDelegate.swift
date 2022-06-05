@@ -20,8 +20,13 @@ class LocationManagerDelegate: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first, let completionHandler = completionHandler else { return }
+        print("""
+        ___________________________________________________________
+        latitude: \(location.coordinate.latitude)
+        longitude: \(location.coordinate.longitude)
+        """)
         completionHandler(location)
-//        completionHandler(CLLocation(latitude: 55.672423427107134, longitude: 37.47909789405624))
+//        completionHandler(CLLocation(latitude: 55.67223972533287, longitude: 37.4794751874624))
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {

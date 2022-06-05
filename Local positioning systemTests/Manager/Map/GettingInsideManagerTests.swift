@@ -75,6 +75,14 @@ class GettingInsideManagerTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
+    func testCheckGettingInsideBuildingWorksCorrectlyFourthTest() {
+        let location = CLLocationCoordinate2D(latitude: 55.67219200458108, longitude: 37.4788591774319)
+        
+        let result = sut.checkGettingInside(in: sut.buildingCoordinates, userLocation: location)
+        
+        XCTAssertTrue(result)
+    }
+    
 //    func testGetCurrentUserLocationReturnsNotDefaultResult() {
 //        let expectation = expectation(description: "Test after zero point one second")
 //

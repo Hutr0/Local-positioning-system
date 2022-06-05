@@ -29,12 +29,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var user: UIImageView! {
-        didSet {
-            userX = user.frame.origin.x
-            userY = user.frame.origin.y
-        }
-    }
+    @IBOutlet weak var user: UIImageView!
     @IBOutlet weak var userConstraintToLeading: NSLayoutConstraint!
     @IBOutlet weak var userConstraintToTop: NSLayoutConstraint!
     
@@ -44,6 +39,9 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userX = user.frame.origin.x
+        userY = user.frame.origin.y
 
         viewModel.configure(scrollView: scrollView) { [weak self] in
             guard let self = self, let userX = self.userX, let userY = self.userY else { return }
@@ -51,8 +49,8 @@ class MainViewController: UIViewController {
             self.userConstraintToLeading.constant = userX * self.scrollView.zoomScale
             self.userConstraintToTop.constant = userY * self.scrollView.zoomScale
         }
-
-        viewModel.startPositioningUserOnMap(widht: map.frame.width, height: map.frame.height) { [weak self] point in
+        
+        viewModel.startPositioningUserOnMap(widht: map.bounds.width, height: map.bounds.height) { [weak self] point in
             guard let self = self else { return }
 
             self.user.isHidden = false

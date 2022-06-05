@@ -22,17 +22,17 @@ class MapManager {
                         
             if CLLocationManager.locationServicesEnabled() && self.locationManagerAuthorizedWhenInUse() {
                 let completion: ((CLLocation) -> ()) = { location in
-                    
+
                     let latitude = location.coordinate.latitude
                     let longitude = location.coordinate.longitude
-                    
+
                     let point = self.userManager.getUserCoordinatesForMap(mapWidth: mapWidth,
                                                                           mapHeight: mapHeight,
                                                                           coordinatesOfUser: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-                   
+
                     closure(point)
                 }
-                
+
                 self.gettingInsideManager.setCompletionToLocationManagerDelegate(completion: completion)
                 self.locationServicesManager.locationManager.startUpdatingLocation()
             } else {
@@ -50,17 +50,17 @@ class MapManager {
         if locationManagerAuthorizedWhenInUse() {
             let completionHandler: ((CLLocationCoordinate2D) -> ()) = { [weak self] location in
                 guard let self = self else { return }
-                
+
                 let latitude = location.latitude
                 let longitude = location.longitude
-                
+
                 let point = self.userManager.getUserCoordinatesForMap(mapWidth: mapWidth,
                                                                       mapHeight: mapHeight,
                                                                       coordinatesOfUser: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-                
+
                 completionHandler(point)
             }
-            
+
             gettingInsideManager.startDetectionGettingInside(completionHandler: completionHandler)
         } else {
             let latitude = buildingCoordinates.enter.latitude

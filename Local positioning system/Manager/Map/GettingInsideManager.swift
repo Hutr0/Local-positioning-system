@@ -17,14 +17,12 @@ class GettingInsideManager {
         let completion: ((CLLocation) -> ()) = { [weak self] location in
             guard let self = self else { return }
             
-//            self.getCurrentUserLocation() { location in
             let isInside = self.checkGettingInside(in: self.buildingCoordinates, userLocation: location.coordinate)
                 
-                if isInside {
-                    self.locationServicesManager.locationManager.stopUpdatingLocation()
-                    completionHandler(location.coordinate)
-                }
-//            }
+            if isInside {
+                self.locationServicesManager.locationManager.stopUpdatingLocation()
+                completionHandler(location.coordinate)
+            }
         }
         
         setCompletionToLocationManagerDelegate(completion: completion)
@@ -70,17 +68,4 @@ class GettingInsideManager {
         
         (delegate as! LocationManagerDelegate).completionHandler = completion
     }
-    
-//    func getCurrentUserLocation(completion: @escaping (CLLocationCoordinate2D) -> ()) {
-//        let completion: ((CLLocation) -> ()) = { location in
-//            completion(location.coordinate)
-//        }
-//
-//        setCompletionToLocationManagerDelegate(completion: completion)
-//
-//        locationServicesManager.locationManager.requestLocation()
-//
-////        let coord = CLLocationCoordinate2D(latitude: 55.67240880567305, longitude: 37.47905855501432)
-////        completion(coord)
-//    }
 }
